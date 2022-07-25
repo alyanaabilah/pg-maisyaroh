@@ -10,8 +10,13 @@ class Order extends Model
     protected $table = 'orders';
     protected $guarded = ['id'];
 
-    public function shipping()
+    // public function shipping()
+    // {
+    //     return $this->hasOne(Shipping::class);
+    // }
+
+    public function orderitem()
     {
-        return $this->hasOne(Shipping::class);
+        return $this->hasMany(OrderItem::class);
     }
 }

@@ -16,11 +16,18 @@ class MyOrderController extends Controller
             "orders" => $orders,
             "title" => "Pangkalan Gas Maisyaroh | Orders",
             "active" => "orders",
-            "judul" => "Order Saya",
+            "judul" => "Pesanan Saya",
         ]);
     }
 
     public function show($id)
     {
+        $orders = Order::where('id', $id)->where('user_id', Auth::id())->get();
+        return view('front.order-detail', [
+            "orders" => $orders,
+            "title" => "Pangkalan Gas Maisyaroh | Orders",
+            "active" => "orders",
+            "judul" => "Detail Pesanan"
+        ]);
     }
 }
