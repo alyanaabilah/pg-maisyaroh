@@ -1,0 +1,9 @@
+.shoping__checkout ul li input {
+    background-color: transparent;
+    float: right;
+    position: relative;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: right;
+
+}
