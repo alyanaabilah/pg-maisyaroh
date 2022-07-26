@@ -184,13 +184,13 @@
 
 
                                         <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
+                                            <a class="sidenav-item-link" href="/admin/order-item">
                                                 <span class="nav-text">Barang Terjual</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
-                                                <span class="nav-text">Rincian Pembelian</span>
+                                            <a class="sidenav-item-link" href="admin/order">
+                                                <span class="nav-text">Penjualan Barang</span>
                                             </a>
                                         </li>
                                         <li>

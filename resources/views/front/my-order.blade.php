@@ -31,10 +31,10 @@
                                     @currency($order->total_price)
                                 </td>
                                 <td>
-                                    {{ $order->payment_status == '0' ? 'pending' : 'completed'}}
+                                    {{ $order->order_status == '0' ? 'pending' : 'completed'}}
                                 </td>
                                 <td>
-                                    <a href="/user/my-orders/{$order->id}" class="btn btn-primary">Detail</a>
+                                    <a href="{{route('my-orders.show', $order->id)}}" class="btn btn-primary">Detail</a>
                                 </td>
                                 <td class="shoping__cart__item__close">
                                     <span class="icon_close delete-cart-item border-0"></span>

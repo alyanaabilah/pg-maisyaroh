@@ -1,24 +1,26 @@
 <?php
 
-use App\Http\Controllers\admin\DashboardController;
-use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\attribut\CategoryController;
-use App\Http\Controllers\attribut\BrandController;
-use App\Http\Controllers\auth\LoginController;
-use App\Http\Controllers\auth\RegisterController;
-use App\Models\Category;
-use App\Http\Controllers\front\ServiceController;
-use App\Http\Controllers\front\CartController;
-use App\Http\Controllers\front\ContactController;
-use App\Http\Controllers\front\ShopController;
-use App\Http\Controllers\front\UserHomeController;
-use Illuminate\Support\Facades\Route;
 use App\Models\Brand;
-use App\Http\Controllers\front\MyProfileController;
-use App\Http\Controllers\admin\IncomingProductController;
-use App\Http\Controllers\front\CheckoutController;
+use App\Models\Category;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\front\CartController;
+use App\Http\Controllers\front\ShopController;
+use App\Http\Controllers\admin\OrderController;
+use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\front\ContactController;
 use App\Http\Controllers\front\MyOrderController;
+use App\Http\Controllers\front\ServiceController;
+use App\Http\Controllers\attribut\BrandController;
+use App\Http\Controllers\front\CheckoutController;
+use App\Http\Controllers\front\UserHomeController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\OrderItemController;
+use App\Http\Controllers\front\MyProfileController;
+use App\Http\Controllers\attribut\CategoryController;
+use App\Http\Controllers\admin\IncomingProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +108,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('product', ProductController::class);
         Route::resource('user', UserController::class)->except('show');
         Route::resource('incoming-product', IncomingProductController::class)->except('show');
+        Route::resource('order-item', OrderItemController::class);
+        Route::resource('order', OrderController::class);
     });
 });
 

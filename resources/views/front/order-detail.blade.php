@@ -8,74 +8,69 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <form>
-                    <div class="row">
-                        <div class="col-lg-12 col-md-6">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="name">Nama</label>
-                                        <input type="text" readonly class="form-control" required autofocus name="name" id="name" aria-describedby="name" placeholder="Nama" style="color:black">
-                                    </div>
-                                </div>
 
-                            </div>
-
-                            <div class="form-group">
-                                <label for="addres">Alamat</label>
-                                <input type="text" readonly class="form-control" name="addres" id="addres" aria-describedby="addres" placeholder="Alamat" style="color:black">
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="province">Provinsi</label>
-                                        <input type="text" readonly class="form-control" name="province" id="province" aria-describedby="province" placeholder="Provinsi" style="color:black">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="regency">Kabupaten/Kota</label>
-                                        <input type="text" readonly class="form-control" name="regency" id="regency" aria-describedby="regency" placeholder="Kabupaten/Kota" style="color:black">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="Nomor Telepon">Nomor Telepon</label>
-                                        <input type="text" class="form-control @error('phone_number') is-invalid @enderror" required autofocus name="phone_number" id="phone_number" aria-describedby="phone_number" placeholder="Nomor Telepon" style="color:black">
-                                        @error('phone_number')
-                                        <div class="invalid-feeedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
-                            <a href="#" class="mb-2 btn btn-sm btn-success border-0">Edit Data</a>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-        <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
+                    <a href="/user/my-orders" class="primary-btn cart-btn">Kembali</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mt-5">
+            <div class="row">
+                <div class="col-md-6 order-details">
+                    <h4>Detail Penerima</h4>
+                    <hr>
+                    <label for="name">Nama</label>
+                    <div class="border">{{$order->name}}</div>
+                    <label for="addres" class="mt-2">Alamat</label>
+                    <div class="border">{{ $order->addres }}</div>
+                    <label for="province" class="mt-2">Provinsi</label>
+                    <div class="border">{{$order->provinces_id}}</div>
+                    <label for="regency" class="mt-2">Kabupaten/Kota</label>
+                    <div class="border">{{$order->regencies_id}}</div>
+                    <label for="zip_code" class="mt-2">Kode Pos</label>
+                    <div class="border">{{$order->zip_code}}</div>
+                    <label for="phone_number" class="mt-2">Nomor Telepon</label>
+                    <div class="border">{{$order->phone_number}}</div>
+                </div>
 
-                    <a href="/user/home" class="primary-btn cart-btn">Beranda</a>
-
-                    <a href="/user/shop" class="primary-btn cart-btn cart-btn-right">
-                        Belanja</a>
-
+                <div class="col-md-6">
+                    <h4>Detail Pemesanan</h4>
+                    <hr>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Image</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($order->orderitem as $item)
+                            <tr>
+                                <td>{{$item->product->name}}</td>
+                                <td>{{$item->quantity}}</td>
+                                <td>{{$item->price}}</td>
+                                <td>
+                                    <img src="{{asset('storage/'. $item->product->image)}}" width="50px">
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <h4 class="px-2">Total: <span class="float-end">{{$order->total_price}}</span></h4>
                 </div>
             </div>
 
-
         </div>
+
+    </div>
+
+
+    </div>
+
+
     </div>
 
 </section>

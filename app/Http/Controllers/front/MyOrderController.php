@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\front;
 
-use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Regency;
+use App\Models\Province;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class MyOrderController extends Controller
@@ -22,12 +24,14 @@ class MyOrderController extends Controller
 
     public function show($id)
     {
-        $orders = Order::where('id', $id)->where('user_id', Auth::id())->get();
+        $orders = Order::where('id', $id)->where('user_id', Auth::id())->first();
         return view('front.order-detail', [
-            "orders" => $orders,
+            "order" => $orders,
             "title" => "Pangkalan Gas Maisyaroh | Orders",
             "active" => "orders",
-            "judul" => "Detail Pesanan"
+            "judul" => "Detail Pesanan",
+
+
         ]);
     }
 }
