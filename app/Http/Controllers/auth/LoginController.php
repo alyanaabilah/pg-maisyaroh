@@ -21,9 +21,10 @@ class LoginController extends Controller
                 return redirect()->intended('admin');
             } elseif ($user->ceklevel == 'user') {
                 return redirect()->intended('user');
+            } elseif ($user->ceklevel == 'subsidi') {
+                return redirect()->intended('user');
             }
         }
-
 
         return view(
             'login',
@@ -61,6 +62,8 @@ class LoginController extends Controller
             if ($user->ceklevel == 'admin') {
                 return redirect()->intended('admin/home');
             } elseif ($user->ceklevel == 'user') {
+                return redirect()->intended('user/home');
+            } elseif ($user->ceklevel == 'subsidi') {
                 return redirect()->intended('user/home');
             }
         }

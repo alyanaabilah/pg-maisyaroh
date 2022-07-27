@@ -169,130 +169,15 @@
                         </div>
                         <div class="form-group">
                             <label>
-                                Ship to a different address?
-                                <input type="checkbox" id="shipping_different" name="shipping_different" value="1">
-                                <span class="checkmark"></span>
+                                Ship to?
+                                <br>
+                                <input type="radio" id="myself" name="ship_to" value="1">
+                                <label for="myself">My Self</label><br>
+                                <input type="radio" id="different" name="ship_to" value="0">
                             </label>
                         </div>
                     </div>
                     @endforeach
-
-
-                    <div id="delivery" class="col-lg-12 col-md-6" style="display:none;">
-                        <h4>Kirim ke Alamat Berbeda</h4>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="name">Nama</label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" required autofocus name="name" id="name" aria-describedby="name" placeholder="Nama Product" style="color:black">
-                                    @error('name')
-                                    <div class="invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="Nomor Telepon">Nomor Telepon</label>
-                                    <input type="text" class="form-control @error('phone_number') is-invalid @enderror" required autofocus name="phone_number" id="phone_number" aria-describedby="phone_number" placeholder="Nomor Telepon" value="{{old ('phone_number', $user->phone_number)}}" style="color:black">
-                                    @error('phone_number')
-                                    <div class="invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="addres">Alamat</label>
-                            <input type="text" class="form-control @error('addres') is-invalid @enderror" required autofocus name="addres" id="addres" aria-describedby="addres" placeholder="Alamat" style="color:black">
-                            @error('addres')
-                            <div class="invalid-feeedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="province">Provinsi</label>
-                                    <select class="wide form-control " name="province" id="province">
-                                        <option>Pilih Provinsi</option>
-                                        @foreach ($provinces as $province)
-                                        <option value="{{$province->id}}">{{$province->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('province')
-                                    <div class="invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="regency">Kabupaten/Kota</label>
-                                    <select id="regency" class="form-control " name="regency">
-                                        <option>Pilih Kabupaten/Kota</option>
-
-                                    </select>
-                                    @error('regency')
-                                    <div class=" invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="district">Kecamatan</label>
-                                    <select id="district" class="form-control " name="district">
-                                        <option>Pilih Kecamatan</option>
-
-                                    </select>
-                                    @error('district')
-                                    <div class=" invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="village">Kelurahan/Desa</label>
-                                    <select id="village" class="wide form-control " name="village">
-                                        <option>Pilih Desa</option>
-
-                                    </select>
-                                    @error('village')
-                                    <div class="invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="Kodepos">Kodepos</label>
-                                    <input type="text" class="form-control @error('zip_code') is-invalid @enderror" autofocus name="zip_code" id="zip_code" aria-describedby="zip_code" placeholder="Kodepos" style="color:black">
-                                    @error('zip_code')
-                                    <div class="invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="checkout__input">
-                            <p>Order notes<span>*</span></p>
-                            <input type="text" placeholder="Notes about your order, e.g. special notes for delivery.">
-                        </div>
-                    </div>
-
-
 
                     <div class="col-lg-12 col-md-6">
                         <div class="checkout__order">
@@ -321,16 +206,10 @@
                                 </tbody>
                             </table>
                             <div class="checkout__input__checkbox">
-                                <label for="payment">
-                                    Transfer Bank
-                                    <input type="checkbox" id="payment">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="paypal">
-                                    Cash On Delivery
-                                    <input type="checkbox" id="paypal">
-                                    <span class="checkmark"></span>
-                                </label>
+                                <input type="radio" id="bank" name="delivery_method" value="Transfer Bank">
+                                <label for="bank">Transfer Bank</label><br>
+                                <input type="radio" id="cod" name="delivery_method" value="Cash On Delivery">
+                                <label for="cod">Cash On Delivery</label><br>
                             </div>
                             <div class="checkout__order__subtotal">Ongkos Kirim<span>$750.99</span></div>
                             <div class="checkout__order__total">Total<span>Rp.{{ number_format($total) }}</span></div>

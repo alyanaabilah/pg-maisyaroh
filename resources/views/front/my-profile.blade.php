@@ -73,13 +73,13 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="name">Nama</label>
-                                    <input type="text" readonly class="form-control" required autofocus name="name" id="name" aria-describedby="name" placeholder="Nama" value="{{ $user->name}}" style="color:black">
+                                    <input type="text" readonly class="form-control" name="name" id="name" aria-describedby="name" placeholder="Nama" value="{{ $user->name}}" style="color:black">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="name">Username</label>
-                                    <input type="text" readonly class="form-control" required autofocus name="username" id="username" aria-describedby="name" placeholder="Username" value="{{ $user->username}}" style="color:black">
+                                    <input type="text" readonly class="form-control" name="username" id="username" aria-describedby="name" placeholder="Username" value="{{ $user->username}}" style="color:black">
                                 </div>
                             </div>
                         </div>
@@ -92,13 +92,13 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="province">Provinsi</label>
-                                    <input type="text" readonly class="form-control" name="province" id="province" aria-describedby="province" placeholder="Provinsi" value="{{$user->province->name}}" style="color:black">
+                                    <input type="text" readonly class="form-control" name="province" id="province" aria-describedby="province" placeholder="Provinsi" value="{{$user->province_id}}" style="color:black">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="regency">Kabupaten/Kota</label>
-                                    <input type="text" readonly class="form-control" name="regency" id="regency" aria-describedby="regency" placeholder="Kabupaten/Kota" value="{{ $user->regency->name}}" style="color:black">
+                                    <input type="text" readonly class="form-control" name="regency" id="regency" aria-describedby="regency" placeholder="Kabupaten/Kota" value="{{ $user->regency_id}}" style="color:black">
                                 </div>
                             </div>
                         </div>
@@ -106,13 +106,13 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="district">Kecamatan</label>
-                                    <input type="text" readonly class="form-control" name="district" id="district" aria-describedby="district" placeholder="KKecamatan" value="{{ $user->district->name}}" style="color:black">
+                                    <input type="text" readonly class="form-control" name="district" id="district" aria-describedby="district" placeholder="Kecamatan" style="color:black">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="village">Kelurahan/Desa</label>
-                                    <input type="text" readonly class="form-control" name="village" id="village" aria-describedby="village" placeholder="Kelurahan/Desa" value="{{ $user->village->name}}" style="color:black">
+                                    <input type="text" readonly class="form-control" name="village" id="village" aria-describedby="village" placeholder="Kelurahan/Desa" style="color:black">
                                 </div>
                             </div>
                             <div class="col-lg-4">

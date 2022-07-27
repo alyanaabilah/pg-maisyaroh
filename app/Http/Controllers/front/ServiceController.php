@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\front;
 
-use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ServiceController extends Controller
 {
@@ -16,7 +17,8 @@ class ServiceController extends Controller
     {
         return view('front.service', [
             "title" => "Pangkalan Gas Maisyaroh | Service",
-            "active" => "service"
+            "active" => "service",
+            "product" => Product::all(),
         ]);
     }
 

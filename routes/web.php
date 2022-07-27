@@ -160,6 +160,41 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 });
 
 
+
+Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['ceklevel:subsidi']], function () {
+        Route::resource('shop', ShopController::class);
+        Route::resource('home', UserHomeController::class);
+        Route::resource('service', ServiceController::class);
+        Route::resource('contact', ContactController::class);
+        Route::get('cart', [CartController::class, 'index']);
+        Route::get('/my-profile', [MyProfileController::class, 'index']);
+        Route::get('/my-profile/{id}/edit', [MyProfileController::class, 'edit']);
+        Route::post('/my-profile-update', [MyProfileController::class, 'update'])->name('update.profil');
+        Route::resource('checkout', CheckoutController::class);
+        Route::resource('my-orders', MyOrderController::class);
+
+
+        Route::get('/front-category/{category:slug}', function (Category $category) {
+            return view('front.attribut.category-userfront', [
+                "title" => "Pangkalan Gas Maisyaroh | Kategori",
+                "category" => $category->name,
+                "product" => $category->product,
+                "active" => "Category"
+            ]);
+        });
+        Route::get('/front-brand/{brand:name}', function (Brand $brand) {
+            return view('front.attribut.brand-userfront', [
+                "title" => "Pangkalan Gas Maisyaroh | Brand",
+                "brand" => $brand->name,
+                "product" => $brand->product,
+                "active" => "Brand"
+            ]);
+        });
+    });
+});
+
+
 // Route::get('/create-category', [CategoryController::class, 'create'])->name('admin.create-kategori');
 // Route::post('/save-category', [CategoryController::class, 'store'])->name('admin.save-kategori');
 // Route::get('/home', [AdminController::class, 'index'])->name('admin.home');

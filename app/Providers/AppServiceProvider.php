@@ -32,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('user', function (User $user) {
             return $user->ceklevel == 0;
         });
+        Gate::define('subsidi', function (User $user) {
+            return $user->ceklevel == 2;
+        });
 
         Blade::directive('currency', function ($expression) {
             return "Rp. <?php echo number_format($expression,0,',','.'); ?>";

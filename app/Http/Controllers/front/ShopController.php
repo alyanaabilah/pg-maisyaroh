@@ -23,7 +23,8 @@ class ShopController extends Controller
             "title" => "Pangkalan Gas Maisyaroh | Shop",
             "product" => Product::all(),
             "active" => "shop",
-            "judul" => "Shop"
+            "judul" => "Shop",
+            "product" => Product::all()
         ]);
     }
 

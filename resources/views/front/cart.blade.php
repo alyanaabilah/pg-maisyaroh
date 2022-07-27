@@ -9,20 +9,12 @@
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span>All departments</span>
+                        <span>Kategori</span>
                     </div>
                     <ul>
-                        <li><a href="#">Fresh Meat</a></li>
-                        <li><a href="#">Vegetables</a></li>
-                        <li><a href="#">Fruit & Nut Gifts</a></li>
-                        <li><a href="#">Fresh Berries</a></li>
-                        <li><a href="#">Ocean Foods</a></li>
-                        <li><a href="#">Butter & Eggs</a></li>
-                        <li><a href="#">Fastfood</a></li>
-                        <li><a href="#">Fresh Onion</a></li>
-                        <li><a href="#">Papayaya & Crisps</a></li>
-                        <li><a href="#">Oatmeal</a></li>
-                        <li><a href="#">Fresh Bananas</a></li>
+                        @foreach ($product as $produk)
+                        <li><a href="/front-category/{{ $produk->category->name }}">{{ $produk->category->name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -86,6 +78,8 @@
                                         <img src="{{asset('storage/'. $cart->product->image)}}" height="60px" width="60px" alt="">
                                         @if(Auth::user()->ceklevel === 'user')
                                         <a href="/user/shop/{{$cart->product->slug}}" style="color: black;">{{$cart->product->name}}</a>
+                                        @elseif(Auth::user()->ceklevel === 'subsidi')
+                                        <a href="/user/shop/{{$cart->product->slug}}" style="color: black;">{{$cart->product->name}}</a>
                                         @else
                                         <a href="/admin/shop/{{$cart->product->slug}}" style="color: black;">{{$cart->product->name}}</a>
                                         @endif
@@ -124,10 +118,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    @if(Auth::user()->ceklevel === 'user')
-                    <a href="/user/shop" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    @if(Auth::user()->ceklevel == 'user')
+                    <a href="/user/shop" class="primary-btn cart-btn">LANJUT BELANJA</a>
+                    @elseif(Auth::user()->ceklevel == 'subsidi')
+                    <a href="/user/shop" class="primary-btn cart-btn">LANJUT BELANJA</a>
                     @else
-                    <a href="/admin/shop" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    <a href="/admin/shop" class="primary-btn cart-btn">LANJUT BELANJA</a>
                     @endif
                 </div>
             </div>
@@ -146,9 +142,11 @@
                 <div class="shoping__checkout">
                     <h5>Cart Total</h5>
                     <ul>
-                        <li>Total <input type="text" id="total" readonly class="input border-0"> </li>
+                        <li>Total <input type="text" id="total" readonly class="input border-0" value="@currency($cart->product->sell_price * $cart->quantity)"> </li>
                     </ul>
-                    @if(Auth::user()->ceklevel === 'user')
+                    @if(Auth::user()->ceklevel == 'user')
+                    <a href="/user/checkout" class="primary-btn">CHECKOUT</a>
+                    @elseif(Auth::user()->ceklevel == 'subsidi')
                     <a href="/user/checkout" class="primary-btn">CHECKOUT</a>
                     @else
                     <a href="/admin/checkout" class="primary-btn">CHECKOUT</a>

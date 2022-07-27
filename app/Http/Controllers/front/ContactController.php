@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\front;
 
-use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ContactController extends Controller
 {
@@ -16,7 +17,8 @@ class ContactController extends Controller
     {
         return view('front.contact', [
             "title" => "Pangkalan Gas Maisyaroh | Contact",
-            "active" => "contact"
+            "active" => "contact",
+            "product" => Product::all(),
         ]);
     }
 

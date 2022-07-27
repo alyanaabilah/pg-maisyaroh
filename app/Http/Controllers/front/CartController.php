@@ -26,6 +26,7 @@ class CartController extends Controller
             "active" => "cart",
             "judul" => "Cart",
             "cartitems" => $cartitems,
+            "product" => Product::all()
             //  "total" => $total
         ]);
     }
