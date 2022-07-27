@@ -17,9 +17,9 @@ class LoginController extends Controller
     public function index()
     {
         if ($user = Auth::user()) {
-            if ($user->ceklevel == 'admin') {
+            if ($user->ceklevel === 'admin') {
                 return redirect()->intended('admin');
-            } elseif ($user->ceklevel == 'user') {
+            } elseif ($user->ceklevel === 'user') {
                 return redirect()->intended('user');
             } elseif ($user->ceklevel == 'subsidi') {
                 return redirect()->intended('user');
@@ -59,11 +59,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            if ($user->ceklevel == 'admin') {
+            if ($user->ceklevel === 'admin') {
                 return redirect()->intended('admin/home');
-            } elseif ($user->ceklevel == 'user') {
+            } elseif ($user->ceklevel === 'user') {
                 return redirect()->intended('user/home');
-            } elseif ($user->ceklevel == 'subsidi') {
+            } elseif ($user->ceklevel === 'subsidi') {
                 return redirect()->intended('user/home');
             }
         }

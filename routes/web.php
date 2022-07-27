@@ -21,6 +21,7 @@ use App\Http\Controllers\admin\OrderItemController;
 use App\Http\Controllers\front\MyProfileController;
 use App\Http\Controllers\attribut\CategoryController;
 use App\Http\Controllers\admin\IncomingProductController;
+use App\Models\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,7 +110,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('user', UserController::class)->except('show');
         Route::resource('incoming-product', IncomingProductController::class)->except('show');
         Route::resource('order-item', OrderItemController::class);
-        Route::resource('order', OrderController::class);
+        Route::resource('orders', OrderController::class);
+        //Route::get('/generate-invoice/{$id}', [OrderController::class, 'invoice']);
+        Route::get('/generate-invoice/{order:id}', function (Order $order) {
+            return view('admin.report.invoice-order', [
+                "title" => "Pangkalan Gas Maisyaroh | Invoice",
+                "order" => $order->id,
+                "active" => "Brand"
+            ]);
+        });
     });
 });
 
@@ -121,6 +130,8 @@ Route::post('update-cart-item', [CartController::class, 'update']);
 Route::post('user-provinces', [MyProfileController::class, 'store']);
 Route::post('user-regencies', [MyProfileController::class, 'getRegencies']);
 Route::post('user-districts', [MyProfileController::class, 'getDistricts']);
+
+
 
 // Route::get('province', [Controller::class, 'get_province'])->name('province');
 // Route::get('/kota/{id}', [CheckoutController::class, 'get_city']);
@@ -161,7 +172,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
 
 
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'subsidi', 'middleware' => ['auth']], function () {
     Route::group(['middleware' => ['ceklevel:subsidi']], function () {
         Route::resource('shop', ShopController::class);
         Route::resource('home', UserHomeController::class);

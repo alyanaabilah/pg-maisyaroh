@@ -189,7 +189,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="sidenav-item-link" href="admin/order">
+                                            <a class="sidenav-item-link" href="/admin/orders">
                                                 <span class="nav-text">Penjualan Barang</span>
                                             </a>
                                         </li>

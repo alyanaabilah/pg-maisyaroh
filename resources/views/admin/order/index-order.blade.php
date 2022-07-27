@@ -56,7 +56,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>No Lacak</th>
+                        <th width="200px">No Lacak</th>
                         <th>Pembeli</th>
                         <th>Phone</th>
                         <th>Status</th>
@@ -75,7 +75,7 @@
                             @endif
                         </td>
 
-                        <td><a href="{{route('order.show', $order->id)}}" class="btn btn-primary">Detail</a></td>
+                        <td><a href="{{route('orders.show', $order->id)}}" class="btn btn-primary">Detail</a></td>
                     </tr>
 
                     @endforeach

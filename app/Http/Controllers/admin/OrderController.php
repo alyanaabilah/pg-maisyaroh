@@ -51,9 +51,22 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        if (Order::where('id', $id)->first()) {
+            $orders = Order::find($id);
+            return view('admin.order.order-show', [
+                "title" => "Penjualan Barang",
+                "order" => $orders
+            ]);
+        } else {
+
+            return redirect()->back()->with('status', "Order Tidak Ditemukan");
+        }
     }
 
+    // public function invoice($id)
+    // {
+    //     return view('admin.report.invoice-order');
+    // }
     /**
      * Show the form for editing the specified resource.
      *
