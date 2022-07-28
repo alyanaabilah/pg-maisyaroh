@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrderController extends Controller
 {
@@ -63,10 +64,7 @@ class OrderController extends Controller
         }
     }
 
-    // public function invoice($id)
-    // {
-    //     return view('admin.report.invoice-order');
-    // }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -99,5 +97,23 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function invoice($id)
+    {
+        if (Order::where('id', $id)->first()) {
+            $orders = Order::find($id);
+            //return view('admin.report.invoice-order');
+            //     //     "order" => $orders
+            //     // ]);
+            $data = [
+                'order' => $orders,
+            ];
+            $pdf = PDF::loadView('admin.report.invoice-order', $data);
+            return $pdf->stream('pg-maisyaroh-invoice-pelanggan.pdf');
+            //return $pdf->download('pg-maisyaroh-invoice-pelanggan.pdf');
+        } else {
+            return redirect()->back()->with('status', "Tidak ada order");
+        }
     }
 }

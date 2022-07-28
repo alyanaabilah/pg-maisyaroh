@@ -21,6 +21,7 @@ use App\Http\Controllers\admin\OrderItemController;
 use App\Http\Controllers\front\MyProfileController;
 use App\Http\Controllers\attribut\CategoryController;
 use App\Http\Controllers\admin\IncomingProductController;
+use App\Http\Controllers\PdfController;
 use App\Models\Order;
 
 /*
@@ -111,14 +112,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('incoming-product', IncomingProductController::class)->except('show');
         Route::resource('order-item', OrderItemController::class);
         Route::resource('orders', OrderController::class);
-        //Route::get('/generate-invoice/{$id}', [OrderController::class, 'invoice']);
-        Route::get('/generate-invoice/{order:id}', function (Order $order) {
-            return view('admin.report.invoice-order', [
-                "title" => "Pangkalan Gas Maisyaroh | Invoice",
-                "order" => $order->id,
-                "active" => "Brand"
-            ]);
-        });
+
+        // Route::get('/generate-invoice/{order:id}', function (Order $order) {
+        //     return view('admin.report.invoice-order', [
+        //         "title" => "Pangkalan Gas Maisyaroh | Invoice",
+        //         "order" => $order->id,
+        //         "active" => "Brand"
+        //     ]);
+        // });
     });
 });
 
@@ -131,7 +132,8 @@ Route::post('user-provinces', [MyProfileController::class, 'store']);
 Route::post('user-regencies', [MyProfileController::class, 'getRegencies']);
 Route::post('user-districts', [MyProfileController::class, 'getDistricts']);
 
-
+//Route::get('generate-pdf', [PdfController::class, 'generatePDF']);
+Route::get('/cetak-invoice/{order:id}', [OrderController::class, 'invoice'])->name('cetak.invoice');
 
 // Route::get('province', [Controller::class, 'get_province'])->name('province');
 // Route::get('/kota/{id}', [CheckoutController::class, 'get_city']);
@@ -144,9 +146,9 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
         Route::resource('service', ServiceController::class);
         Route::resource('contact', ContactController::class);
         Route::get('cart', [CartController::class, 'index']);
-        Route::get('/my-profile', [MyProfileController::class, 'index']);
-        Route::get('/my-profile/{id}/edit', [MyProfileController::class, 'edit']);
-        Route::post('/my-profile-update', [MyProfileController::class, 'update'])->name('update.profil');
+        Route::resource('my-profile', MyProfileController::class);
+        // Route::get('/my-profile/{users:id}/edit', [MyProfileController::class, 'edit']);
+        // Route::post('/my-profile-update', [MyProfileController::class, 'update'])->name('update.profil');
         Route::resource('checkout', CheckoutController::class);
         Route::resource('my-orders', MyOrderController::class);
 

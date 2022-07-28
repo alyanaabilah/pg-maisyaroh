@@ -127,9 +127,9 @@
         <div class="brand-section">
             <div class="row">
                 <div class="col-6">
-                    <h1 class="text-white">Pangkalan Gas Maisyaroh</h1>
+                    <h3 class="text-white">Pangkalan Gas Maisyaroh</h3>
                 </div>
-                <div class="col-6">
+                <div class="">
                     <div class="company-details">
                         <p class="text-white">Sungai Sipai</p>
                         <p class="text-white">Kota Martapura</p>
@@ -140,18 +140,18 @@
         </div>
 
         <div class="body-section">
-            <div class="row">
-                <div class="col-6">
-                    <h2 class="heading">Invoice No.: 001</h2>
-                    <p class="sub-heading">Tracking No. fabcart2025 </p>
-                    <p class="sub-heading">Order Date: 20-20-2021 </p>
+            <div class="">
+                <div class="">
+                    <h2 class="heading">Invoice No.: {{ $order->id }}</h2>
+                    <p class="sub-heading">Tracking No. {{ $order->tracking_no }} </p>
+                    <p class="sub-heading">Order Date: {{ $order->created_at->format('d-m-Y') }} </p>
                     <p class="sub-heading">Email Address: customer@gfmail.com </p>
                 </div>
-                <div class="col-6">
-                    <p class="sub-heading">Full Name: </p>
-                    <p class="sub-heading">Address: </p>
-                    <p class="sub-heading">Phone Number: </p>
-                    <p class="sub-heading">City,State,Pincode: </p>
+                <div class="">
+                    <p class="sub-heading">Full Name: {{$order->name}}</p>
+                    <p class="sub-heading">Address: {{$order->addres}}</p>
+                    <p class="sub-heading">Phone Number: {{$order->phone_number}}</p>
+                    <p class="sub-heading">City,State,Pincode: {{$order->provinces->name}}, {{$order->regencies->name}}</p>
                 </div>
             </div>
         </div>
@@ -170,33 +170,44 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Product Name</td>
-                        <td>10</td>
-                        <td>1</td>
-                        <td>10</td>
+                        @foreach($order->orderitem as $item)
+                    <tr>
+                        <td>{{$item->product->name}}</td>
+                        <td>{{$item->quantity}}</td>
+                        <td>@currency($item->price)</td>
+                        <td>{{$item->ptice * $item->quantity}}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" class="text-right">Ongkos Kirim</td>
+                        <td>0</td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="text-right">Sub Total</td>
-                        <td> 10.XX</td>
+                        <td colspan="3" class="text-right">Total</td>
+                        <td>@currency($item->total_price)</td>
                     </tr>
-                    <tr>
-                        <td colspan="3" class="text-right">Tax Total %1X</td>
-                        <td> 2</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="text-right">Grand Total</td>
-                        <td> 12.XX</td>
+                    @endforeach
                     </tr>
                 </tbody>
             </table>
             <br>
-            <h3 class="heading">Payment Status: Paid</h3>
-            <h3 class="heading">Payment Mode: Cash on Delivery</h3>
+            <h3 class="heading">Payment Status:
+                @if($order->payment_status == '0')
+                Pending
+                @elseif($order->payment_status == '1')
+                COD - Terbayar
+                @elseif($order->payment_status == '2')
+                Transfer Bank - Sukses
+                @elseif($order->payment_status == '3')
+                Transfer Bank - Pending
+                @endif
+            </h3>
+            <h3 class="heading">Payment Mode: {{ $order->payment_mode }}</h3>
         </div>
 
         <div class="body-section">
             <p>&copy; Copyright 2021 - Fabcart. All rights reserved.
-                <a href="https://www.fundaofwebit.com/" class="float-right">www.fundaofwebit.com</a>
+                <a href="#" class="float-right">www.fundaofwebit.com</a>
             </p>
         </div>
     </div>

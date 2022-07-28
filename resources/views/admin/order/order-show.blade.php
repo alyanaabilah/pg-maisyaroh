@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <h6 class="mb-0" style="color: black;">
                         Detail
-                        <a href="/generate-invoice/{{$order->id}}" class="primary-btn cart-btn float-right py-1">Cetak Invoice</a>
+                        <a href="{{route('cetak.invoice', $order->id)}}" class="primary-btn cart-btn float-right py-1">Cetak Invoice</a>
                     </h6>
                 </div>
             </div>
@@ -28,15 +28,23 @@
                                 <h6 style="color: black;">{{$order->tracking_no }}</h6>
                             </div>
                         </div>
-                        <div class="col-md-8 mt-3">
+                        <div class=" col-md-8 mt-3">
                             <div class="border p-2">
                                 <label for="Tracking Message">Tracking Message</label>
                                 <h6 style="color: black;">{{(!isset($order->tracking_msg))== true ? $order->tracking_msg:'Tidak Ada Pesan' }}</h6>
                             </div>
                         </div>
-                        <div class="col-md-8 mt-3">
+                        <div class="col-md-4 mt-3">
                             <div class="border p-2">
                                 <label for="Mode Pembayaran">Mode Pembayaran</label>
+                                <h6 style="color: black;">
+                                    {{ $order->payment_mode }}
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mt-3">
+                            <div class="border p-2">
+                                <label for="Status Pembayaran">Status Pembayaran</label>
                                 <h6 style="color: black;">
                                     @if($order->payment_status == '0')
                                     Pending
@@ -98,7 +106,7 @@
                                         <td>@currency($item->price)</td>
                                         <td>{{$item->ptice * $item->quantity}}</td>
                                     </tr>
-                                    @endforeach
+
                                     <tr>
                                         <td colspan="3" class="text-right">Ongkos Kirim</td>
                                         <td>0</td>
@@ -107,6 +115,7 @@
                                         <td colspan="3" class="text-right">Total</td>
                                         <td>@currency($item->total_price)</td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -140,13 +149,13 @@
                         <div class="col-md-4 mt-3">
                             <div class="border p-2">
                                 <label for="Provinsi">Provinsi</label>
-                                <h6 style="color: black;">{{$order->province_id}}</h6>
+                                <h6 style="color: black;">{{$order->provinces->name}}</h6>
                             </div>
                         </div>
                         <div class="col-md-4 mt-3">
                             <div class="border p-2">
                                 <label for="Kota/Kabupaten">Kota/Kabupaten</label>
-                                <h6 style="color: black;">{{$order->regency_id}}</h6>
+                                <h6 style="color: black;">{{$order->regencies->name}}</h6>
                             </div>
                         </div>
                         <div class="col-md-4 mt-3">

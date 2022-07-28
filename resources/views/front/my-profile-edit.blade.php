@@ -66,9 +66,9 @@
         <div class="checkout__form">
             <h4>Edit Profile</h4>
 
-            <form action="{{route('update.profil')}}" method="POST">
+            <form action="/user/my-profile/{$users->id}" method="POST">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="row">
                     <div class="col-lg-12 col-md-6">
                         <div class="row">
@@ -131,13 +131,7 @@
                                     <label for="regency">Kabupaten/Kota</label>
                                     <select id="regency" class="form-control " name="regency">
                                         <option>Pilih Kabupaten/Kota</option>
-                                        @foreach ($regencies as $regency)
-                                        @if(old('regency_id', $users->regency_id)== $regency->id)
-                                        <option value="{{$regency->id}}" selected>{{$regency->name}}</option>
-                                        @else
-                                        <option value="{{$regency->id}}">{{$regency->name}}</option>
-                                        @endif
-                                        @endforeach
+
                                     </select>
                                     @error('regency')
                                     <div class=" invalid-feeedback">
@@ -153,13 +147,7 @@
                                     <label for="district">Kecamatan</label>
                                     <select id="district" class="form-control " name="district">
                                         <option>Pilih Kecamatan</option>
-                                        @foreach ($districts as $district)
-                                        @if(old('district_id', $users->district_id)== $district->id)
-                                        <option value="{{$district->id}}" selected>{{$district->name}}</option>
-                                        @else
-                                        <option value="{{$district->id}}">{{$district->name}}</option>
-                                        @endif
-                                        @endforeach
+
                                     </select>
                                     @error('district')
                                     <div class=" invalid-feeedback">
@@ -173,13 +161,7 @@
                                     <label for="village">Kelurahan/Desa</label>
                                     <select id="village" class="wide form-control " name="village">
                                         <option>Pilih Desa</option>
-                                        @foreach ($villages as $village)
-                                        @if(old('village_id', $users->village_id)== $village->id)
-                                        <option value="{{$village->id}}" selected>{{$village->name}}</option>
-                                        @else
-                                        <option value="{{$village->id}}">{{$village->name}}</option>
-                                        @endif
-                                        @endforeach
+
                                     </select>
                                     @error('village')
                                     <div class="invalid-feeedback">

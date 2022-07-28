@@ -105,19 +105,16 @@ class MyProfileController extends Controller
         $user_id = Auth::user()->id;
         $user = User::with(['province', 'regency', 'district', 'village'])->findOrFail($user_id);
         // $user = User::with(['province', 'regency', 'district', 'village'])->where('id', auth()->user()->id)->get();
-        $regencies = Regency::all();
+
         $provinces = Province::all();
-        $districts = District::all();
-        $villages = Village::all();
+
         return view('front.my-profile-edit', [
             "title" => "Pangkalan Gas Maisyaroh | Edit",
             "active" => "my-profile",
             "users" => $user,
             "judul" => "My Profile Edit",
             "provinces" => $provinces,
-            "regencies" => $regencies,
-            "districts" => $districts,
-            "villages" => $villages
+
         ]);
     }
 
@@ -151,7 +148,7 @@ class MyProfileController extends Controller
 
         User::where('id', $user->id)
             ->update($validatedData);
-        return redirect('/user/my-profile')->with('success', 'Berhasil Edit Profil!');
+        return redirect('user/my-profile')->with('success', 'Berhasil Edit Profil!');
     }
 
     /**

@@ -25,4 +25,14 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function provinces()
+    {
+        return $this->belongsTo(Province::class, 'provinces_id', 'id');
+    }
+
+    public function regencies()
+    {
+        return $this->belongsTo(Regency::class, 'regencies_id', 'id');
+    }
 }
