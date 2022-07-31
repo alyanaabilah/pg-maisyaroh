@@ -22,7 +22,7 @@ class LoginController extends Controller
             } elseif ($user->ceklevel === 'user') {
                 return redirect()->intended('user');
             } elseif ($user->ceklevel == 'subsidi') {
-                return redirect()->intended('user');
+                return redirect()->intended('subsidi');
             }
         }
 
@@ -64,7 +64,7 @@ class LoginController extends Controller
             } elseif ($user->ceklevel === 'user') {
                 return redirect()->intended('user/home');
             } elseif ($user->ceklevel === 'subsidi') {
-                return redirect()->intended('user/home');
+                return redirect()->intended('subsidi/home');
             }
         }
         return back()->with('loginError', 'Login Gagal');

@@ -64,9 +64,9 @@
                                  </div>
                              </div>
                          </div>
-                         <div class="carousel-item card">
-                             <div class="card">
-                                 <div class="card-body">
+                         <div class="carousel-item card border-0">
+                             <div class="card border-0">
+                                 <div class="card-body border-0">
                                      <div class="card-img-overlay">
                                          <br>
                                          <br>
@@ -80,9 +80,9 @@
                                  </div>
                              </div>
                          </div>
-                         <div class="carousel-item card">
-                             <div class="card">
-                                 <div class="card-body">
+                         <div class="carousel-item card border-0">
+                             <div class="card border-0">
+                                 <div class="card-body border-0">
                                      <div class="card-img-overlay">
                                          <br>
                                          <br>

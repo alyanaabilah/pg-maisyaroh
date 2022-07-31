@@ -21,7 +21,10 @@ use App\Http\Controllers\admin\OrderItemController;
 use App\Http\Controllers\front\MyProfileController;
 use App\Http\Controllers\attribut\CategoryController;
 use App\Http\Controllers\admin\IncomingProductController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\front\SubsidiCouponController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\report\CouponUserController;
 use App\Models\Order;
 
 /*
@@ -112,6 +115,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('incoming-product', IncomingProductController::class)->except('show');
         Route::resource('order-item', OrderItemController::class);
         Route::resource('orders', OrderController::class);
+        Route::resource('coupon', CouponController::class);
+        Route::resource('subsidi', CouponUserController::class);
+
+
 
         // Route::get('/generate-invoice/{order:id}', function (Order $order) {
         //     return view('admin.report.invoice-order', [
@@ -186,7 +193,7 @@ Route::group(['prefix' => 'subsidi', 'middleware' => ['auth']], function () {
         Route::post('/my-profile-update', [MyProfileController::class, 'update'])->name('update.profil');
         Route::resource('checkout', CheckoutController::class);
         Route::resource('my-orders', MyOrderController::class);
-
+        Route::resource('coupon', SubsidiCouponController::class);
 
         Route::get('/front-category/{category:slug}', function (Category $category) {
             return view('front.attribut.category-userfront', [

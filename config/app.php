@@ -166,6 +166,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
 
 
+
         /*
          * Package Service Providers...
          */
@@ -196,6 +197,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
     'PDF' => Barryvdh\DomPDF\Facade::class,
+
 
 
 

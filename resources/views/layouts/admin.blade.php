@@ -24,13 +24,15 @@
     <link href="{{ asset ('admin/assets/plugins/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
 
 
-
-
     <!-- SLEEK CSS -->
     <link id="sleek-css" rel="stylesheet" href="{{ asset ('admin/assets/css/sleek.css') }}" />
     <link rel="stylesheet" href="{{ asset ('admin/assets/css/custom.css') }}" />
 
-
+    <style>
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
 
     <!-- FAVICON -->
     <link href="{{ asset ('admin/assets/img/favicon.png') }}" rel="shortcut icon" />
@@ -78,7 +80,7 @@
                                     <path class="logo-fill-white" fill="#FFF" d="M11 4v25l8 4V0z" />
                                 </g>
                             </svg>
-                            <span class="brand-name">Sleek Dashboard</span>
+                            <span class="brand-name">Admin Dashboard</span>
                         </a>
                     </div>
                     <!-- begin sidebar scrollbar -->
@@ -94,24 +96,7 @@
                                     <i class="mdi mdi-view-dashboard-outline"></i>
                                     <span class="nav-text">Dashboard</span> <b class="caret"></b>
                                 </a>
-                                <ul class="collapse show" id="dashboard" data-parent="#sidebar-menu">
-                                    <div class="sub-menu">
-                                        <li class="active">
-                                            <a class="sidenav-item-link" href="index.html">
-                                                <span class="nav-text">Ecommerce</span>
 
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="sidenav-item-link" href="analytics.html">
-                                                <span class="nav-text">Analytics</span>
-
-                                                <span class="badge badge-success">new</span>
-
-                                            </a>
-                                        </li>
-                                    </div>
-                                </ul>
                             </li>
 
                             <!-- Attribut !-->
@@ -163,8 +148,8 @@
                                         </li>
 
                                         <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
-                                                <span class="nav-text">Retur Barang Pelanggan</span>
+                                            <a class="sidenav-item-link" href="/admin/coupon">
+                                                <span class="nav-text">Kupon</span>
                                             </a>
                                         </li>
 
@@ -248,6 +233,11 @@
                                         <li>
                                             <a class="sidenav-item-link" href="user-profile.html">
                                                 <span class="nav-text">Pelanggan Terloyal</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="sidenav-item-link" href="/admin/subsidi">
+                                                <span class="nav-text">Pelanggan Subsidi</span>
                                             </a>
                                         </li>
                                     </div>
@@ -374,7 +364,11 @@
         <script src="{{ asset ('admin/assets/js/date-range.js') }}"></script>
         <script src="{{ asset ('admin/assets/js/map.js') }}"></script>
         <script src="{{ asset ('admin/assets/js/custom.js') }}"></script>
-
+        <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2();
+            });
+        </script>
 
     </body>
 

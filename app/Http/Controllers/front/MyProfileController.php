@@ -111,7 +111,7 @@ class MyProfileController extends Controller
         return view('front.my-profile-edit', [
             "title" => "Pangkalan Gas Maisyaroh | Edit",
             "active" => "my-profile",
-            "users" => $user,
+            "user" => $user,
             "judul" => "My Profile Edit",
             "provinces" => $provinces,
 
@@ -130,24 +130,33 @@ class MyProfileController extends Controller
         $user_id = Auth::user()->id;
         $user = User::findOrFail($user_id);
 
-        // $user = User::where('id', auth()->user()->id)->get();
-        $rules = [
-            'name' => 'required|string',
-            'username' => 'required|string',
-            'addres' => 'required|string',
-            'province_id' => 'required',
-            'regency_id' => 'required',
-            'district_id' => 'required',
-            'village_id' => 'required',
-            'zip_code' => 'integer',
-            'phone_number' => 'required|string',
-            'country' => 'string',
+        // $user = User::where('id', Auth::id()->first());
+        // $rules = [
+        //     'name' => 'required|string',
+        //     'username' => 'required|string',
+        //     'addres' => 'required|string',
+        //     'province_id' => 'required',
+        //     'regency_id' => 'required',
+        //     'district_id' => 'required',
+        //     'village_id' => 'required',
+        //     'zip_code' => 'integer',
+        //     'phone_number' => 'required|string',
+        //     'country' => 'string',
+        // ];
+        // $validatedData = $request->validate($rules);
 
-        ];
-        $validatedData = $request->validate($rules);
-
-        User::where('id', $user->id)
-            ->update($validatedData);
+        $user->name = $request->input('name');
+        $user->username = $request->input('username');
+        $user->addres = $request->input('addres');
+        $user->province_id = $request->input('province');
+        $user->regency_id = $request->input('regency');
+        $user->district_id = $request->input('district');
+        $user->village_id = $request->input('village');
+        $user->zip_code = $request->input('zip_code');
+        $user->phone_number = $request->input('phone_number');
+        $user->update();
+        // User::where('id', $user->id)
+        //     ->update($validatedData);
         return redirect('user/my-profile')->with('success', 'Berhasil Edit Profil!');
     }
 

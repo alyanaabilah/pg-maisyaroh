@@ -56,7 +56,11 @@
 
 @include('front.partials.breadcrumb')
 
-
+@if(session()->has('success'))
+<div class="alert alert-success" role="alert">
+    {{ session('success') }}
+</div>
+@endif
 
 <!-- Checkout Section Begin -->
 <section class="checkout spad">
@@ -106,13 +110,13 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="district">Kecamatan</label>
-                                    <input type="text" readonly class="form-control" name="district" id="district" aria-describedby="district" placeholder="Kecamatan" style="color:black">
+                                    <input type="text" readonly class="form-control" name="district" id="district" aria-describedby="district" placeholder="Kecamatan" value="{{ $user->district->name}}" style=" color:black">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="village">Kelurahan/Desa</label>
-                                    <input type="text" readonly class="form-control" name="village" id="village" aria-describedby="village" placeholder="Kelurahan/Desa" style="color:black">
+                                    <input type="text" readonly class="form-control" name="village" id="village" aria-describedby="village" placeholder="Kelurahan/Desa" value="{{ $user->village->name}}" style=" color:black">
                                 </div>
                             </div>
                             <div class="col-lg-4">

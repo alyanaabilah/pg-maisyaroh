@@ -30,9 +30,9 @@
                             <div>Hai {{Auth::user()->name}} (Subsidi) </div>
                             <span class="arrow_carrot-down"></span>
                             <ul>
-                                <li><a href="/user/my-profile">Profil Saya</a></li>
-                                <li><a href="/user/my-orders">Order Saya</a></li>
-                                <li><a href="/user/my-orders">Subisidi</a></li>
+                                <li><a href="/subsidi/my-profile">Profil Saya</a></li>
+                                <li><a href="/subsidi/my-orders">Order Saya</a></li>
+                                <li><a href="/subsidi/coupon">Kupon</a></li>
                             </ul>
                         </div>
 
@@ -156,7 +156,7 @@
 
                     @elseif(Auth::user()->ceklevel === 'subsidi')
                     <ul>
-                        <li><a href="/user/cart"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
+                        <li><a href="/subsidi/cart"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
                     </ul>
 
                     @else

@@ -70,19 +70,18 @@
                         <tbody class="product_data">
                             <tr>
                                 <td class="shoping__cart__item">
-                                    @if($cart->product->stock < $cart->quantity)
-                                        <input type="checkbox" class="mr-5" value="">
-                                        @else
-                                        <input type="checkbox" class="mr-5" value="{{ $cart->product->sell_price * $cart->quantity }}">
-                                        @endif
-                                        <img src="{{asset('storage/'. $cart->product->image)}}" height="60px" width="60px" alt="">
-                                        @if(Auth::user()->ceklevel === 'user')
-                                        <a href="/user/shop/{{$cart->product->slug}}" style="color: black;">{{$cart->product->name}}</a>
-                                        @elseif(Auth::user()->ceklevel === 'subsidi')
-                                        <a href="/user/shop/{{$cart->product->slug}}" style="color: black;">{{$cart->product->name}}</a>
-                                        @else
-                                        <a href="/admin/shop/{{$cart->product->slug}}" style="color: black;">{{$cart->product->name}}</a>
-                                        @endif
+
+
+
+
+                                    <img src="{{asset('storage/'. $cart->product->image)}}" height="60px" width="60px" alt="">
+                                    @if(Auth::user()->ceklevel === 'user')
+                                    <a href="/user/shop/{{$cart->product->slug}}" style="color: black;">{{$cart->product->name}}</a>
+                                    @elseif(Auth::user()->ceklevel === 'subsidi')
+                                    <a href="/user/shop/{{$cart->product->slug}}" style="color: black;">{{$cart->product->name}}</a>
+                                    @else
+                                    <a href="/admin/shop/{{$cart->product->slug}}" style="color: black;">{{$cart->product->name}}</a>
+                                    @endif
                                 </td>
                                 <td class="shoping__cart__price">
                                     @if($cart->product->stock >= $cart->quantity)
@@ -125,17 +124,6 @@
                     @else
                     <a href="/admin/shop" class="primary-btn cart-btn">LANJUT BELANJA</a>
                     @endif
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Discount Codes</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">APPLY COUPON</button>
-                        </form>
-                    </div>
                 </div>
             </div>
             <div class="col-lg-6">

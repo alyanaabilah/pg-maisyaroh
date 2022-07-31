@@ -9,7 +9,7 @@
     <div class="container">
         <div class="checkout__form">
             <h4>Alamat Pengiriman</h4>
-            <form action="{{route('checkout.store')}}" method="POST">
+            <form action="/user/checkout" method="POST">
                 {{ csrf_field() }}
                 <div class="row">
 
@@ -88,34 +88,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="district">Kecamatan</label>
-                                    <select id="district" class="wide form-control" name="district">
-                                        <option>Pilih Kecamatan</option>
-                                    </select>
-                                    @error('district')
-                                    <div class="invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="village">Desa</label>
-                                    <select id="village" class="wide form-control" name="village">
-                                        <option>Pilih Desa</option>
-                                    </select>
-                                    @error('village')
-                                    <div class="invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
+
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="Kodepos">Kodepos</label>
@@ -174,6 +147,7 @@
                                 <input type="radio" id="myself" name="ship_to" value="1">
                                 <label for="myself">My Self</label><br>
                                 <input type="radio" id="different" name="ship_to" value="0">
+                                <label for="other">Other Address</label>
                             </label>
                         </div>
                     </div>
@@ -215,11 +189,8 @@
                             <div class="checkout__order__total">Total<span>Rp.{{ number_format($total) }}</span></div>
                             <div class="checkout__input__checkbox">
                             </div>
-                            @if($cartitems->count() > 0)
+
                             <button type="submit" name="place_order" class="site-btn">Buat Pesanan</button>
-                            @else
-                            <button type="submit" class="site-btn fade">Buat Pesanan</button>
-                            @endif
                         </div>
 
                     </div>
@@ -232,19 +203,6 @@
 </section>
 <!-- Checkout Section End -->
 <script>
-    var shipping_different = document.getElementById('shipping_different');
-    var delivery_div = document.getElementById('delivery');
-    var showdelivery = function() {
-        if (shipping_different.checked) {
-            delivery_div.style['display'] = 'block';
-        } else {
-            delivery_div.style['display'] = 'none';
-        }
-    }
-    shipping_different.onclick = showdelivery;
-    showdelivery();
-
-
     window.addEventListener('DOMContentLoaded', function() {
         $(document).ready(function() {
             $('#province').on('change', function() {
