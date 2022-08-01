@@ -10,8 +10,8 @@ class Coupon extends Model
 {
     protected $guarded = ['id'];
 
-    public function user()
+    public function couponuser()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->hasMany(CouponUser::class, 'id', 'coupon_id');
     }
 }

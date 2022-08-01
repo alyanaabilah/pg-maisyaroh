@@ -219,7 +219,7 @@
                             </div>
                             @elseif(Auth::user()->ceklevel === 'subsidi')
                             <div class="product__item__text">
-                                <h6><a href="/user/shop/{{$produk->slug}}">{{ $produk->name }}</a></h6>
+                                <h6><a href="/subsidi/shop/{{$produk->slug}}">{{ $produk->name }}</a></h6>
                                 <h5>@currency($produk->sell_price)</h5>
                             </div>
                             @else

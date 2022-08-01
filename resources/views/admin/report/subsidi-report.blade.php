@@ -33,14 +33,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($kupon as $kupon)
                         <tr>
-                            @foreach($kupon as $kupon)
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $kupon->user->name }}</td>
                             <td>{{ $kupon->coupon->coupon_name }}</td>
-                            @endforeach
                             <td>
 
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

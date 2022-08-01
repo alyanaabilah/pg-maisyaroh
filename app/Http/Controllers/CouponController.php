@@ -49,7 +49,6 @@ class CouponController extends Controller
     {
 
         $coupon = new Coupon();
-        // $coupon->user_id = $request->input('user_id');
         $coupon->coupon_name = $request->input('coupon_name');
         $coupon->coupon_name = $request->input('coupon_type');
         $coupon->coupon_code = $request->input('coupon_code');
@@ -99,9 +98,9 @@ class CouponController extends Controller
     public function update(Request $request, $id)
     {
         $coupon = Coupon::find($id);
-        $coupon->coupon_code = $request->input('coupon_code');
         $coupon->coupon_name = $request->input('coupon_name');
         $coupon->coupon_type = $request->input('coupon_type');
+        $coupon->coupon_code = $request->input('coupon_code');
         $coupon->coupon_price = $request->input('coupon_price');
         $coupon->start_datetime = $request->input('start_datetime');
         $coupon->end_datetime = $request->input('end_datetime');

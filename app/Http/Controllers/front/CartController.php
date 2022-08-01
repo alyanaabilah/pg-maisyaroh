@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\front;
 
-use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\User;
+use App\Models\Coupon;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 
 class CartController extends Controller
@@ -20,13 +21,15 @@ class CartController extends Controller
     public function index()
     {
         //$total = User::with('cartWithProductPrice')->find(1);
+        $coupon = Coupon::all();
         $cartitems = Cart::where('user_id', Auth::id())->get();
         return view('front.cart', [
             "title" => "Pangkalan Gas Maisyaroh | Cart",
             "active" => "cart",
             "judul" => "Cart",
             "cartitems" => $cartitems,
-            "product" => Product::all()
+            "product" => Product::all(),
+            "kupon" => $coupon
             //  "total" => $total
         ]);
     }

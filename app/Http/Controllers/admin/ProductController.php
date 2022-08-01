@@ -52,7 +52,7 @@ class ProductController extends Controller
             'name' => 'required|string',
             'category_id' => 'required',
             'brand_id' => 'required',
-            'stock' => 'required',
+            // 'stock' => 'required',
             'sell_price' => 'required|integer',
             'sales_price' => 'required|integer',
             'slug' => 'required|max:50|string|unique:products',
@@ -110,7 +110,7 @@ class ProductController extends Controller
             'name' => 'required|string',
             'category_id' => 'required',
             'brand_id' => 'required',
-            'stock' => 'required',
+            // 'stock' => 'required',
             'sell_price' => 'required|integer',
             'sales_price' => 'required|integer',
             'description' => 'required'

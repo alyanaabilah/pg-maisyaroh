@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\BestSellerController;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,9 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\front\SubsidiCouponController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\report\CouponUserController;
+use App\Http\Controllers\report\StockController;
 use App\Models\Order;
+use Illuminate\Foundation\Console\StorageLinkCommand;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,6 +120,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('orders', OrderController::class);
         Route::resource('coupon', CouponController::class);
         Route::resource('subsidi', CouponUserController::class);
+        Route::resource('stock', StockController::class);
+        Route::resource('best-seller', BestSellerController::class);
 
 
 
@@ -141,6 +146,10 @@ Route::post('user-districts', [MyProfileController::class, 'getDistricts']);
 
 //Route::get('generate-pdf', [PdfController::class, 'generatePDF']);
 Route::get('/cetak-invoice/{order:id}', [OrderController::class, 'invoice'])->name('cetak.invoice');
+Route::get('/cetak-stock', [StockController::class, 'sisastock'])->name('cetak.stock');
+Route::get('/cetak-tanggal/{tglawal}/{tglakhir}', [StockController::class, 'cetaktgl'])->name('cetak.tanggal');
+Route::get('/cetak-brand/{brand}', [StockController::class, 'cetakbrand'])->name('cetak.brand');
+Route::get('/cetak-kategori/{category}', [StockController::class, 'cetakkategori'])->name('cetak.kategori');
 
 // Route::get('province', [Controller::class, 'get_province'])->name('province');
 // Route::get('/kota/{id}', [CheckoutController::class, 'get_city']);

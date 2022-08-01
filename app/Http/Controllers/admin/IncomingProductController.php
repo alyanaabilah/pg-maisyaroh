@@ -57,7 +57,7 @@ class IncomingProductController extends Controller
 
         $product = Product::find($request->product_id);
         $product->stock += $request->quantity;
-        $product->save(); //untuk membuat quantity di produk masuk menambahkan stok yg ada di product
+        $product->save(); //untuk membuat quantity di produk masuk menambahkan stok yg ada di sisa stock product
 
         return redirect('admin/incoming-product')->with('success', 'Product Masuk Ditambahkan!');
     }

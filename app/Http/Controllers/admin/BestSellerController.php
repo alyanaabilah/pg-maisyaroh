@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\front;
+namespace App\Http\Controllers\admin;
 
-use App\Models\User;
-use App\Models\Coupon;
-use App\Models\CouponUser;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Models\OrderItem;
+use Illuminate\Http\Request;
 
-class SubsidiCouponController extends Controller
+class BestSellerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +15,11 @@ class SubsidiCouponController extends Controller
      */
     public function index()
     {
-        $coupon = Coupon::all();
-        return view('front.subsidi', [
-            "kupon" => $coupon,
-            "title" => "Pangkalan Gas Maisyaroh | Kupon",
-            "active" => "coupon",
-            "judul" => "Kupon Subsidi Saya",
+        $order = (new OrderItem())->groupBy('product_id')->selectRaw(' sum(quantity) as quantity, product_id')
+            ->get();;
+        return view('admin.dashboard.best-seller', [
+            "title" => "Produk Terlaris",
+            "seller" => $order
         ]);
     }
 
@@ -35,7 +31,6 @@ class SubsidiCouponController extends Controller
     public function create()
     {
         //
-
     }
 
     /**
@@ -46,14 +41,7 @@ class SubsidiCouponController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id = Auth::id();
-        $user = User::find($user_id);
-
-        $kuponuser = new CouponUser();
-        $kuponuser->user_id = Auth::id();
-        $kuponuser->coupon_id = $request->input('coupon_id');
-        $kuponuser->save();
-        redirect()->back()->with('success', "Berhasil Pakai Kupon");
+        //
     }
 
     /**

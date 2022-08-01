@@ -120,10 +120,25 @@
                     @if(Auth::user()->ceklevel == 'user')
                     <a href="/user/shop" class="primary-btn cart-btn">LANJUT BELANJA</a>
                     @elseif(Auth::user()->ceklevel == 'subsidi')
-                    <a href="/user/shop" class="primary-btn cart-btn">LANJUT BELANJA</a>
+                    <a href="/subsidi/shop" class="primary-btn cart-btn">LANJUT BELANJA</a>
                     @else
                     <a href="/admin/shop" class="primary-btn cart-btn">LANJUT BELANJA</a>
                     @endif
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__continue">
+                    <div class="shoping__discount">
+                        <h5>Discount Codes</h5>
+                        <form action="/subsidi/coupon" method="POST">
+                            {{ csrf_field() }}
+                            @foreach($kupon as $kupon)
+                            <input type="hidden" value="{{$kupon->id}}" class="coupon_id" name="coupon_id">
+                            @endforeach
+                            <input type="text" placeholder="Enter your coupon code">
+                            <button type="submit" class="site-btn">APPLY COUPON</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -135,7 +150,7 @@
                     @if(Auth::user()->ceklevel == 'user')
                     <a href="/user/checkout" class="primary-btn">CHECKOUT</a>
                     @elseif(Auth::user()->ceklevel == 'subsidi')
-                    <a href="/user/checkout" class="primary-btn">CHECKOUT</a>
+                    <a href="/subsidi/checkout" class="primary-btn">CHECKOUT</a>
                     @else
                     <a href="/admin/checkout" class="primary-btn">CHECKOUT</a>
                     @endif
@@ -143,12 +158,15 @@
             </div>
         </div>
     </div>
+    </div>
     @else
     <div class="text-center" style="padding: 30px 0;">
         <h3 class="card-title">Keranjang Belanja Kamu Kosong Nih</h3>
         <h4 class="card-text">Ayo Tambah Ke Keranjang Sekarang!</h4>
         @if(Auth::user()->ceklevel === 'user')
         <a href="/user/shop" class="btn btn-success mt-2">Pilih Produk</a>
+        @elseif(Auth::user()->ceklevel == 'subsidi')
+        <a href="/subsidi/shop" class="btn btn-success mt-2">Pilih Produk</a>
         @else
         <a href="/admin/shop" class="btn btn-success mt-2">Pilih Produk</a>
         @endif

@@ -66,15 +66,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="stock">Stok</label>
-                    <input type="text" class="form-control @error('stock') is-invalid @enderror" required name="stock" id="stock" aria-describedby="stock" placeholder="Stock" value="{{old ('stock', $product->stock)}}">
-                    @error('stock')
-                    <div class="invalid-feeedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
                     <label for="sell_price">Harga Jual</label>
                     <input type="text" class="form-control @error('sell_price') is-invalid @enderror" required name="sell_price" id="sell_price" aria-describedby="sell_price" placeholder="Harga Jual" value="{{old ('sell_price', $product->sell_price)}}">
                     @error('sell_price')

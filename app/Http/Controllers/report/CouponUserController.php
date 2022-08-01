@@ -13,7 +13,7 @@ class CouponUserController extends Controller
     public function index()
     {
         $kupon = CouponUser::all();
-        return view('admin.report.subsidi', [
+        return view('admin.report.subsidi-report', [
             "title" => "Data Pelanggan Subsidi",
             "kupon" => $kupon
             //"user" => User::where('ceklevel', 'subsidi')->get(),

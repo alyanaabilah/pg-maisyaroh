@@ -62,7 +62,6 @@
                             <th>Kode</th>
                             <th>Kategori</th>
                             <th>Brand</th>
-                            <th>Stok</th>
                             <th>Harga Jual</th>
                             <th>Harga Sales</th>
                             <th>Slug</th>
@@ -81,7 +80,6 @@
                             <td>{{ $product->product_code }}</td>
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->brand->name }}</td>
-                            <td>{{ $product->stock }}</td>
                             <td>@currency($product->sell_price)</td>
                             <td>@currency($product->sales_price)</td>
                             <td>{{ $product->slug }}</td>

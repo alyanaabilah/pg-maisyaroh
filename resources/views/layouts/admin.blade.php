@@ -206,7 +206,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
+                                            <a class="sidenav-item-link" href="/admin/stock">
                                                 <span class="nav-text">Stok Produk</span>
                                             </a>
                                         </li>
@@ -216,7 +216,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
+                                            <a class="sidenav-item-link" href="/admin/best-seller">
                                                 <span class="nav-text">Barang Terlaris</span>
                                             </a>
                                         </li>
@@ -237,7 +237,7 @@
                                         </li>
                                         <li>
                                             <a class="sidenav-item-link" href="/admin/subsidi">
-                                                <span class="nav-text">Pelanggan Subsidi</span>
+                                                <span class="nav-text">Kupon Subsidi</span>
                                             </a>
                                         </li>
                                     </div>

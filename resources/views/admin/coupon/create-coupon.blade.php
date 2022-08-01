@@ -10,7 +10,7 @@
             <h2>Tambah Kupon</h2>
         </div>
         <div class="card-body">
-            <form action="{{route('coupon.store')}}" method="POST">
+            <form action="/admin/coupon" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="coupon_code">Kode</label>

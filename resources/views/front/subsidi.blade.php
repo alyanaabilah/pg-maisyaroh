@@ -2,44 +2,38 @@
 @section('content')
 
 @include('front.partials.breadcrumb')
+@if(session()->has('success'))
+<div class="alert alert-success" role="alert">
+    {{ session('success') }}
+</div>
+@endif
 <div class="container">
     <div class="row">
-        @foreach($kupon as $kupon)
-        <div class="card mt-5 mb-5 ml-2 mr-2 " style="width: 16rem;">
-            <div class="card-body">
-                <p class="card-text"> Tipe : {{ $kupon->coupon_type }}
+
+        <form action="/subsidi/coupon" method="POST">
+            {{ csrf_field() }}
+            @foreach($kupon as $kupon)
+            <div class="card mt-5 mb-5 ml-2 mr-2 " style="width: 30rem;">
+                <div class="card-body">
+                    <input type="hidden" value="{{$kupon->id}}" class="coupon_id" name="coupon_id">
+                    <p class="card-text"> Tipe : {{ $kupon->coupon_type }}
+                        <br>
+                        Harga : @currency($kupon->coupon_price)
+                        <br>
+                        Nama : {{ $kupon->coupon_name }}
+                        <br>
+                        Berakhir : {{ $kupon->end_datetime }}
+                    </p>
+                    <input type="checkbox" value="{{$kupon->id}}" class="coupon_id" name="coupon_id">
                     <br>
-                    Harga : @currency($kupon->coupon_price)
-                    <br>
-                    Nama : {{ $kupon->coupon_name }}
-                    <br>
-                    Berakhir : {{ $kupon->end_datetime }}
-                </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <button type="submit" class="btn btn-primary">Pakai</button>
+                </div>
             </div>
-        </div>
-        <div class="card mt-5 mb-5 ml-5 mr-2  " style="width: 15rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-        <div class="card mt-5 mb-5 ml-5 mr-2 " style="width: 15rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-        <div class="card mt-5 mb-5 ml-5 mr-0 " style="width: 15rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a><!-- buttonnya jadi create atau store dan indexnya ke report subsidi di admin-->
-            </div>
-        </div>
-        @endforeach
+
+            @endforeach
+        </form>
+
+
     </div>
 </div>
 

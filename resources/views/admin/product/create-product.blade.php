@@ -50,7 +50,7 @@
                         @if(old('brand_id') == $brand->id)
                         <option value="{{$brand->id}}" selected>{{$brand->name}}</option>
                         @else
-                        <option value="{{$brand->id}}" selected>{{$brand->name}}</option>
+                        <option value="{{$brand->id}}">{{$brand->name}}</option>
                         @endif
                         @endforeach
                     </select>
