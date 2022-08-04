@@ -16,3 +16,13 @@
     font-size: 14px;
     padding: 5px;
 }
+
+.ui-menu {
+    z-index: 3500 !important;
+}
+
+.whatsapp-chat {
+    bottom: 10px;
+    left: 10px;
+    position: fixed;
+}

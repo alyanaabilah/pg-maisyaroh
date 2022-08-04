@@ -25,13 +25,13 @@
                         <div class="col-md-4 mt-3">
                             <div class="border p-2">
                                 <label for="No Order">No Order</label>
-                                <h6 style="color: black;">{{$order->tracking_no }}</h6>
+                                <h6 style="color: black;">{{$order->order_no }}</h6>
                             </div>
                         </div>
                         <div class=" col-md-8 mt-3">
                             <div class="border p-2">
-                                <label for="Tracking Message">Tracking Message</label>
-                                <h6 style="color: black;">{{(!isset($order->tracking_msg))== true ? $order->tracking_msg:'Tidak Ada Pesan' }}</h6>
+                                <label for="order Message">Order Message</label>
+                                <h6 style="color: black;">{{(!isset($order->order_msg))== true ? $order->order_msg:'Tidak Ada Pesan' }}</h6>
                             </div>
                         </div>
                         <div class="col-md-4 mt-3">
@@ -60,11 +60,11 @@
                         </div>
                         <div class="col-md-4 mt-3">
                             <div class="border p-2">
-                                <label for="ID Pembayaran">ID Pembayaran</label>
-                                <h6 style="color: black;">{{(!isset($order->payment_id))== true ? $order->payment_id:'Pembayaran COD' }}</h6>
+                                <label for="Bukti Transfer">Bukti Transfer</label>
+                                <img src="{{asset('storage/'. $order->image)}}" width="100px">
                             </div>
                         </div>
-                        <div class="col-md-8 mt-3">
+                        <div class="col-md-4 mt-3">
                             <div class="border p-2">
                                 <label for="Order Status">Order Status</label>
                                 <h6 style="color: black;">
@@ -104,18 +104,18 @@
                                         <td>{{$item->product->name}}</td>
                                         <td>{{$item->quantity}}</td>
                                         <td>@currency($item->price)</td>
-                                        <td>{{$item->ptice * $item->quantity}}</td>
+                                        <td>@currency($item->price * $item->quantity)</td>
                                     </tr>
+                                    @endforeach
 
                                     <tr>
                                         <td colspan="3" class="text-right">Ongkos Kirim</td>
-                                        <td>0</td>
+                                        <td>Rp. 10.000</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" class="text-right">Total</td>
-                                        <td>@currency($item->total_price)</td>
+                                        <td>@currency($order->total_price + 10000)</td>
                                     </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

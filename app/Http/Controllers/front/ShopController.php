@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,14 +21,17 @@ class ShopController extends Controller
      */
     public function index()
     {
+
+
         return view('front.shop', [
             "title" => "Pangkalan Gas Maisyaroh | Shop",
             "product" => Product::all(),
             "active" => "shop",
             "judul" => "Shop",
-            "product" => Product::all()
+            "categories" => Category::all()
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,7 +52,8 @@ class ShopController extends Controller
             "title" => "Pangkalan Gas Maisyaroh | Detail",
             "product" => $shop,
             "active" => "shop",
-            "judul" => "Detail Produk"
+            "judul" => "Detail Produk",
+            "brands" => Brand::all()
 
 
         ]);
@@ -63,14 +69,14 @@ class ShopController extends Controller
             if ($prod_check) {
                 if (Cart::where('product_id', $product_id)->where('user_id', Auth::id())->first()) {
                     //session()->flash('status',  $prod_check->name . " Already Added to cart");
-                    return response()->json(['status' => $prod_check->name . " Already Added to cart"]);
+                    return response()->json(['status' => $prod_check->name . " Sudah ada di keranjang"]);
                 } else {
                     $cartItem = new Cart();
                     $cartItem->product_id = $product_id;
                     $cartItem->user_id = Auth::id();
                     $cartItem->quantity = $product_qty;
                     $cartItem->save();
-                    return response()->json(['status' => $prod_check->name . " Added to cart"]);
+                    return response()->json(['status' => $prod_check->name . " Ditambahkan ke keranjang"]);
                 }
             }
         } else {

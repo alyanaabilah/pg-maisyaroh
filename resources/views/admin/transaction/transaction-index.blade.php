@@ -28,22 +28,7 @@
                                 <label for="Akhir">Akhir</label>
                                 <input type="date" id="tglakhir">
                             </div>
-                            <div class="col-md-3 mt-1 ml-2">
-                                <label for="Brand">Brand</label>
-                                <select class="form-control" name="brand_id" id="brand">
-                                    @foreach ($brands as $brand)
-                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-3 mt-1">
-                                <label for="Category">Kategori</label>
-                                <select class="form-control" name="category_id" id="category">
-                                    @foreach ($categories as $kategori)
-                                    <option value="{{$kategori->id}}">{{$kategori->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+
                             <a href="" onclick="this.href='/terlaris-tanggal/'+document.getElementById('tglawal').value +'/'+ document.getElementById('tglakhir').value; " target="_blank" class="btn btn-primary mt-4">Filter</a>
 
 
@@ -76,26 +61,29 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th width="250px">Produk</th>
-                            <th>Brand</th>
-                            <th>Kategori</th>
-                            <th>Quantity</th>
+                            <th width="200px">No Lacak</th>
+                            <th>Pembeli</th>
+                            <th>Phone</th>
+                            <th>Status</th>
                             <th>Total</th>
-                            <th>Gambar</th>
+                            <th>Waktu</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($seller as $item)
+                        @foreach ($orders as $order)
 
                         <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{ $item->product->name }}</td>
-                            <td>{{ $item->product->brand->name }}</td>
-                            <td>{{ $item->product->category->name }}</td>
-                            <td>{{ $item->quantity }}</td>
-                            <td>@currency( $item->price * $item->quantity)</td>
-                            <td> <img src="{{asset('storage/'. $item->product->image)}}" width="100px"></td>
+                            <td>{{$order->order->order_no}}</td>
+                            <td>{{ $order->order->user->name }}</td>
+                            <td>{{ $order->order->phone_number}}</td>
+                            <td>@if($order->order->order_status == '0')
+                                pending
+                                @else
+                                success
+                                @endif
+                            </td>
+                            <td>@currency($order->price * $order->quantity)</td>
+                            <td>{{$order->created_at}}</td>
                         </tr>
 
                         @endforeach

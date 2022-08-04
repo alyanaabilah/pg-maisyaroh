@@ -4,9 +4,16 @@
 
 @include('front.partials.breadcrumb')
 
+
+
 <section class="shoping-cart spad">
 
     <div class="container">
+        @if($orders->count() > 1)
+        <div class="alert alert-danger" role="alert">
+            <h3 style="text-align: center;">Silahkan lakukan Pembayaran</h3>
+        </div>
+        @endif
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__table ">
@@ -23,9 +30,10 @@
 
                         <tbody>
                             @foreach($orders as $order)
+
                             <tr>
                                 <td>
-                                    {{ $order->tracking_no }}
+                                    {{ $order->order_no }}
                                 </td>
                                 <td>
                                     @currency($order->total_price)
@@ -34,7 +42,14 @@
                                     {{ $order->order_status == '0' ? 'pending' : 'completed'}}
                                 </td>
                                 <td>
-                                    <a href="{{route('my-orders.show', $order->id)}}" class="btn btn-primary">Detail</a>
+                                    @if(Auth::user()->ceklevel === 'user')
+
+                                    <a href="/user/my-orders/{{$order->id}}"><i class="fa fa-info-circle fa-2x mr-2" style="color:black;"></i></a>
+                                    <a href=" /user/confirmation-orders/{{$order->id}}"><i class="fa fa-check-circle fa-2x" style="color:black;"></i></a>
+                                    @else (Auth::user()->ceklevel === 'subsidi')
+                                    <a href="/subsidi/my-orders/{{$order->id}}"><i class="fa fa-info-circle fa-2x mr-2" style="color:black;"></i></a>
+                                    <a href="/subsidi/confirmation-orders/{{$order->id}}"><i class="fa fa-check-circle fa-2x" style="color:black;"></i></a>
+                                    @endif
                                 </td>
                                 <td class="shoping__cart__item__close">
                                     <span class="icon_close delete-cart-item border-0"></span>

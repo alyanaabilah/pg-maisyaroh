@@ -66,12 +66,13 @@
                 <tbody>
                     @foreach ($orders as $order)
                     <tr>
-                        <td>{{$order->tracking_no}}</td>
+                        <td>{{$order->order_no}}</td>
                         <td>{{ $order->user->name }}</td>
                         <td>{{ $order->phone_number}}</td>
                         <td>@if($order->order_status == '0')
                             pending
                             @else
+                            succes
                             @endif
                         </td>
 

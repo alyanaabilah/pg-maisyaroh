@@ -19,7 +19,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="name">Nama</label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" required autofocus name="name" id="name" aria-describedby="name" placeholder="Nama Product" value="{{Auth::user()->name}}" style="color:black">
+                                    <input type="text" class="form-control name @error('name') is-invalid @enderror" required autofocus name="name" id="name" aria-describedby="name" placeholder="Nama Product" value="{{Auth::user()->name}}" style="color:black">
                                     @error('name')
                                     <div class="invalid-feeedback">
                                         {{ $message }}
@@ -30,7 +30,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="Nomor Telepon">Nomor Telepon</label>
-                                    <input type="text" class="form-control @error('phone_number') is-invalid @enderror" required autofocus name="phone_number" id="phone_number" aria-describedby="phone_number" placeholder="Nomor Telepon" value="{{ Auth::user()->phone_number }}" style="color:black">
+                                    <input type="text" class="form-control phone_number @error('phone_number') is-invalid @enderror" required autofocus name="phone_number" id="phone_number" aria-describedby="phone_number" placeholder="Nomor Telepon" value="{{ Auth::user()->phone_number }}" style="color:black">
                                     @error('phone_number')
                                     <div class="invalid-feeedback">
                                         {{ $message }}
@@ -42,7 +42,7 @@
 
                         <div class="form-group">
                             <label for="addres">Alamat</label>
-                            <input type="text" class="form-control @error('addres') is-invalid @enderror" required autofocus name="addres" id="addres" aria-describedby="addres" placeholder="Alamat" value="{{Auth::user()->addres}}" style="color:black">
+                            <input type="text" class="form-control addres @error('addres') is-invalid @enderror" required autofocus name="addres" id="addres" aria-describedby="addres" placeholder="Alamat" value="{{Auth::user()->addres}}" style="color:black">
                             @error('addres')
                             <div class="invalid-feeedback">
                                 {{ $message }}
@@ -118,8 +118,10 @@
                                     <label for="Pengiriman">Pengiriman</label>
                                     <select id="pengiriman" class="wide form-control" name="pengiriman">
                                         <option value="">Pilih Pengiriman</option>
-                                        <option value="cod">COD</option>
-                                        <option value="antar">Jasa Antar</option>
+                                        <option value="1">COD</option>
+                                        <option value="2">JNE</option>
+                                        <option value="3">POS</option>
+                                        <option value="4">Ambil Ke Toko</option>
                                     </select>
                                     @error('country')
                                     <div class="invalid-feeedback">
@@ -131,7 +133,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="note">Order notes</label>
-                                    <input type="text" class="form-control" name="country" id="country" aria-describedby="name" placeholder="Note" style="color:black">
+                                    <input type="text" class="form-control" name="order_msg" id="order_msg" aria-describedby="name" placeholder="Note" style="color:black">
                                     @error('country')
                                     <div class="invalid-feeedback">
                                         {{ $message }}
@@ -142,12 +144,12 @@
                         </div>
                         <div class="form-group">
                             <label>
-                                Ship to?
+                                Kirim Ke?
                                 <br>
                                 <input type="radio" id="myself" name="ship_to" value="1">
-                                <label for="myself">My Self</label><br>
+                                <label for="myself">Alamat Saya</label><br>
                                 <input type="radio" id="different" name="ship_to" value="0">
-                                <label for="other">Other Address</label>
+                                <label for="other">Alamat Lain</label>
                             </label>
                         </div>
                     </div>
@@ -167,14 +169,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($cartitems as $cart)
+
                                     @php $total = 0; @endphp
+                                    @foreach($cartitems as $cart)
+
                                     <tr>
                                         <td>{{$cart->product->name}}</td>
                                         <td>{{$cart->quantity}}</td>
+
                                         <td>@currency($cart->product->sell_price)</td>
-                                        <td>@currency($cart->product->sell_price * $cart->quantity)</td>
                                         @php $total += $cart->product->sell_price * $cart->quantity; @endphp
+                                        <td>@currency($cart->product->sell_price * $cart->quantity)</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -184,21 +189,27 @@
                                 <label for="bank">Transfer Bank</label><br>
                                 <input type="radio" id="cod" name="delivery_method" value="Cash On Delivery">
                                 <label for="cod">Cash On Delivery</label><br>
+                                <input type="radio" id="store" name="delivery_method" value="Ke Toko">
+                                <label for="toko">Ke Toko</label><br>
                             </div>
-                            <div class="checkout__order__subtotal">Ongkos Kirim<span>$750.99</span></div>
-                            <div class="checkout__order__total">Total<span>Rp.{{ number_format($total) }}</span></div>
-                            <div class="checkout__input__checkbox">
-                            </div>
+                            <section>
+                                <div class="checkout__order__subtotal">Ongkos Kirim<span>Rp.10.000</span></div>
+                                <div class="checkout__order__total">Total<span>Rp.{{ number_format($total + 10000) }}</span></div>
+                                <div class="checkout__input__checkbox">
+                            </section>
 
-                            <button type="submit" name="place_order" class="site-btn">Buat Pesanan</button>
+                            <button type="submit" class="btn btn-primary">Buat Pesanan | COD</button>
+                            <button class="btn btn-success transfer_btn">Bank Transfer</button>
                         </div>
 
                     </div>
 
-
                 </div>
-            </form>
+
+
         </div>
+        </form>
+    </div>
     </div>
 </section>
 <!-- Checkout Section End -->
@@ -229,6 +240,17 @@
                 })
             });
 
+
+        });
+
+    });
+
+    let inputs = document.querySelectorAll('input[name="delivery_method"]');
+    let section = document.querySelector('section');
+
+    inputs.forEach((el) => {
+        el.addEventListener("change", function(e) {
+            section.style.display = e.target.value === 'Ke Toko' ? "none" : "block";
         });
     });
 </script>

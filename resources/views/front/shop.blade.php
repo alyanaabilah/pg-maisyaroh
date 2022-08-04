@@ -10,7 +10,7 @@
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span>All departments</span>
+                        <span>Brands</span>
                     </div>
                     <ul>
                         @foreach ($product as $produk)
@@ -22,24 +22,13 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
-                            <div class="hero__search__categories">
-                                All Categories
-                                <span class="arrow_carrot-down"></span>
-                            </div>
-                            <input type="text" placeholder="What do yo u need?">
-                            <button type="submit" class="site-btn">SEARCH</button>
+                        <form action="{{route('search.products')}}" method="POST">
+                            @csrf
+                            <input type="text" placeholder="Apa yang anda cari?" name="search" id="search" value="" style="width: 520px">
+                            <button type="submit" class="site-btn">Cari</button>
                         </form>
                     </div>
-                    <div class="hero__search__phone">
-                        <div class="hero__search__phone__icon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="hero__search__phone__text">
-                            <h5>+65 11.188.888</h5>
-                            <span>support 24/7 time</span>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -83,8 +72,8 @@
                     <div class="sidebar__item">
                         <h4>Kategori</h4>
                         <ul>
-                            @foreach ($product as $produk)
-                            <li><a href="/front-category/{{ $produk->category->name }}">{{ $produk->category->name }}</a></li>
+                            @foreach ($categories as $category)
+                            <li><a href="/front-category/{{ $category->name }}">{{ $category->name }}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -191,13 +180,6 @@
                                 <h6><span>16</span> Products found</h6>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
-                                <span class="icon_grid-2x2"></span>
-                                <span class="icon_ul"></span>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
                 <div class="row">

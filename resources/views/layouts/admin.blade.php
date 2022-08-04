@@ -211,8 +211,8 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
-                                                <span class="nav-text">Penjualan</span>
+                                            <a class="sidenav-item-link" href="/admin/transaction-orders">
+                                                <span class="nav-text">Transaksi Penjualan</span>
                                             </a>
                                         </li>
                                         <li>
@@ -236,7 +236,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="sidenav-item-link" href="/admin/subsidi">
+                                            <a class="sidenav-item-link" href="/admin/subsidi-kupon">
                                                 <span class="nav-text">Kupon Subsidi</span>
                                             </a>
                                         </li>

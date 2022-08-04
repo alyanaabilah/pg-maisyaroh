@@ -32,17 +32,9 @@
                     <div class="border">{{$order->zip_code}}</div>
                     <label for="phone_number" class="mt-2">Nomor Telepon</label>
                     <div class="border">{{$order->phone_number}}</div>
-                    <form action="/user/my-orders/{{$order->id}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
+                    <form action="{{route('my-orders.store')}}" method="POST" enctype="multipart/form-data">
                         <label for="Image">Image</label>
-                        <input type="hidden" name="oldImage" value="{{$order->image}}">
-                        <input type="hidden" value="{{$order->order_status}}">
-                        @if($order->image)
-                        <img src="{{asset('storage/'. $order->image)}}" img class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
-                        @else
-                        <img class="img-preview img-fluid mb-3 col-sm-5">
-                        @endif
+                        <img class="img-preview img-fluid mb-3 col-sm-5" alt="">
                         <input type="file" class="@error('image') is-invalid @enderror" name="image" id="image" aria-describedby="image" onchange="previewImage()">
                         <br>
                         <button type="submit" class="btn btn-primary mt-3">Simpan Bukti</button>
@@ -104,6 +96,9 @@
         }
     }
 </script>
+
+
+
 
 
 

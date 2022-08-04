@@ -51,6 +51,7 @@
 <!-- Shoping Cart Section Begin -->
 
 <section class="shoping-cart spad">
+    @php $total = 0; @endphp
     @if($cartitems->count() > 0)
     <div class="container">
         <div class="row">
@@ -70,10 +71,6 @@
                         <tbody class="product_data">
                             <tr>
                                 <td class="shoping__cart__item">
-
-
-
-
                                     <img src="{{asset('storage/'. $cart->product->image)}}" height="60px" width="60px" alt="">
                                     @if(Auth::user()->ceklevel === 'user')
                                     <a href="/user/shop/{{$cart->product->slug}}" style="color: black;">{{$cart->product->name}}</a>
@@ -97,6 +94,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                @php $total += $cart->product->sell_price * $cart->quantity; @endphp
                                 <td class="shoping__cart__total">
                                     @currency($cart->product->sell_price * $cart->quantity)
                                 </td>
@@ -145,7 +143,7 @@
                 <div class="shoping__checkout">
                     <h5>Cart Total</h5>
                     <ul>
-                        <li>Total <input type="text" id="total" readonly class="input border-0" value="@currency($cart->product->sell_price * $cart->quantity)"> </li>
+                        <li>Total <input type="text" readonly class="input border-0" value="Rp.{{ number_format($total) }}"></li>
                     </ul>
                     @if(Auth::user()->ceklevel == 'user')
                     <a href="/user/checkout" class="primary-btn">CHECKOUT</a>

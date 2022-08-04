@@ -10,14 +10,12 @@ use App\Models\Regency;
 use App\Models\Village;
 use App\Models\District;
 use App\Models\Province;
-use App\Models\RoProvince;
-use App\Models\RoCity;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\courier;
 use Illuminate\Support\Facades\Auth;
-use Irfa\RajaOngkir\RajaOngkirServiceProvider;
+
 
 class CheckoutController extends Controller
 {
@@ -73,8 +71,8 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
 
-        $user_id = Auth::id();
-        $user = User::find($user_id);
+        // $user_id = Auth::id();
+        // $user = User::find($user_id);
         //buatt order
         /*payment status = 0 (pending)
             1 = pembayaran diterima
@@ -82,9 +80,9 @@ class CheckoutController extends Controller
             */
         $tracking = rand(1111, 9999);
         $order = new Order;
-        $order->user_id = $user_id;
-        $order->tracking_no = 'pgmaisyaroh' . $tracking;
-        $order->tracking_msg = "";
+        $order->user_id = Auth::id();
+        $order->order_no = 'pgmaisyaroh' . $tracking;
+        $order->order_msg = $request->input('order_msg');
         $order->payment_mode = "Cash on Delivery";
         $order->payment_id = "";
         $order->payment_status = "0";
@@ -96,6 +94,7 @@ class CheckoutController extends Controller
         $order->regencies_id = $request->input('regency');
         $order->zip_code = $request->input('zip_code');
         $order->phone_number = $request->input('phone_number');
+        $order->pengiriman = $request->input('pengiriman');
 
         //total harga
         $total = 0;
@@ -107,27 +106,26 @@ class CheckoutController extends Controller
         $order->save();
 
 
-        $last_order_id = $order->id;
+
         //buat pesanan
         $cartitems = Cart::where('user_id', Auth::id())->get();
         foreach ($cartitems as $cart) {
             OrderItem::create([
-                'order_id' => $last_order_id,
+                'order_id' => $order->id,
                 'product_id' => $cart->product_id,
                 'quantity' => $cart->quantity,
                 'price' => $cart->product->sell_price,
             ]);
-
-            $product = Product::where('id', $cart->product_id)->first();
-            $product->stock = $product->stock - $cart->quantity;
-            $product->update();
-
-
-            $cartitems = Cart::where('user_id', Auth::id())->get();
-            Cart::destroy($cartitems);
-
-            return redirect('/user/home')->with('status', "Terima kasih. Pesanan anda akan kami siapkan");
         }
+        $product = Product::where('id', $cart->product_id)->first();
+        $product->stock = $product->stock - $cart->quantity;
+        $product->update();
+
+
+        $cartitems = Cart::where('user_id', Auth::id())->get();
+        Cart::destroy($cartitems);
+
+        return redirect('/user/home')->with('status', "Terima kasih. Pesanan anda akan kami siapkan");
     }
 
     /**

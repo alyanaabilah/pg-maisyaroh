@@ -22,7 +22,9 @@ use App\Http\Controllers\admin\OrderItemController;
 use App\Http\Controllers\front\MyProfileController;
 use App\Http\Controllers\attribut\CategoryController;
 use App\Http\Controllers\admin\IncomingProductController;
+use App\Http\Controllers\admin\TransactionOrderController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\front\PayOrderController;
 use App\Http\Controllers\front\SubsidiCouponController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\report\CouponUserController;
@@ -58,15 +60,18 @@ Route::get('/front-category/{category:slug}', function (Category $category) {
         "title" => "Pangkalan Gas Maisyaroh | Kategori",
         "category" => $category->name,
         "product" => $category->product,
-        "active" => "Category"
+        "active" => "Category",
+        "judul" => "Kategori " . $category->name
     ]);
 });
+
 Route::get('/front-brand/{brand:name}', function (Brand $brand) {
     return view('front.attribut.brand-userfront', [
         "title" => "Pangkalan Gas Maisyaroh | Brand",
         "brand" => $brand->name,
         "product" => $brand->product,
-        "active" => "Brand"
+        "active" => "Brand",
+        "judul" => "Brand " . $brand->name,
     ]);
 });
 
@@ -98,7 +103,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
                 "title" => "Pangkalan Gas Maisyaroh | Kategori",
                 "category" => $category->name,
                 "product" => $category->product,
-                "active" => "Category"
+                "active" => "Category",
+                "judul" => "Kategori " . $category->name
             ]);
         });
         Route::get('/front-brand/{brand:name}', function (Brand $brand) {
@@ -106,7 +112,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
                 "title" => "Pangkalan Gas Maisyaroh | Brand",
                 "brand" => $brand->name,
                 "product" => $brand->product,
-                "active" => "Brand"
+                "active" => "Brand",
+                "judul" => "Brand " . $brand->name,
             ]);
         });
 
@@ -119,9 +126,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('order-item', OrderItemController::class);
         Route::resource('orders', OrderController::class);
         Route::resource('coupon', CouponController::class);
-        Route::resource('subsidi', CouponUserController::class);
+        Route::resource('subsidi-kupon', CouponUserController::class);
         Route::resource('stock', StockController::class);
         Route::resource('best-seller', BestSellerController::class);
+        Route::resource('transaction-orders', TransactionOrderController::class);
 
 
 
@@ -144,16 +152,31 @@ Route::post('user-provinces', [MyProfileController::class, 'store']);
 Route::post('user-regencies', [MyProfileController::class, 'getRegencies']);
 Route::post('user-districts', [MyProfileController::class, 'getDistricts']);
 
-//Route::get('generate-pdf', [PdfController::class, 'generatePDF']);
+
+//PDF
 Route::get('/cetak-invoice/{order:id}', [OrderController::class, 'invoice'])->name('cetak.invoice');
+//STOCK
 Route::get('/cetak-stock', [StockController::class, 'sisastock'])->name('cetak.stock');
 Route::get('/cetak-tanggal/{tglawal}/{tglakhir}', [StockController::class, 'cetaktgl'])->name('cetak.tanggal');
 Route::get('/cetak-brand/{brand}', [StockController::class, 'cetakbrand'])->name('cetak.brand');
 Route::get('/cetak-kategori/{category}', [StockController::class, 'cetakkategori'])->name('cetak.kategori');
+//TERLARIS
+Route::get('/cetak-terlaris', [BestSellerController::class, 'terlaris'])->name('cetak.terlaris');
+Route::get('/terlaris-tanggal/{tglawal}/{tglakhir}', [BestSellerController::class, 'cetaktgl'])->name('cetak.tanggal');
+
+
+
+//search
+Route::get('product-list', [UserHomeController::class, 'productlistAjax']);
+Route::post('search-product', [UserHomeController::class, 'searchproduct'])->name('search.products');
 
 // Route::get('province', [Controller::class, 'get_province'])->name('province');
 // Route::get('/kota/{id}', [CheckoutController::class, 'get_city']);
 // Route::get('/origin={province_origin}&destination={city_destination}&weight={weight}&courier={courier}', [CheckoutController::class, 'get_ongkir']);
+
+
+
+
 
 Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
     Route::group(['middleware' => ['ceklevel:user']], function () {
@@ -167,6 +190,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
         // Route::post('/my-profile-update', [MyProfileController::class, 'update'])->name('update.profil');
         Route::resource('checkout', CheckoutController::class);
         Route::resource('my-orders', MyOrderController::class);
+        Route::get('my-orders/{id}/addinfo', [MyOrderController::class, 'addinfo']);
+        //  Route::get('pay-orders/{order:id}', [PayOrderController::class, 'show']);
 
 
         Route::get('/front-category/{category:slug}', function (Category $category) {
@@ -174,7 +199,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
                 "title" => "Pangkalan Gas Maisyaroh | Kategori",
                 "category" => $category->name,
                 "product" => $category->product,
-                "active" => "Category"
+                "active" => "Category",
+                "judul" => "Kategori " . $category->name,
             ]);
         });
         Route::get('/front-brand/{brand:name}', function (Brand $brand) {
@@ -182,7 +208,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
                 "title" => "Pangkalan Gas Maisyaroh | Brand",
                 "brand" => $brand->name,
                 "product" => $brand->product,
-                "active" => "Brand"
+                "active" => "Brand",
+                "judul" => "Brand " . $brand->name,
             ]);
         });
     });
@@ -209,7 +236,8 @@ Route::group(['prefix' => 'subsidi', 'middleware' => ['auth']], function () {
                 "title" => "Pangkalan Gas Maisyaroh | Kategori",
                 "category" => $category->name,
                 "product" => $category->product,
-                "active" => "Category"
+                "active" => "Category",
+                "judul" => "Kategori " . $category->name
             ]);
         });
         Route::get('/front-brand/{brand:name}', function (Brand $brand) {
@@ -217,7 +245,8 @@ Route::group(['prefix' => 'subsidi', 'middleware' => ['auth']], function () {
                 "title" => "Pangkalan Gas Maisyaroh | Brand",
                 "brand" => $brand->name,
                 "product" => $brand->product,
-                "active" => "Brand"
+                "active" => "Brand",
+                "judul" => "Brand " . $brand->name,
             ]);
         });
     });
