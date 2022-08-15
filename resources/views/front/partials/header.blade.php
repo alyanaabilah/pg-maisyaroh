@@ -151,7 +151,10 @@
                     @auth
                     @if(Auth::user()->ceklevel === 'user')
                     <ul>
-                        <li><a href="/user/cart"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
+                        @php
+                            $cartItems = App\Models\Cart::where('user_id', Auth::id())->count();
+                        @endphp
+                        <li><a href="/user/cart"><i class="fa fa-shopping-bag"></i> <span>{{$cartItems}}</span></a></li>
                     </ul>
 
                     @elseif(Auth::user()->ceklevel === 'subsidi')
@@ -161,7 +164,10 @@
 
                     @else
                     <ul>
-                        <li><a href="/admin/cart"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
+                        @php
+                        $cartItems = App\Models\Cart::where('user_id', Auth::id())->count();
+                    @endphp
+                        <li><a href="/admin/cart"><i class="fa fa-shopping-bag"></i> <span>{{$cartItems}}</span></a></li>
                     </ul>
 
                     @endif

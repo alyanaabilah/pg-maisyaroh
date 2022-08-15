@@ -28,7 +28,7 @@
         }
 
         .container {
-            width: 80%;
+            width: 100%;
             margin-right: auto;
             margin-left: auto;
         }
@@ -129,13 +129,11 @@
                 <div class="col-6">
                     <h3 class="text-white">Pangkalan Gas Maisyaroh</h3>
                 </div>
-                <div class="">
-                    <div class="company-details">
-                        <p class="text-white">Sungai Sipai</p>
-                        <p class="text-white">Kota Martapura</p>
-                        <p class="text-white">087838797675</p>
-                    </div>
-                </div>
+                    
+                            <p class="text-white">Sungai Sipai</p>
+                            <p class="text-white">Kota Martapura</p>
+                            <p class="text-white">087838797675</p>
+                      
             </div>
         </div>
 
@@ -143,29 +141,28 @@
             <div class="">
                 <div class="">
                     <h2 class="heading">Invoice No.: {{ $order->id }}</h2>
-                    <p class="sub-heading">Tracking No. {{ $order->tracking_no }} </p>
+                    <p class="sub-heading">Order No. {{ $order->order_no }} </p>
                     <p class="sub-heading">Order Date: {{ $order->created_at->format('d-m-Y') }} </p>
-                    <p class="sub-heading">Email Address: customer@gfmail.com </p>
                 </div>
                 <div class="">
-                    <p class="sub-heading">Full Name: {{$order->name}}</p>
-                    <p class="sub-heading">Address: {{$order->addres}}</p>
-                    <p class="sub-heading">Phone Number: {{$order->phone_number}}</p>
-                    <p class="sub-heading">City,State,Pincode: {{$order->provinces->name}}, {{$order->regencies->name}}</p>
+                    <p class="sub-heading">Nama: {{$order->name}}</p>
+                    <p class="sub-heading">Nomor Telepon: {{$order->phone_number}}</p>
+                    <p class="sub-heading">Alamat: {{$order->addres}}</p>
+                    <p class="sub-heading">Provinsi, Kota, Kodepos: {{$order->provinces->name}}, {{$order->regencies->name}}, {{$order->zip_code}}</p>
                 </div>
             </div>
         </div>
 
         <div class="body-section">
-            <h3 class="heading">Ordered Items</h3>
+            <h3 class="heading">Pembelian Barang</h3>
             <br>
             <table class="table-bordered">
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th class="w-20">Price</th>
+                        <th>Produk</th>
+                        <th class="w-20">Harga</th>
                         <th class="w-20">Quantity</th>
-                        <th class="w-20">Grandtotal</th>
+                        <th class="w-20">Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -175,23 +172,44 @@
                         <td>{{$item->product->name}}</td>
                         <td>{{$item->quantity}}</td>
                         <td>@currency($item->price)</td>
-                        <td>{{$item->ptice * $item->quantity}}</td>
+                        <td>@currency($item->price * $item->quantity)</td>
                     </tr>
-
+                    @endforeach
                     <tr>
                         <td colspan="3" class="text-right">Ongkos Kirim</td>
-                        <td>0</td>
+                        <td>Rp.10.000</td>
                     </tr>
                     <tr>
                         <td colspan="3" class="text-right">Total</td>
-                        <td>@currency($item->total_price)</td>
+                        <td>@currency($order->total_price + 10000)</td>
                     </tr>
-                    @endforeach
+                    
                     </tr>
                 </tbody>
             </table>
             <br>
-            <h3 class="heading">Payment Status:
+            <hr>
+            <h3 class="heading">Pembayaran:
+                @if($order->payment_mode == '0')
+                On Delivery
+                @elseif($order->payment_mode == '1')
+                Transfer Bank
+                @elseif($order->payment_mode == '2')
+                Pembayaran Di Toko
+                @endif
+            </h3>
+            <h3 class="heading">Pengiriman:
+                @if($order->pengiriman == "1")
+                            COD
+                            @elseif($order->pengiriman == "2")
+                            JNE
+                            @elseif($order->pengiriman == "3")
+                            POS
+                            @elseif($order->pengiriman == "4")
+                            Ambil Di Toko
+                            @endif
+            </h3>
+            <h3 class="heading">Status Pembayaran:
                 @if($order->payment_status == '0')
                 Pending
                 @elseif($order->payment_status == '1')
@@ -202,14 +220,20 @@
                 Transfer Bank - Pending
                 @endif
             </h3>
-            <h3 class="heading">Payment Mode: {{ $order->payment_mode }}</h3>
+            <h3 class="heading">Status Order:
+                @if($order->order_status == '0')
+                Pending
+                @elseif($order->order_status == '1')
+                Sukses
+                @elseif($order->order_status == '2')
+                Dibatalkan
+                @endif
+            </h3>
+           
+                        
         </div>
 
-        <div class="body-section">
-            <p>&copy; Copyright 2021 - Fabcart. All rights reserved.
-                <a href="#" class="float-right">www.fundaofwebit.com</a>
-            </p>
-        </div>
+        
     </div>
 
 </body>

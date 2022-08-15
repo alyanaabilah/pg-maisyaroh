@@ -30,7 +30,7 @@
 <body>
 
 
-    @include('front.partials.preloader')
+    
     @include('front.partials.hamburger')
 
     @include('front.partials.header')

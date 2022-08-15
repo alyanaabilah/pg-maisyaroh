@@ -175,12 +175,7 @@
                                         </li>
                                         <li>
                                             <a class="sidenav-item-link" href="/admin/orders">
-                                                <span class="nav-text">Penjualan Barang</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
-                                                <span class="nav-text">Status Retur Pelanggan</span><!-- tabel retur brg pelanggan+field(tgl barang dikirim ke pelanggan(kalau tdk diisi maka status tdk keluar),status) !-->
+                                                <span class="nav-text">Order User</span>
                                             </a>
                                         </li>
                                         <li>
@@ -221,7 +216,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
+                                            <a class="sidenav-item-link" href="/admin/wilayah-terbanyak">
                                                 <span class="nav-text">Wilayah Terbanyak</span>
                                             </a>
                                         </li>
@@ -231,7 +226,12 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
+                                            <a class="sidenav-item-link" href="/admin/keuangan-laporan">
+                                                <span class="nav-text">Keuangan</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="sidenav-item-link" href="/admin/user-loyal">
                                                 <span class="nav-text">Pelanggan Terloyal</span>
                                             </a>
                                         </li>

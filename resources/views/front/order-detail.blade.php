@@ -30,8 +30,21 @@
                     <div class="border">{{$order->regencies_id}}</div>
                     <label for="zip_code" class="mt-2">Kode Pos</label>
                     <div class="border">{{$order->zip_code}}</div>
+                    <label for="pengiriman" class="mt-2">Pengiriman</label>
+                    @if($order->pengiriman == "1")
+                        <div class="border">COD</div>
+                    @elseif($order->pengiriman == "2")
+                        <div class="border">JNE</div>
+                    @elseif($order->pengiriman == "3")
+                        <div class="border">POS</div>
+                    @elseif($order->pengiriman == "4")
+                        <div class="border">Ambil Di Toko</div>
+                    @else
+                         <div class="border">-</div>
+                    @endif
                     <label for="phone_number" class="mt-2">Nomor Telepon</label>
                     <div class="border">{{$order->phone_number}}</div>
+                    @if($order->pengiriman != "4")
                     <form action="/user/my-orders/{{$order->id}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -47,6 +60,7 @@
                         <br>
                         <button type="submit" class="btn btn-primary mt-3">Simpan Bukti</button>
                     </form>
+                    @endif
                 </div>
 
                 <div class="col-md-6">
@@ -74,7 +88,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                    @if($order->pengiriman != "4")
+                    <h4 class="px-2">Total + Ongkir: <span class="float-end">@currency($order->total_price + 10000)</span></h4>
+                    @else
                     <h4 class="px-2">Total: <span class="float-end">@currency($order->total_price)</span></h4>
+                    @endif
                 </div>
             </div>
 

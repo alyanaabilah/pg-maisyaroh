@@ -33,7 +33,7 @@
 <div class="col-lg-12">
     <div class="card card-default">
         <div class="card-header card-header-border-bottom">
-            <h2>Product</h2>
+            <h2>Order User</h2>
         </div>
         <div class="card-body">
 
@@ -56,10 +56,11 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th width="200px">No Lacak</th>
+                        <th width="200px">No Order</th>
                         <th>Pembeli</th>
                         <th>Phone</th>
-                        <th>Status</th>
+                        <th>Metode Pengiriman</th>
+                        <th>Status Pengiriman</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -69,6 +70,17 @@
                         <td>{{$order->order_no}}</td>
                         <td>{{ $order->user->name }}</td>
                         <td>{{ $order->phone_number}}</td>
+                        @if($order->pengiriman == "1")
+                        <td>COD</td>
+                        @elseif($order->pengiriman == "2")
+                        <td>JNE</td>
+                        @elseif($order->pengiriman == "3")
+                        <td>POS</td>
+                        @elseif($order->pengiriman == "4")
+                        <td>Ambil Di Toko</td>
+                        @else
+                        <td></td>
+                        @endif
                         <td>@if($order->order_status == '0')
                             pending
                             @else

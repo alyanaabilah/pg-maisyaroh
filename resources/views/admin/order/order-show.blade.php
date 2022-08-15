@@ -8,8 +8,8 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="mb-0" style="color: black;">
-                        Detail
-                        <a href="{{route('cetak.invoice', $order->id)}}" class="primary-btn cart-btn float-right py-1">Cetak Invoice</a>
+                        Detail Order User
+                        <a href="{{route('cetak.invoice', $order->id)}}" target="_blank" class="primary-btn cart-btn float-right py-1">Cetak Invoice</a>
                     </h6>
                 </div>
             </div>

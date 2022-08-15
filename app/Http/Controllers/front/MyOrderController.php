@@ -65,4 +65,11 @@ class MyOrderController extends Controller
         })->get();
         return view('front.my-order', compact('id', 'orders'));
     }
+
+    public function complete($id) {
+        $order = Order::find($id);
+        $order->order_status = "3";
+        $order->save();
+        return redirect()->back()->with('status', 'Sukses Menerima Order');
+    }
 }

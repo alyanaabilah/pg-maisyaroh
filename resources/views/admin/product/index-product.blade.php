@@ -63,7 +63,6 @@
                             <th>Kategori</th>
                             <th>Brand</th>
                             <th>Harga Jual</th>
-                            <th>Harga Sales</th>
                             <th>Slug</th>
                             <th>Image</th>
                             <th>Deskripsi</th>
@@ -81,10 +80,10 @@
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->brand->name }}</td>
                             <td>@currency($product->sell_price)</td>
-                            <td>@currency($product->sales_price)</td>
+                           
                             <td>{{ $product->slug }}</td>
                             <td>
-                                <img src="{{asset('storage/'. $product->image)}}" class="photo-kategori">
+                                <img src="{{asset('storage/'. $product->image)}}" width="150px">
                             </td>
                             <td>{{ $product->description }}</td>
                             <td>

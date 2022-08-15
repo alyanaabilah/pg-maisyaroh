@@ -44,6 +44,10 @@
                             <th>No</th>
                             <th>Produk</th>
                             <th>Quantity</th>
+                            <th>Harga Beli</th>
+                            <th>Total Harga<br>Beli</th>
+                            <th>Ongkir Barang</th>
+                            <th>Total Ongkir</th>
                             <th>Tanggal Masuk</th>
                             <th>Aksi</th>
                         </tr>
@@ -56,7 +60,11 @@
 
                             <td>{{ $incoming->product->name }}</td>
                             <td>{{ $incoming->quantity }}</td>
-                            <td>{{ $incoming->updated_at }}</td>
+                            <td>@currency($incoming->pembelian_price)</td>
+                            <td> @currency($incoming->pembelian_price * $incoming->quantity) </td>
+                            <td> @currency($incoming->pembelian_ongkir) </td>
+                            <td> @currency($incoming->pembelian_ongkir*$incoming->quantity) </td>
+                            <td>{{ date('d F Y', strtotime($incoming->updated_at)) }}</td>
                             <td>
                                 <form method="POST" action="{{route('incoming-product.destroy', $incoming->id)}}" class="d-inline">
                                     {{ method_field('DELETE') }}

@@ -119,11 +119,11 @@
                                     <select id="pengiriman" class="wide form-control" name="pengiriman">
                                         <option value="">Pilih Pengiriman</option>
                                         <option value="1">COD</option>
-                                        <option value="2">JNE</option>
-                                        <option value="3">POS</option>
+                                        <option value="2">JNE - Transfer</option>
+                                        <option value="3">POS - Transfer</option>
                                         <option value="4">Ambil Ke Toko</option>
                                     </select>
-                                    @error('country')
+                                    @error('pengiriman')
                                     <div class="invalid-feeedback">
                                         {{ $message }}
                                     </div>
@@ -133,7 +133,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="note">Order notes</label>
-                                    <input type="text" class="form-control" name="order_msg" id="order_msg" aria-describedby="name" placeholder="Note" style="color:black">
+                                    <input type="text" class="form-control" name="note" id="note" aria-describedby="name" placeholder="Note" style="color:black">
                                     @error('country')
                                     <div class="invalid-feeedback">
                                         {{ $message }}
@@ -184,22 +184,13 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="checkout__input__checkbox">
-                                <input type="radio" id="bank" name="delivery_method" value="Transfer Bank">
-                                <label for="bank">Transfer Bank</label><br>
-                                <input type="radio" id="cod" name="delivery_method" value="Cash On Delivery">
-                                <label for="cod">Cash On Delivery</label><br>
-                                <input type="radio" id="store" name="delivery_method" value="Ke Toko">
-                                <label for="toko">Ke Toko</label><br>
-                            </div>
                             <section>
                                 <div class="checkout__order__subtotal">Ongkos Kirim<span>Rp.10.000</span></div>
                                 <div class="checkout__order__total">Total<span>Rp.{{ number_format($total + 10000) }}</span></div>
                                 <div class="checkout__input__checkbox">
                             </section>
 
-                            <button type="submit" class="btn btn-primary">Buat Pesanan | COD</button>
-                            <button class="btn btn-success transfer_btn">Bank Transfer</button>
+                            <button type="submit" class="btn btn-primary">Buat Pesanan</button>
                         </div>
 
                     </div>
@@ -245,14 +236,7 @@
 
     });
 
-    let inputs = document.querySelectorAll('input[name="delivery_method"]');
-    let section = document.querySelector('section');
-
-    inputs.forEach((el) => {
-        el.addEventListener("change", function(e) {
-            section.style.display = e.target.value === 'Ke Toko' ? "none" : "block";
-        });
-    });
+    
 </script>
 
 

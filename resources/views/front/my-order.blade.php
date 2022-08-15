@@ -39,13 +39,25 @@
                                     @currency($order->total_price)
                                 </td>
                                 <td>
-                                    {{ $order->order_status == '0' ? 'pending' : 'completed'}}
+                                    @if($order->order_status == '0')
+                                <td>Pending</td>
+                                @elseif($order->order_status == '1')
+                                <td>Sukses</td>
+                                @elseif($order->order_status == '2')
+                                <td>Cancel</td>
+                                @elseif($order->order_status == '3')
+                                <td>Complete</td>
+                                @else
+                                <td></td>
+                                @endif
                                 </td>
                                 <td>
                                     @if(Auth::user()->ceklevel === 'user')
 
                                     <a href="/user/my-orders/{{$order->id}}"><i class="fa fa-info-circle fa-2x mr-2" style="color:black;"></i></a>
+                                    @if ($order->order_status == "1")
                                     <a href=" /user/confirmation-orders/{{$order->id}}"><i class="fa fa-check-circle fa-2x" style="color:black;"></i></a>
+                                    @endif
                                     @else (Auth::user()->ceklevel === 'subsidi')
                                     <a href="/subsidi/my-orders/{{$order->id}}"><i class="fa fa-info-circle fa-2x mr-2" style="color:black;"></i></a>
                                     <a href="/subsidi/confirmation-orders/{{$order->id}}"><i class="fa fa-check-circle fa-2x" style="color:black;"></i></a>

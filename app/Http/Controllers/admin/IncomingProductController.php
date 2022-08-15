@@ -49,7 +49,8 @@ class IncomingProductController extends Controller
         $validatedData = $request->validate([
             'product_id' => 'required',
             'quantity' => 'required|integer',
-
+            'pembelian_price' => 'required|integer',
+            'pembelian_ongkir' => 'required|integer',
         ]);
 
 
@@ -100,8 +101,9 @@ class IncomingProductController extends Controller
     {
         $rules = [
             'product_id' => 'required',
-            'quantity' => 'required|integer'
-
+            'quantity' => 'required|integer',
+            'pembelian_price' => 'required|integer',
+            'pembelian_ongkir' => 'required|integer',
         ];
         $validatedData = $request->validate($rules);
 

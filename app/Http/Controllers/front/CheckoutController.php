@@ -31,6 +31,9 @@ class CheckoutController extends Controller
     {
 
         $cartitems = Cart::where('user_id', Auth::id())->get();
+        if($cartitems->isEmpty()) {
+            return redirect()->back()->with('status', 'Belum ada barang di keranjang');
+        } 
         foreach ($cartitems as $cart) {
             if (!Product::where('id', $cart->product_id)->where('stock', '>=', $cart->quantity)->exists()) {
                 $removeItem = Cart::where('user_id', Auth::id())->where('product_id', $cart->product_id)->first();
@@ -82,11 +85,16 @@ class CheckoutController extends Controller
         $order = new Order;
         $order->user_id = Auth::id();
         $order->order_no = 'pgmaisyaroh' . $tracking;
-        $order->order_msg = $request->input('order_msg');
+        $order->order_msg = "";
         $order->payment_mode = "Cash on Delivery";
         $order->payment_id = "";
         $order->payment_status = "0";
-        $order->order_status = "0";
+        if($request->pengiriman == '4') {
+            $order->order_status = "1";
+        } else {
+            $order->order_status = "0";
+        }
+        //$order->order_status = "0";
         $order->notification = "0";
         $order->name = $request->input('name');
         $order->addres = $request->input('addres');
@@ -101,6 +109,11 @@ class CheckoutController extends Controller
         $cartitems_total = Cart::where('user_id', Auth::id())->get();
         foreach ($cartitems_total as $prod) {
             $total += $prod->product->sell_price * $prod->quantity;
+        }
+        if($request->pengiriman == '4') {
+            $order->total_price = $total;
+        } else {
+            $order->total_price = $total + 10000;
         }
         $order->total_price = $total;
         $order->save();
@@ -125,7 +138,7 @@ class CheckoutController extends Controller
         $cartitems = Cart::where('user_id', Auth::id())->get();
         Cart::destroy($cartitems);
 
-        return redirect('/user/home')->with('status', "Terima kasih. Pesanan anda akan kami siapkan");
+        return redirect('/user/my-orders')->with('status', "Terima kasih. Pesanan anda akan kami siapkan");
     }
 
     /**

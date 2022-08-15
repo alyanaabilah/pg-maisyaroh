@@ -18,7 +18,7 @@ class OrderController extends Controller
     {
         $order = Order::all();
         return view('admin.order.index-order', [
-            "title" => "Penjualan Barang",
+            "title" => "Order User",
             "orders" => $order
         ]);
     }
@@ -55,7 +55,7 @@ class OrderController extends Controller
         if (Order::where('id', $id)->first()) {
             $orders = Order::find($id);
             return view('admin.order.order-show', [
-                "title" => "Penjualan Barang",
+                "title" => "Detail Order User",
                 "order" => $orders
             ]);
         } else {
@@ -115,5 +115,19 @@ class OrderController extends Controller
         } else {
             return redirect()->back()->with('status', "Tidak ada order");
         }
+    }
+
+    public function approve($id) {
+        $order = Order::find($id);
+        $order->order_status = "1";
+        $order->save();
+        return redirect()->back()->with('status', 'Sukses Approve Order');
+    }
+
+    public function reject($id) {
+        $order = Order::find($id);
+        $order->order_status = "2";
+        $order->save();
+        return redirect()->back()->with('status', 'Sukses Approve Order');
     }
 }
