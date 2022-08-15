@@ -95,7 +95,7 @@
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->brand->name }}</td>
                             <td>{{ $product->stock }}</td>
-                            <td>{{ $product->updated_at }}</td>
+                            <td>{{ date('d F Y', strtotime($product->updated_at)) }}</td>
 
                         </tr>
 

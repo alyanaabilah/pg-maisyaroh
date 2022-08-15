@@ -16,7 +16,7 @@
 
 <body>
     <div class="form-group">
-        <p align="center"><b>SISA STOCK BARANG PERTANGGAL</b></p>
+        <p align="center"><b>SISA STOCK BARANG BRAND</b></p>
         <table class="static" align="center" rules="all" border="1px" style="width: 95%;">
             <tr>
 
@@ -37,7 +37,7 @@
                 <td>{{ $product->product_code }}</td>
                 <td>{{ $product->brand->name }}</td>
                 <td>{{ $product->stock }}</td>
-                <td>{{ $product->updated_at }}</td>
+                <td>{{ date('d F Y', strtotime($product->updated_at)) }}</td>
 
             </tr>
 

@@ -29,6 +29,8 @@ use App\Http\Controllers\front\SubsidiCouponController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\report\CouponUserController;
 use App\Http\Controllers\report\StockController;
+use App\Http\Controllers\report\UserLoyalController;
+use App\Http\Controllers\report\WilayahController;
 use App\Models\Order;
 use Illuminate\Foundation\Console\StorageLinkCommand;
 
@@ -130,7 +132,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('stock', StockController::class);
         Route::resource('best-seller', BestSellerController::class);
         Route::resource('transaction-orders', TransactionOrderController::class);
-
+        Route::get('user-loyal', [UserLoyalController::class, 'userloyal'])->name('cetak.user');
 
 
         // Route::get('/generate-invoice/{order:id}', function (Order $order) {
@@ -163,7 +165,10 @@ Route::get('/cetak-kategori/{category}', [StockController::class, 'cetakkategori
 //TERLARIS
 Route::get('/cetak-terlaris', [BestSellerController::class, 'terlaris'])->name('cetak.terlaris');
 Route::get('/terlaris-tanggal/{tglawal}/{tglakhir}', [BestSellerController::class, 'cetaktgl'])->name('cetak.tanggal');
-
+//USER-LOYAL
+//Route::get('/user-loyal', [UserLoyalController::class, 'userloyal'])->name('cetak.user');
+//WILAYAH-TERBANYAK
+Route::get('/cetak-wilayah-terbanyak', [WilayahController::class, 'wilayah'])->name('cetak.wlayah');
 
 
 //search

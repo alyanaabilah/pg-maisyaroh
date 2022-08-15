@@ -40,7 +40,7 @@
                 <td>{{ $order->product->category->name }}</td>
                 <td>{{ $order->quantity }}</td>
                 <td>@currency( $order->price * $order->quantity)</td>
-                <td>{{$order->updated_at}}</td>
+                <td>{{date('d F Y', strtotime($order->created_at))}}</td>
 
             </tr>
 

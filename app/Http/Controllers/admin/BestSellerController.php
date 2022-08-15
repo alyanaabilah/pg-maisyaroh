@@ -19,7 +19,7 @@ class BestSellerController extends Controller
      */
     public function index()
     {
-        $order = (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')
+        $order = (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')
             ->get();
         // $order = OrderItem::query()->leftJoin('order_items', 'price', '=', 'order_items.product_id')->select('quantity', 'price')->selectRaw('count(quantity.order_items) as quantity')->groupBy('order_items.product_id')->get();
         return view('admin.dashboard.best-seller', [
@@ -98,7 +98,7 @@ class BestSellerController extends Controller
 
     public function terlaris()
     {
-        $order = (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')
+        $order = (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id')->orderBy('quantity', 'desc')
             ->get();
         $pdf = PDF::loadView('admin.report.terlaris-report', ['orders' => $order]);
         return $pdf->stream('pg-maisyaroh-produk-terlaris.pdf');
