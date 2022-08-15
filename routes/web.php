@@ -158,10 +158,11 @@ Route::post('user-districts', [MyProfileController::class, 'getDistricts']);
 //PDF
 Route::get('/cetak-invoice/{order:id}', [OrderController::class, 'invoice'])->name('cetak.invoice');
 //STOCK
+//Route::get('/cetak-stock/{tglawal}/{tglakhir}/{brand}/{category}', [StockController::class, 'sisastock'])->name('cetak.stock');
 Route::get('/cetak-stock', [StockController::class, 'sisastock'])->name('cetak.stock');
 Route::get('/cetak-tanggal/{tglawal}/{tglakhir}', [StockController::class, 'cetaktgl'])->name('cetak.tanggal');
-Route::get('/cetak-brand/{brand}', [StockController::class, 'cetakbrand'])->name('cetak.brand');
-Route::get('/cetak-kategori/{category}', [StockController::class, 'cetakkategori'])->name('cetak.kategori');
+Route::get('/cetak-brand/{brand:id}', [StockController::class, 'cetakbrand'])->name('cetak.brand');
+Route::get('/cetak-kategori/{category:id}', [StockController::class, 'cetakkategori'])->name('cetak.kategori');
 //TERLARIS
 Route::get('/cetak-terlaris', [BestSellerController::class, 'terlaris'])->name('cetak.terlaris');
 Route::get('/terlaris-tanggal/{tglawal}/{tglakhir}', [BestSellerController::class, 'cetaktgl'])->name('cetak.tanggal');

@@ -9,7 +9,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Support\Facades\DB;
 
 class StockController extends Controller
 {
@@ -116,11 +116,16 @@ class StockController extends Controller
         return $pdf->stream('pg-maisyaroh-sisa-stock-pertanggal.pdf');
     }
 
-    public function cetakbrand($brand)
+    public function cetakbrand($id)
     {
-        $brand = Product::where('brand_id', [$brand])->get();
-        $pdf = PDF::loadView('admin.product.report-brand', ['brand' => $brand]);
+       // $brand = (new Product())->groupBy('brand_id', 'name', 'product_code', 'stock','date')->selectRaw('date(created_at) as date ,product_code, name, stock, brand_id as brand')->get();
+       //$brand = (new Product())->groupBy('brand_id', 'name', 'product_code', 'stock','date')->selectRaw('date(created_at) as date ,product_code, name, stock, brand_id as brand')->get();
+       $merk = Product::find($id)->select('brand_id');
+      // $merk = Product::select('brand_id', 'name', 'product_code', 'stock')->groupBy('brand_id','name', 'product_code', 'stock')->get();
+       //$brand = Product::select('brand_id')->pluck('name');
+        $pdf = PDF::loadView('admin.product.report-brand', ['brands' => $merk]);
         return $pdf->stream('pg-maisyaroh-sisa-stock-brand.pdf');
+    
     }
 
     public function cetakkategori($category)

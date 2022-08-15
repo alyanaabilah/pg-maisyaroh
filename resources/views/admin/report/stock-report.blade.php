@@ -14,38 +14,52 @@
 <div class="col-lg-12">
     <div class="card card-default">
         <div class="card-header card-header-border-bottom">
-            <h2>Product</h2>
+            <h2>Sisa Stok Barang</h2>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-2 mt-1">
-                                <label for="Mulai">Mulai</label>
-                                <input type="date" id="tglawal">
-                            </div>
-                            <div class="col-md-2 mt-1 ml-2">
-                                <label for="Akhir">Akhir</label>
+
+                            <div class="col-md-4">
+                                <div class="card shadow-sm border">
+                                    <label for="Mulai">Mulai</label>
+                                    <input type="date" id="tglawal">
+                                    <label for="Akhir">Akhir</label>
                                 <input type="date" id="tglakhir">
+                                </div>
                             </div>
-                            <div class="col-md-3 mt-1 ml-2">
-                                <label for="Brand">Brand</label>
-                                <select class="form-control" name="brand_id" id="brand">
-                                    @foreach ($brands as $brand)
-                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-4">
+                                <div class="card shadow-sm border">
+                                    <div class="card-body">
+                                         <h5>Brand</h5>
+                                         <form action="/cetak-brand/{brand}">
+                                            <div class="input-group mb-3">
+                                                <select class="form-control" name="brand_id" id="brand">
+                                                    @foreach ($brands as $brand)
+                                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="input-group-append">
+                                                <button type="submit" class="input-group-text bg-info text-white">Filter</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-3 mt-1">
+                            <div class="col-md-4">
+                                <div class="card shadow-sm border">
                                 <label for="Category">Kategori</label>
                                 <select class="form-control" name="category_id" id="category">
                                     @foreach ($categories as $kategori)
                                     <option value="{{$kategori->id}}">{{$kategori->name}}</option>
                                     @endforeach
                                 </select>
+                                </div>
                             </div>
-                            <a href="" onclick="this.href='/cetak-tanggal/'+document.getElementById('tglawal').value +'/'+ document.getElementById('tglakhir').value; this.href='/cetak-brand/'+document.getElementById('brand').value; this.href='/cetak-kategori/'+document.getElementById('category').value;" target="_blank" class="btn btn-primary mt-4">Filter</a>
+                            <button id="filter" onclick="filter()" class="btn btn-primary mt-4">Filter</button>
 
 
                         </div>
@@ -106,10 +120,24 @@
         </div>
     </div>
 </div>
-</div>
-</div>
 
 
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        $(document).ready(function () {
+            document.getElementById("filter").addEventListener("click", function(event){
+                event.preventDefault();
+                var tglawal = $('#tglawal').val();
+                var tglakhir = $('#tglakhir').val();
+                var brand = $('#brand').val();
+                var category = $('#category').val();
+                window.open("{{('cetak-tanggal/')}}"+ tglawal + ":" tglakhir)
+                window.open("{{('/cetak-brand/')}}"+ brand)
+                window.open("{{('/cetak-kategori/')}}"+ category)
+            });
+        });
+    });
+</script>
 
 
 

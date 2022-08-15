@@ -16,7 +16,7 @@
 
 <body>
     <div class="form-group">
-        <p align="center"><b>SISA STOCK BARANG BRAND</b></p>
+        <p align="center"><b>SISA STOCK BARANG - BRAND</b></p>
         <table class="static" align="center" rules="all" border="1px" style="width: 95%;">
             <tr>
 
@@ -28,16 +28,16 @@
 
 
             </tr>
-            @foreach ($brand as $product)
+            @foreach ($brands as $item)
 
             <tr>
 
 
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->product_code }}</td>
-                <td>{{ $product->brand->name }}</td>
-                <td>{{ $product->stock }}</td>
-                <td>{{ date('d F Y', strtotime($product->updated_at)) }}</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->product_code }}</td>
+                <td>{{ $item->brand }}</td>
+                <td>{{ $item->stock }}</td>
+                
 
             </tr>
 
