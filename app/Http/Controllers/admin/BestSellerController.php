@@ -27,7 +27,7 @@ class BestSellerController extends Controller
         return view('admin.dashboard.best-seller', [
             "title" => "Produk Terlaris",
             "seller" => $order,
-            "brands" => Brand::all(),
+            "brand" => Brand::all(),
             "categories" => Category::all()
         ]);
     }
@@ -118,31 +118,24 @@ class BestSellerController extends Controller
         return $pdf->stream('pg-maisyaroh-terlaris-pertanggal.pdf');
     }
 
-    public function cetakbrand( $id)
+    public function cetakbrand($name)
     {
-        // $terjual = DB::table('order_items')
-        //  ->select(
-        //         DB::raw('SUM(order_items.quantity * order_items.price) as price'),
-        //          DB::raw('SUM(order_items.quantity)as quantity')
-        // )
-        // ->join('products','products.id','=','order_items.product_id')
-        // ->join('brands','brands.id','=','products.brand_id')
-        // ->groupBy('price', 'product_id')->orderBy('quantity', 'desc')->where('brand_id',Request::input('brand_id'))
-        // ->get();
-
-        $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',Request::input('brand_id'))
+        // $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',$brand->input('brand_id'))
+        //     ->get();
+        $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',1)
             ->get();
-        //$merk = $brand->where(Request::input('brand_id'));
-        //dd($terjual);
-       // $merk = OrderItem::where('product_id', Request::input('brand_id'))->get();
+        // $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',Request::input('brand_id', $name))
+        //     ->get();
+        //$terjual = Request::input('brand_id', $id);
+            dd($terjual)->get();
         $pdf = PDF::loadView('admin.dashboard.terlaris-brand', ['brand' => $terjual]);
         return $pdf->stream('pg-maisyaroh-sisa-stock-brand.pdf');
     }
 
     public function cetakkategori($category)
     {
-        $category = Product::where('category_id', [$category])->get();
-        $pdf = PDF::loadView('admin.dashboard.terlaris-kategori', ['category' => $category]);
+        $category = (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',Request::input('category_id', $category))->get();
+        $pdf = PDF::loadView('admin.dashboard.terlaris-kategori', ["category" => $category]);
         return $pdf->stream('pg-maisyaroh-sisa-stock-kategori.pdf');
     }
 }

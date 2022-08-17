@@ -1,14 +1,18 @@
 <?php
 
-use App\Http\Controllers\admin\BestSellerController;
 use App\Models\Brand;
+use App\Models\Order;
 use App\Models\Category;
+use App\Models\OrderItem;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\front\CartController;
 use App\Http\Controllers\front\ShopController;
 use App\Http\Controllers\admin\OrderController;
+use App\Http\Controllers\report\StockController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\front\ContactController;
@@ -16,26 +20,24 @@ use App\Http\Controllers\front\MyOrderController;
 use App\Http\Controllers\front\ServiceController;
 use App\Http\Controllers\attribut\BrandController;
 use App\Http\Controllers\front\CheckoutController;
+use App\Http\Controllers\front\PayOrderController;
 use App\Http\Controllers\front\UserHomeController;
+use App\Http\Controllers\report\WilayahController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\OrderItemController;
 use App\Http\Controllers\front\MyProfileController;
-use App\Http\Controllers\attribut\CategoryController;
-use App\Http\Controllers\admin\IncomingProductController;
-use App\Http\Controllers\admin\PermintaanController;
-use App\Http\Controllers\admin\TransactionOrderController;
-use App\Http\Controllers\CouponController;
-use App\Http\Controllers\front\PayOrderController;
-use App\Http\Controllers\front\SubsidiCouponController;
-use App\Http\Controllers\PdfController;
-use App\Http\Controllers\repoprt\CetakPesananController;
-use App\Http\Controllers\report\CouponUserController;
 use App\Http\Controllers\report\KeuanganController;
-use App\Http\Controllers\report\StockController;
+use App\Http\Controllers\admin\BestSellerController;
+use App\Http\Controllers\admin\PermintaanController;
 use App\Http\Controllers\report\UserLoyalController;
-use App\Http\Controllers\report\WilayahController;
-use App\Models\Order;
+use App\Http\Controllers\attribut\CategoryController;
+use App\Http\Controllers\report\CouponUserController;
 use Illuminate\Foundation\Console\StorageLinkCommand;
+use App\Http\Controllers\front\SubsidiCouponController;
+use App\Http\Controllers\repoprt\CetakPesananController;
+use App\Http\Controllers\admin\IncomingProductController;
+use App\Http\Controllers\admin\TransactionOrderController;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -140,6 +142,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('keuangan-laporan',KeuanganController::class);
         Route::resource('pesanan-barang',PermintaanController::class);
         Route::get('laporan-barang',[CetakPesananController::class, 'index']);
+        Route::get('/orders/{id}/approve', [OrderController::class, 'approve'])->name('orders.approve');
+        Route::get('/orders/{id}/reject', [OrderController::class, 'reject'])->name('orders.reject');
+        Route::get('/orders/{id}/selesai', [OrderController::class, 'selesai'])->name('orders.selesai');
         
         
         // Route::get('/generate-invoice/{order:id}', function (Order $order) {
@@ -173,7 +178,7 @@ Route::get('/cetak-kategori/{category:id}', [StockController::class, 'cetakkateg
 //TERLARIS
 Route::get('/cetak-terlaris', [BestSellerController::class, 'terlaris'])->name('cetak.terlaris');
 Route::get('/terlaris-tanggal/{tglawal}/{tglakhir}', [BestSellerController::class, 'cetaktgl'])->name('cetak.tanggal');
-Route::get('/terlaris-brand/{brand:id}', [BestSellerController::class, 'cetakbrand'])->name('cetak.brand');
+Route::get('/terlaris-brand/{brand:name}', [BestSellerController::class, 'cetakbrand'])->name('cetak.brand');
 Route::get('/terlaris-kategori/{category:id}', [BestSellerController::class, 'cetakkategori'])->name('cetak.kategori');
 //USER-LOYAL
 Route::get('/cetak-user-loyal', [UserLoyalController::class, 'cetakuser'])->name('cetak.user');
@@ -186,6 +191,26 @@ Route::get('/cetak-transaksi', [TransactionOrderController::class, 'transaksi'])
 Route::get('/transaksi-tanggal/{tglawal}/{tglakhir}', [TransactionOrderController::class, 'tgltransaksi'])->name('cetak.tgltransaksi');
 //REQUEST-SALES
 Route::get('pesanan-brand/{brand:id}',[CetakPesananController::class, 'cetakbrand']);
+
+
+// Route::post('/terlaris-brand/{brand:name}', function (Brand $brand) {
+//     $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',$brand->input('brand_id'))
+//             ->get();
+//     $pdf = PDF::loadView('admin.dashboard.terlaris-brand', ['brand' => $terjual]);
+//         return $pdf->stream('pg-maisyaroh-sisa-stock-brand.pdf');
+    
+// });
+
+
+// Route::get('/front-brand/{brand:name}', function (Brand $brand) {
+//     return view('front.attribut.brand-userfront', [
+//         "title" => "Pangkalan Gas Maisyaroh | Brand",
+//         "brand" => $brand->name,
+//         "product" => $brand->product,
+//         "active" => "Brand",
+//         "judul" => "Brand " . $brand->name,
+//     ]);
+// });
 
 
 //search

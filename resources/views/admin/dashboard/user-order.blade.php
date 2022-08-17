@@ -68,7 +68,7 @@
                             <th>Nama</th>
                             <th>Jumlah Beli</th>
                             <th>Total Pembelian</th>
-                            <th>Tanggal Pembelian</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
@@ -79,7 +79,7 @@
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->most_orders}}</td>
                             <td>@currency($item->total_price)</td>
-                            <td>{{date('d F Y', strtotime($item->date))}}</td>
+                            
                            
                         </tr>
 

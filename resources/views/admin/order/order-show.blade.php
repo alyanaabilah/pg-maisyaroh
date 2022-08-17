@@ -9,8 +9,15 @@
                 <div class="card-body">
                     <h6 class="mb-0" style="color: black;">
                         Detail Order User
+                        
                         <a href="{{route('cetak.invoice', $order->id)}}" target="_blank" class="primary-btn cart-btn float-right py-1">Cetak Invoice</a>
                     </h6>
+                    @if($order->order_status !="1")
+                    <a href="{{route('orders.selesai', $order->id)}}" onclick="return confirm('Periksa Kembali Apakah Pesanan Selesai?')"class="btn btn-success mt-3">Pesanan Selesai </a>
+                    @endif
+                    @if($order->order_status == "1")
+                    <label class="bg-success py-1 px-2 text-dark mt-3">&nbsp;Pesanan Selesai</label>
+                    @endif
                 </div>
             </div>
         </div>
@@ -30,15 +37,28 @@
                         </div>
                         <div class=" col-md-8 mt-3">
                             <div class="border p-2">
-                                <label for="order Message">Order Message</label>
-                                <h6 style="color: black;">{{(!isset($order->order_msg))== true ? $order->order_msg:'Tidak Ada Pesan' }}</h6>
+                                <label for="order Message">Konfirmasi User</label>
+                                <h6 style="color: black;">
+                                    @if($order->order_status == '3')
+                                    Diterima User
+                                    @elseif($order->order_status == '1')
+                                    Telah Terkirim
+                                    @else
+                                    Belum Diterima User
+                                    @endif</h6>
                             </div>
                         </div>
                         <div class="col-md-4 mt-3">
                             <div class="border p-2">
                                 <label for="Mode Pembayaran">Mode Pembayaran</label>
                                 <h6 style="color: black;">
-                                    {{ $order->payment_mode }}
+                                    @if($order->payment_mode == '1')
+                                    COD
+                                    @elseif($order->payment_mode == '2')
+                                    Transfer Bank
+                                    @elseif($order->payment_mode == '3')
+                                    Pembayaran Ke Toko
+                                    @endif
                                 </h6>
                             </div>
                         </div>
@@ -54,14 +74,25 @@
                                     Transfer Bank - Sukses
                                     @elseif($order->payment_status == '3')
                                     Transfer Bank - Pending
+                                    @elseif($order->payment_status == '4')
+                                    Lunas
                                     @endif
                                 </h6>
+                               
                             </div>
                         </div>
                         <div class="col-md-4 mt-3">
                             <div class="border p-2">
                                 <label for="Bukti Transfer">Bukti Transfer</label>
+                                @if($order->pengiriman == '1')
+                                <h6 style="color: black;">COD</h6>
+                                @elseif($order->pengiriman == '3')
+                                <h6 style="color: black;">Pengambilan Ke Toko</h6>
+                                @elseif($order->pengiriman == '1')
+                                <h6 style="color: black;">Belum Transfer</h6>
+                                @else
                                 <img src="{{asset('storage/'. $order->image)}}" width="100px">
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-4 mt-3">
@@ -74,14 +105,28 @@
                                     Sukses
                                     @elseif($order->order_status == '2')
                                     Dibatalkan
+                                    @elseif($order->order_status == '3')
+                                    Diterima User
                                     @endif
                                 </h6>
                             </div>
+                            @if($order->pengiriman != "3" && $order->order_status == "0")
+                            <td><a href="{{route('orders.approve', $order->id)}}" onclick="return confirm('Terima Pesanan?')"class="btn btn-primary mt-3">Terima</a></td>
+                            @endif
+                            <td><a href="{{route('orders.reject', $order->id)}}" onclick="return confirm('Tolak Pesanan?')" class="btn btn-danger mt-3">Tolak</a></td>
                         </div>
                         <div class="col-md-4 mt-3">
                             <div class="border p-2">
-                                <label for="Cancelled Reason">Alasan Pembatalan</label>
-                                <h6 style="color: black;">{{(isset($order->cancel_reason))== true ? $order->cancel_reason:'Tidak Ada Pesan' }}</h6>
+                                <label for="Pengiriman">Pengiriman</label>
+                                <h6 style="color: black;">
+                                    @if($order->pengiriman == '1')
+                                    COD
+                                    @elseif($order->pengiriman == '2')
+                                    JNE
+                                    @elseif($order->pengiriman == '3')
+                                    Ambil Ke Toko
+                                    @endif
+                                </h6>
                             </div>
                         </div>
                     </div>

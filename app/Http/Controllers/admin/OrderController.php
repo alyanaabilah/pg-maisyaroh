@@ -55,12 +55,12 @@ class OrderController extends Controller
         if (Order::where('id', $id)->first()) {
             $orders = Order::find($id);
             return view('admin.order.order-show', [
-                "title" => "Detail Order User",
+                "title" => "Detail Pesanan User",
                 "order" => $orders
             ]);
         } else {
 
-            return redirect()->back()->with('status', "Order Tidak Ditemukan");
+            return redirect()->back()->with('danger', "Pesanan Tidak Ditemukan");
         }
     }
 
@@ -71,10 +71,23 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    // public function edit($id)
+    // {
+    //     if(Order::find($id)->exists())
+    //     {
+    //         $order = Order::find($id);
+    //         return view('admin.order.status-order', [
+    //             "title" => "Status Pesanan User",
+    //             "order" => $order
+    //         ]);
+    //     } else {
+
+    //         return redirect()->back()->with('danger', "Pesanan Tidak Ditemukan");
+    //     }
+        
+    // }
+
+    // public function trackingstatus(Request $request, $id)
 
     /**
      * Update the specified resource in storage.
@@ -96,7 +109,10 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $order = Order::find($id);
+        // $order->payment_status = "0";
+        // $order->save();
+        // return redirect()->back()->with('delete', 'Batal Terima Pembayaran');
     }
 
     public function invoice($id)
@@ -119,15 +135,23 @@ class OrderController extends Controller
 
     public function approve($id) {
         $order = Order::find($id);
-        $order->order_status = "1";
+        $order->payment_status = "2";
         $order->save();
-        return redirect()->back()->with('status', 'Sukses Approve Order');
+        return redirect()->back()->with('success', 'Sukses Terima Pembayaran');
     }
 
     public function reject($id) {
         $order = Order::find($id);
-        $order->order_status = "2";
+        $order->payment_status = "0";
+        $order->order_status = "0";
         $order->save();
-        return redirect()->back()->with('status', 'Sukses Approve Order');
+        return redirect()->back()->with('success', 'Sukses Tolak Pembayaran');
+    }
+    
+    public function selesai($id) {
+        $order = Order::find($id);
+        $order->order_status = "1";
+        $order->save();
+        return redirect()->back()->with('success', 'Pesanan Telah Selesai');
     }
 }

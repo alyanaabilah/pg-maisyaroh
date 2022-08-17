@@ -24,7 +24,7 @@
                             <th>Pembeli</th>
                             <th>Telepon</th>
                             <th>Status</th>
-                            <th>Total</th>
+                            <th>Total Belanja</th>
                             <th>Tanggal<br>Membeli</th>
            
 
@@ -39,9 +39,9 @@
                             <td>{{ $order->order->user->name }}</td>
                             <td>{{ $order->order->phone_number}}</td>
                             <td>@if($order->order->order_status == '0')
-                                pending
+                                Proses
                                 @else
-                                success
+                                Sukses
                                 @endif
                             </td>
                             <td>@currency($order->price * $order->quantity)</td>

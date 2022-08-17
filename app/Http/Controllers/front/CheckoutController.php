@@ -86,7 +86,14 @@ class CheckoutController extends Controller
         $order->user_id = Auth::id();
         $order->order_no = 'pgmaisyaroh' . $tracking;
         $order->order_msg = "";
-        $order->payment_mode = "Cash on Delivery";
+        if($request->pengiriman == '3') {
+            $order->payment_mode = "3";
+        } elseif($request->pengiriman == '1') {
+            $order->payment_mode = "1";
+        } elseif($request->pengiriman == '2') {
+            $order->payment_mode = "2";
+        }
+        //$order->payment_mode = "Cash on Delivery";
         $order->payment_id = "";
         $order->payment_status = "0";
         if($request->pengiriman == '4') {

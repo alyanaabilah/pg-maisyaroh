@@ -23,7 +23,7 @@
                 <th>Nama</th>
                 <th>Kode</th>
                 <th>Merk</th>
-                <th>Kuantitas</th>
+                <th>Terjual</th>
                 <th>Harga Terjual</th>
            
 

@@ -39,21 +39,20 @@
                                 <div class="card shadow-sm border">
                                     <div class="card-body">
                                          <h5>Merk</h5>
-                                         <form action="/terlaris-brand/{brand:id}" method="GET" target="_blank">
-                                            @csrf
+                                         
+                                           
                                             <div class="input-group mb-3">
-                                                <select class="form-control" name="brand_id" id="brand">
+                                                <select class="form-control" name="brand_id" id="brand_id">
                                                     <option value="">Pilih Merk</option>
-                                                    @foreach ($brands as $merk)
-                                    <option value="{{$merk->id}}">{{$merk->name}}</option>
-                                    @endforeach
-                                                   
+                                                    @foreach ($brand as $merk)
+                                                    <option value="{{$merk->id}}">{{$merk->name}}</option>
+                                                    @endforeach  
                                                 </select>
                                                 <div class="input-group-append">
-                                                <button type="submit" class="input-group-text bg-info text-white">Filter</button>
+                                                    <a href="" onclick="this.href='/terlaris-brand/'+document.getElementById('brand_id').value; " target="_blank" class="btn bg-info text-white">Filter</a>
                                             </div>
                                         </div>
-                                        </form>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +110,7 @@
                             <th width="250px">Produk</th>
                             <th>Brand</th>
                             <th>Kategori</th>
-                            <th>Quantity</th>
+                            <th>Terjual</th>
                             <th>Total</th>
                             <th>Gambar</th>
                         </tr>

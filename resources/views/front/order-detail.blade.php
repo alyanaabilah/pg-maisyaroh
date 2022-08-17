@@ -50,7 +50,6 @@
                         @method('PUT')
                         <label for="Image">Image</label>
                         <input type="hidden" name="oldImage" value="{{$order->image}}">
-                        <input type="hidden" value="{{$order->order_status}}">
                         @if($order->image)
                         <img src="{{asset('storage/'. $order->image)}}" img class="img-preview img-fluid mb-3 col-sm-5 d-block" alt="">
                         @else
@@ -69,10 +68,10 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Image</th>
+                                <th>Produk</th>
+                                <th>Kuantitas</th>
+                                <th>Harga</th>
+                                <th>Bukti</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,7 +92,22 @@
                     @else
                     <h4 class="px-2">Total: <span class="float-end">@currency($order->total_price)</span></h4>
                     @endif
+
+                    <br>
+                    <br>
+                    <div class="col-md-6 mt-5">
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h4>Transfer</h4>
+                                Silahkan Transfer Melalui:
+                                Bank Mandiri 021 000 43871
+                                a.n Maisyaroh
+                            </div>
+                    </div>
                 </div>
+
+                
+               
             </div>
 
         </div>

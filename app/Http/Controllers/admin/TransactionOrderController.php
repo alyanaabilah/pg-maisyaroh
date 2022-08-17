@@ -12,9 +12,8 @@ class TransactionOrderController extends Controller
 {
     public function index()
     {
-        $order = OrderItem::groupBy('date', 'product_id', 'quantity')->selectRaw('date(created_at) as date, product_id')
-        ->get();
-        return view('admin.keuangan.keuangan-show', [
+        $order = OrderItem::all();
+        return view('admin.transaction.transaction-index', [
             "title" => "Transaksi Penjualan Barang",
             "orders" => $order
         ]);

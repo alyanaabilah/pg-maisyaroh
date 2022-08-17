@@ -120,8 +120,7 @@
                                         <option value="">Pilih Pengiriman</option>
                                         <option value="1">COD</option>
                                         <option value="2">JNE - Transfer</option>
-                                        <option value="3">POS - Transfer</option>
-                                        <option value="4">Ambil Ke Toko</option>
+                                        <option value="3">Ambil Ke Toko</option>
                                     </select>
                                     @error('pengiriman')
                                     <div class="invalid-feeedback">

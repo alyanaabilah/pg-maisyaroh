@@ -22,7 +22,7 @@
                             <tr>
                                 <th>Nomor Pembelian</th>
                                 <th>Total Pembelian</th>
-                                <th>Status Pembayaran</th>
+                                <th>Status Pesanan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -37,7 +37,7 @@
                                 <td>
                                     @currency($order->total_price)
                                 </td>
-                                
+                               
                                     @if($order->order_status == '0')
                                 <td>Pending</td>
                                 @elseif($order->order_status == '1')
@@ -55,7 +55,7 @@
 
                                     <a href="/user/my-orders/{{$order->id}}"><i class="fa fa-info-circle fa-2x mr-2" style="color:black;"></i></a>
                                     @if ($order->order_status == "1")
-                                    <a href=" /user/confirmation-orders/{{$order->id}}"><i class="fa fa-check-circle fa-2x" style="color:black;"></i></a>
+                                    <a href="/user/confirmation-orders/{{$order->id}}"><i class="fa fa-check-circle fa-2x" style="color:black;"></i></a>
                                     @endif
                                     @elseif(Auth::user()->ceklevel === 'admin')
                                     <a href="/admin/my-orders/{{$order->id}}"><i class="fa fa-info-circle fa-2x mr-2" style="color:black;"></i></a>

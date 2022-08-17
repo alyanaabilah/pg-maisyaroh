@@ -56,12 +56,12 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th width="200px">No Order</th>
+                        <th width="200px">No Pemesanan</th>
                         <th>Pembeli</th>
-                        <th>Phone</th>
-                        <th>Metode Pengiriman</th>
+                        <th>Telepon</th>
+                        <th>Pengiriman</th>
                         <th>Status Pengiriman</th>
-                        <th>Action</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,19 +75,20 @@
                         @elseif($order->pengiriman == "2")
                         <td>JNE</td>
                         @elseif($order->pengiriman == "3")
-                        <td>POS</td>
-                        @elseif($order->pengiriman == "4")
                         <td>Ambil Di Toko</td>
                         @else
                         <td></td>
                         @endif
                         <td>@if($order->order_status == '0')
-                            pending
-                            @else
-                            succes
+                            Pending
+                            @elseif($order->order_status == '3')
+                            Diterima
+                            @elseif($order->order_status == '1')
+                            Selesai
+                            @elseif($order->order_status == '2')
+                            Dibatalkan
                             @endif
                         </td>
-
                         <td><a href="{{route('orders.show', $order->id)}}" class="btn btn-primary">Detail</a></td>
                     </tr>
 

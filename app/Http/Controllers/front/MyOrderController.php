@@ -51,8 +51,9 @@ class MyOrderController extends Controller
         ]);
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('uploads');
+            // $validatedData['payment_status'] = "2";
         }
-        $validatedData['order_status'] = "1";
+
         Order::where('id', $orders->id)
             ->update($validatedData);
         return redirect('/user/my-orders')->with('status', "Terima kasih telah membayar barang belanjaan anda");
@@ -60,10 +61,14 @@ class MyOrderController extends Controller
 
     public function addInfo($id)
     {
-        $orders = DB::table('orders')->where(function ($query) {
-            $query->whereNull('image');
-        })->get();
-        return view('front.my-order', compact('id', 'orders'));
+        $order = Order::find($id);
+        if ($order->payment_mode = "2"){
+            $orders = DB::table('orders')->where(function ($query) {
+                $query->whereNull('image');
+            })->get();
+            return view('front.my-order', compact('id', 'orders'));
+        }
+       
     }
 
     public function complete($id) {
