@@ -178,7 +178,7 @@ Route::get('/cetak-kategori/{category:id}', [StockController::class, 'cetakkateg
 //TERLARIS
 Route::get('/cetak-terlaris', [BestSellerController::class, 'terlaris'])->name('cetak.terlaris');
 Route::get('/terlaris-tanggal/{tglawal}/{tglakhir}', [BestSellerController::class, 'cetaktgl'])->name('cetak.tanggal');
-Route::get('/terlaris-brand/{brand:name}', [BestSellerController::class, 'cetakbrand'])->name('cetak.brand');
+Route::get('/terlaris-brand/{brand:id}', [BestSellerController::class, 'cetakbrand'])->name('cetak.brand');
 Route::get('/terlaris-kategori/{category:id}', [BestSellerController::class, 'cetakkategori'])->name('cetak.kategori');
 //USER-LOYAL
 Route::get('/cetak-user-loyal', [UserLoyalController::class, 'cetakuser'])->name('cetak.user');
@@ -191,7 +191,8 @@ Route::get('/cetak-transaksi', [TransactionOrderController::class, 'transaksi'])
 Route::get('/transaksi-tanggal/{tglawal}/{tglakhir}', [TransactionOrderController::class, 'tgltransaksi'])->name('cetak.tgltransaksi');
 //REQUEST-SALES
 Route::get('pesanan-brand/{brand:id}',[CetakPesananController::class, 'cetakbrand']);
-
+//KEUANGAN
+Route::get('/cetak-keuangan-tanggal/{tglawal}/{tglakhir}', [KeuanganController::class, 'keuangantgl'])->name('cetak.tgl');
 
 // Route::post('/terlaris-brand/{brand:name}', function (Brand $brand) {
 //     $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',$brand->input('brand_id'))

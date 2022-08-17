@@ -110,7 +110,7 @@
                                     <div class="sub-menu">
                                         <li>
                                             <a class="sidenav-item-link" href="/admin/brand">
-                                                <span class="nav-text">Brand</span>
+                                                <span class="nav-text">Merk</span>
                                             </a>
                                         </li>
                                         <li>
@@ -138,7 +138,7 @@
                                         </li>
                                         <li>
                                             <a class="sidenav-item-link" href="/admin/product">
-                                                <span class="nav-text">Product</span>
+                                                <span class="nav-text">Produk</span>
                                             </a>
                                         </li>
                                         <li>
@@ -147,11 +147,7 @@
                                             </a>
                                         </li>
 
-                                        <li>
-                                            <a class="sidenav-item-link" href="/admin/coupon">
-                                                <span class="nav-text">Kupon</span>
-                                            </a>
-                                        </li>
+                                       
 
                                     </div>
                                 </ul>
@@ -175,12 +171,12 @@
                                         </li>
                                         <li>
                                             <a class="sidenav-item-link" href="/admin/orders">
-                                                <span class="nav-text">Order User</span>
+                                                <span class="nav-text">Pesanan User</span>
                                             </a>
                                         </li>
                                         <li>
                                             <a class="sidenav-item-link" href="/admin/pesanan-barang">
-                                                <span class="nav-text">Barang Request</span> <!-- join antara tabel produk+brand+field(qty, harga satuan, harga total per barang, harga jumlah pemesanan) !-->
+                                                <span class="nav-text">Pesanan Barang</span> <!-- join antara tabel produk+brand+field(qty, harga satuan, harga total per barang, harga jumlah pemesanan) !-->
                                             </a>
                                         </li>
                                     </div>
@@ -220,11 +216,7 @@
                                                 <span class="nav-text">Wilayah Terbanyak</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
-                                                <span class="nav-text">Retur Sales</span>
-                                            </a>
-                                        </li>
+                                        
                                         <li>
                                             <a class="sidenav-item-link" href="/admin/keuangan-laporan">
                                                 <span class="nav-text">Keuangan</span>
@@ -235,11 +227,7 @@
                                                 <span class="nav-text">Pelanggan Terloyal</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a class="sidenav-item-link" href="/admin/subsidi-kupon">
-                                                <span class="nav-text">Kupon Subsidi</span>
-                                            </a>
-                                        </li>
+                                        
                                     </div>
                                 </ul>
                             </li>

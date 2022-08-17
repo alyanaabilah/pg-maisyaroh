@@ -30,7 +30,7 @@
                             <h5 class="mt-2 mb-2">Tanggal Akhir</h5>
                             <input type="date" id="tglakhir" class="ml-2 mt-2 mb-2">
                         </div>
-                         <a href="" onclick="this.href='/cetak-user-tanggal/'+document.getElementById('tglawal').value +'/'+ document.getElementById('tglakhir').value; " target="_blank" class="btn bg-info text-white">Filter</a>
+                         <a href="" onclick="this.href='/cetak-keuangan-tanggal/'+document.getElementById('tglawal').value +'/'+ document.getElementById('tglakhir').value; " target="_blank" class="btn bg-info text-white">Filter</a>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,6 @@
                             <th>Tanggal</th>
                             <th>Total Pendapatan</th>
                             <th>Kuantitas Terjual</th>
-                            <th>Detail</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +49,6 @@
                             <td>{{date('d F Y', strtotime($item->date))}}</td>
                             <td>@currency($item->price)</td>
                             <td>{{$item->quantity}}</td>
-                            <td><a href="/admin/transaction-orders" class="btn btn-primary">Detail</a></td>
                         </tr>
                        @endforeach
                     </tbody>

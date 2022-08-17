@@ -6,16 +6,32 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class WilayahController extends Controller
 {
     public function wilayah()
     {
-        $order = (new Order())->groupBy('user_id', 'total_price', 'date')->selectRaw('count(user_id) as most_orders, user_id, date(created_at) as date, total_price')->orderBy('most_orders', 'desc')->get();
+        //  $order = (new Order())->groupBy('user_id', 'total_price')->selectRaw('count(user_id) as most_orders, total_price, user_id')->orderBy('most_orders', 'desc')->get();
+        
+        $order = DB::table('orders')
+                    ->join('users', 'users.id', '=', 'orders.user_id')
+                    ->join('regencies','regencies.id', '=', 'users.regency_id')
+                    ->join('provinces', 'provinces.id', '=', 'regencies.province_id')
+                    ->groupBy( 'regencies.name', 'provinces.name', 'regencies.id')
+                    ->get([
+                        'regencies.name AS regency_name',
+                        'provinces.name AS province_name',
+                        DB::raw('COUNT(regencies.id) AS most_orders'),
+                        DB::raw('SUM(orders.total_price) AS total_price')
+                    ]);
+
         return view('admin.dashboard.wilayah-order',[
+
             "title" => "Wilayah Terloyal",
             "wilayah" => $order
         ]);
+        
     }
 
     public function wilayahcetak()

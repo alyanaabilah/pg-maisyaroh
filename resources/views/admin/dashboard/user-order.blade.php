@@ -76,7 +76,7 @@
 
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{ $item->user->name }}</td>
+                            <td>{{ $item->name }}</td>
                             <td>{{ $item->most_orders}}</td>
                             <td>@currency($item->total_price)</td>
                             

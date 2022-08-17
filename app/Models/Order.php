@@ -36,8 +36,8 @@ class Order extends Model
         return $this->belongsTo(Regency::class, 'regencies_id', 'id');
     }
 
-    public function getCreatedAtAttribute()
-    {
-        return \Carbon\Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y'); 
-    }
+    // public function getCreatedAtAttribute()
+    // {
+    //     return \Carbon\Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y'); 
+    // }
 }

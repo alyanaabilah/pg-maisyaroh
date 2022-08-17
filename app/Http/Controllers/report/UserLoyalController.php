@@ -6,12 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class UserLoyalController extends Controller
 {
     public function userloyal()
     {
-        $user = (new Order())->groupBy('user_id', 'total_price')->selectRaw('count(user_id) as most_orders, user_id, total_price')->orderBy('most_orders', 'desc')->get();
+        // $user = (new Order())->groupBy('user_id', 'total_price')->selectRaw('count(user_id) as most_orders, user_id, total_price')->orderBy('most_orders', 'desc')->get();
+        $user = DB::table('orders')
+                    ->join('users', 'users.id', '=', 'orders.user_id')
+                    ->groupBy('users.id')
+                    ->get([
+                        'users.name AS name',
+                        DB::raw('COUNT(users.id) AS most_orders'),
+                        DB::raw('SUM(orders.total_price) AS total_price')
+                    ]);
+
         return view('admin.dashboard.user-order',[
             "title" => "User Terloyal",
             "users" => $user

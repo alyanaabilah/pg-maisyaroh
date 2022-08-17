@@ -118,24 +118,24 @@ class BestSellerController extends Controller
         return $pdf->stream('pg-maisyaroh-terlaris-pertanggal.pdf');
     }
 
-    public function cetakbrand($name)
-    {
-        // $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',$brand->input('brand_id'))
-        //     ->get();
-        $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',1)
-            ->get();
-        // $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',Request::input('brand_id', $name))
-        //     ->get();
-        //$terjual = Request::input('brand_id', $id);
-            dd($terjual)->get();
-        $pdf = PDF::loadView('admin.dashboard.terlaris-brand', ['brand' => $terjual]);
-        return $pdf->stream('pg-maisyaroh-sisa-stock-brand.pdf');
-    }
+    // public function cetakbrand($id)
+    // {
+    //     // $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',$brand->input('brand_id'))
+    //     //     ->get();
+    //     $terjual= (new OrderItem())->selectRaw('sum(quantity) as quantity, product_id, price')->where('product_id',Request::input('brand_id', $id))->orderBy('quantity', 'desc')->groupBy('product_id', 'price')
+    //         ->get();
+    //     // $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',Request::input('brand_id', $name))
+    //     //     ->get();
+    //     //$terjual = Request::input('brand_id', $id);
+    //         //dd($terjual)->get();
+    //     $pdf = PDF::loadView('admin.dashboard.terlaris-brand', ['brand' => $terjual]);
+    //     return $pdf->stream('pg-maisyaroh-sisa-stock-brand.pdf');
+    // }
 
-    public function cetakkategori($category)
-    {
-        $category = (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',Request::input('category_id', $category))->get();
-        $pdf = PDF::loadView('admin.dashboard.terlaris-kategori', ["category" => $category]);
-        return $pdf->stream('pg-maisyaroh-sisa-stock-kategori.pdf');
-    }
+    // public function cetakkategori($category)
+    // {
+    //     $category = (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',Request::input('category_id', $category))->get();
+    //     $pdf = PDF::loadView('admin.dashboard.terlaris-kategori', ["category" => $category]);
+    //     return $pdf->stream('pg-maisyaroh-sisa-stock-kategori.pdf');
+    // }
 }

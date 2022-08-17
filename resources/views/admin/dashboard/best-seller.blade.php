@@ -35,48 +35,7 @@
                                 </div>
                             </div>
                            
-                            <div class="col-md-4">
-                                <div class="card shadow-sm border">
-                                    <div class="card-body">
-                                         <h5>Merk</h5>
-                                         
-                                           
-                                            <div class="input-group mb-3">
-                                                <select class="form-control" name="brand_id" id="brand_id">
-                                                    <option value="">Pilih Merk</option>
-                                                    @foreach ($brand as $merk)
-                                                    <option value="{{$merk->id}}">{{$merk->name}}</option>
-                                                    @endforeach  
-                                                </select>
-                                                <div class="input-group-append">
-                                                    <a href="" onclick="this.href='/terlaris-brand/'+document.getElementById('brand_id').value; " target="_blank" class="btn bg-info text-white">Filter</a>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card shadow-sm border">
-                                    <div class="card-body">
-                                         <h5>Kategori</h5>
-                                         <form action="/terlaris-kategori/{category:id}" method="GET" target="_blank">
-                                            @csrf
-                                            <div class="input-group mb-3">
-                                                <select class="form-control" name="category_id" id="category">
-                                                    <option value="">Pilih Kategori</option>
-                                                    @foreach ($categories as $kategori)
-                                    <option value="{{$kategori->id}}">{{$kategori->name}}</option>
-                                    @endforeach
-                                                </select>
-                                                <div class="input-group-append">
-                                                <button type="submit" class="input-group-text bg-info text-white">Filter</button>
-                                            </div>
-                                        </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>

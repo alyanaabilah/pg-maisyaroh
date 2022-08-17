@@ -9,6 +9,7 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class KeuanganController extends Controller
 {
@@ -52,8 +53,11 @@ class KeuanganController extends Controller
         }
     }
 
-    public function cetakkeuangan()
+    public function keuangantgl($tglawal, $tglakhir)
     {
-        
+        $tanggal = OrderItem::groupBy('date')->selectRaw('sum(quantity) as quantity, date(created_at) as date, sum(price* quantity) as price')->wherebetween('created_at', [$tglawal, $tglakhir])->get();
+        $pdf = PDF::loadView('admin.keuangan.keuangan-report', ['orders' => $tanggal]);
+        return $pdf->stream('pg-maisyaroh-transaksi-tanggal-pelanggan.pdf');
+        //return $pdf->download('pg-maisyaroh-invoice-pelanggan.pdf');
     }
 }

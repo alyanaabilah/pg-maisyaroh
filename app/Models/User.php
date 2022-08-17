@@ -66,6 +66,8 @@ class User extends Authenticatable
         return $this->belongsTo(Village::class, 'village_id', 'id');
     }
 
+    
+
     // public function coupon()
     // {
     //     return $this->hasMany(Coupon::class);
