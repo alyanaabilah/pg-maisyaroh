@@ -37,6 +37,7 @@ use App\Http\Controllers\front\SubsidiCouponController;
 use App\Http\Controllers\repoprt\CetakPesananController;
 use App\Http\Controllers\admin\IncomingProductController;
 use App\Http\Controllers\admin\TransactionOrderController;
+use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 /*
@@ -121,6 +122,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
                 "product" => $brand->product,
                 "active" => "Brand",
                 "judul" => "Brand " . $brand->name,
+                "brand" => Brand::all(),
+                "kategori" => Category::all()
             ]);
         });
 
@@ -240,7 +243,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
         Route::resource('my-orders', MyOrderController::class);
         Route::get('my-orders/{id}/addinfo', [MyOrderController::class, 'addinfo']);
         //  Route::get('pay-orders/{order:id}', [PayOrderController::class, 'show']);
-
+        Route::get('/my-orders/{id}/complete', [MyOrderController::class, 'complete'])->name('orders.complete');
 
         Route::get('/front-category/{category:slug}', function (Category $category) {
             return view('front.attribut.category-userfront', [
@@ -258,6 +261,8 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth']], function () {
                 "product" => $brand->product,
                 "active" => "Brand",
                 "judul" => "Brand " . $brand->name,
+                "product" => Product::all(),
+                // "kategori" => Category::all()
             ]);
         });
     });

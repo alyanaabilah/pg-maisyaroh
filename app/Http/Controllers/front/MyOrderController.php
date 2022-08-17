@@ -74,7 +74,8 @@ class MyOrderController extends Controller
     public function complete($id) {
         $order = Order::find($id);
         $order->order_status = "3";
+        $order->payment_status = "4";
         $order->save();
-        return redirect()->back()->with('status', 'Sukses Menerima Order');
+        return redirect()->back()->with('status', 'Sukses Menerima Pesanan');
     }
 }

@@ -93,6 +93,13 @@
                     <h4 class="px-2">Total: <span class="float-end">@currency($order->total_price)</span></h4>
                     @endif
 
+                    @if ($order->order_status == "1")
+                    <a href="{{route('orders.complete', $order->id)}}" onclick="return confirm('Pesanan Sudah Sampai?')"class="btn btn-primary mt-3">Terima</a>
+                                    @endif
+                                    @if($order->payment_status == "4")
+                    <label class="bg-success py-1 px-2 text-dark mt-3">&nbsp;Pesanan Anda Telah Selesai</label>
+                    @endif
+                    <br>
                     <br>
                     <br>
                     <div class="col-md-6 mt-5">

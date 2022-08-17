@@ -140,47 +140,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="district">Kecamatan</label>
-                                    <select id="district" class="form-control " name="district">
-                                        <option>Pilih Kecamatan</option>
-
-                                    </select>
-                                    @error('district')
-                                    <div class=" invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="village">Kelurahan/Desa</label>
-                                    <select id="village" class="wide form-control " name="village">
-                                        <option>Pilih Desa</option>
-
-                                    </select>
-                                    @error('village')
-                                    <div class="invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="Kodepos">Kodepos</label>
-                                    <input type="text" class="form-control @error('zip_code') is-invalid @enderror" autofocus name="zip_code" id="zip_code" aria-describedby="name" placeholder="Kodepos" value="{{old ('zip_code', $user->zip_code)}}" style="color:black">
-                                    @error('zip_code')
-                                    <div class="invalid-feeedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label for="Negara">Negara</label>
                             <input type="text" class="form-control @error('country') is-invalid @enderror" autofocus name="country" id="country" aria-describedby="name" placeholder="Negara" value="{{old ('country', $user->country)}}" style="color:black">

@@ -23,7 +23,7 @@
                 <th>Nama</th>
                 <th>Jumlah Beli</th>
                 <th>Total Pembelian</th>
-                <th>Tanggal Pembelian</th>
+          
 
 
             </tr>
@@ -32,10 +32,9 @@
             <tr>
 
                 <td>{{$loop->iteration}}</td>
-                            <td>{{ $item->user->name }}</td>
+                            <td>{{ $item->name }}</td>
                             <td>{{ $item->most_orders}}</td>
                             <td>@currency($item->total_price)</td>
-                            <td>{{date('d F Y', strtotime($item->date))}}</td>
             </tr>
 
             @endforeach

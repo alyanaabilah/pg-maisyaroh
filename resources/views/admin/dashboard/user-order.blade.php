@@ -20,19 +20,7 @@
                 <div class="col-md-12">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="card shadow-sm border">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <h5 class="mt-2">Tanggal Awal</h5>
-                                            <input type="date" id="tglawal" class="ml-2 mt-2">
-                                            <h5 class="mt-2 mb-2">Tanggal Akhir</h5>
-                                            <input type="date" id="tglakhir" class="ml-2 mt-2 mb-2">
-                                        </div>
-                                         <a href="" onclick="this.href='/cetak-user-tanggal/'+document.getElementById('tglawal').value +'/'+ document.getElementById('tglakhir').value; " target="_blank" class="btn bg-info text-white">Filter</a>
-                                    </div>
-                                </div>
-                            </div>
+                            
 
 
                         </div>

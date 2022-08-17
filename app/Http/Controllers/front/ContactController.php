@@ -19,6 +19,7 @@ class ContactController extends Controller
             "title" => "Pangkalan Gas Maisyaroh | Contact",
             "active" => "contact",
             "product" => Product::all(),
+            "judul" => "Kontak Kami"
         ]);
     }
 

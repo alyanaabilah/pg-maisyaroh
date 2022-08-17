@@ -51,7 +51,7 @@
                                              <h2 style="font-size: 3vw;">Selamat datang <br>Pangkalan Gas Maisyaroh</h2>
                                              <br>
                                              <br>
-                                             <button type="button" class="btn btn-primary mt-3">Primary</button>
+                                            
                                          </div>
                                          <img src="{{ asset ('front_assets/img/hero-2.png') }}" class="d-block w-100" alt="...">
                                      </div>
@@ -67,7 +67,7 @@
                                              <h2 style="font-size: 3vw;">Selamat datang <br>Pangkalan Gas Maisyaroh</h2>
                                              <br>
                                              <br>
-                                             <button type="button" class="btn btn-primary mt-3">Primary</button>
+                                            
                                          </div>
                                          <img src="{{ asset ('front_assets/img/hero-1.png') }}" class="d-block w-100" alt="...">
                                      </div>
@@ -83,7 +83,7 @@
                                              <h2 style="font-size: 3vw;">Selamat datang <br>Pangkalan Gas Maisyaroh</h2>
                                              <br>
                                              <br>
-                                             <button type="button" class="btn btn-primary mt-3">Primary</button>
+                                             
                                          </div>
                                          <img src="./path/to/3.png" class="d-block w-100" alt="...">
                                      </div>

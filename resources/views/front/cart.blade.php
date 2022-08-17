@@ -21,25 +21,15 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
-                            <div class="hero__search__categories">
-                                All Categories
-                                <span class="arrow_carrot-down"></span>
-                            </div>
-                            <input type="text" placeholder="What do yo u need?">
-                            <button type="submit" class="site-btn">SEARCH</button>
+                        <form action="{{route('search.products')}}" method="POST">
+                            @csrf
+                            <input type="text" placeholder="Apa yang anda cari?" name="search" id="search" value="" style="width: 520px">
+                            <button type="submit" class="site-btn">Cari</button>
                         </form>
                     </div>
-                    <div class="hero__search__phone">
-                        <div class="hero__search__phone__icon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="hero__search__phone__text">
-                            <h5>+65 11.188.888</h5>
-                            <span>support 24/7 time</span>
-                        </div>
-                    </div>
+
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -60,9 +50,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="shoping__product">Products</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
+                                <th class="shoping__product">Produk</th>
+                                <th>Harga</th>
+                                <th>Kuantitas</th>
                                 <th>Total</th>
                                 <th></th>
                             </tr>
@@ -124,21 +114,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Discount Codes</h5>
-                        <form action="/subsidi/coupon" method="POST">
-                            {{ csrf_field() }}
-                            @foreach($kupon as $kupon)
-                            <input type="hidden" value="{{$kupon->id}}" class="coupon_id" name="coupon_id">
-                            @endforeach
-                            <input type="text" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">APPLY COUPON</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Cart Total</h5>

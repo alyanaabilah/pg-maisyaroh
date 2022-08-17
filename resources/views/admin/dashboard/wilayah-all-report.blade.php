@@ -33,8 +33,8 @@
             <tr>
 
                 <td>{{$loop->iteration}}</td>
-                <td>{{ $item->user->regency->name }}</td>
-                <td>{{ $item->user->province->name }}</td>
+                <td>{{ $item->regency_name }}</td>
+                <td>{{ $item->province_name }}</td>
                 <td>{{ $item->most_orders}}</td>
                 <td>@currency($item->total_price)</td>
             </tr>
