@@ -21,9 +21,9 @@
             <tr>
 
                 <th>Produk</th>
-                <th>Brand</th>
+                <th>Merk</th>
                 <th>Kategori</th>
-                <th>Quantity</th>
+                <th>Kuantitas</th>
                 <th>Total Harga</th>
                 <th>Tanggal</th>
 
@@ -40,7 +40,7 @@
                 <td>{{ $order->product->category->name }}</td>
                 <td>{{ $order->quantity }}</td>
                 <td>@currency( $order->price * $order->quantity)</td>
-                <td>{{date('d F Y', strtotime($order->created_at))}}</td>
+                <td>{{$order->created_at}}</td>
 
             </tr>
 

@@ -20,38 +20,69 @@
                 <div class="col-md-12">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-2 mt-1">
-                                <label for="Mulai">Mulai</label>
-                                <input type="date" id="tglawal">
+
+                            <div class="col-md-4">
+                                <div class="card shadow-sm border">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <h5 class="mt-2">Tanggal Awal</h5>
+                                            <input type="date" id="tglawal" class="ml-2 mt-2">
+                                            <h5 class="mt-2 mb-2">Tanggal Akhir</h5>
+                                            <input type="date" id="tglakhir" class="ml-2 mt-2 mb-2">
+                                        </div>
+                                         <a href="" onclick="this.href='/terlaris-tanggal/'+document.getElementById('tglawal').value +'/'+ document.getElementById('tglakhir').value; " target="_blank" class="btn bg-info text-white">Filter</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-2 mt-1 ml-2">
-                                <label for="Akhir">Akhir</label>
-                                <input type="date" id="tglakhir">
+                           
+                            <div class="col-md-4">
+                                <div class="card shadow-sm border">
+                                    <div class="card-body">
+                                         <h5>Merk</h5>
+                                         <form action="/terlaris-brand/{brand:id}" method="GET" target="_blank">
+                                            @csrf
+                                            <div class="input-group mb-3">
+                                                <select class="form-control" name="brand_id" id="brand">
+                                                    <option value="">Pilih Merk</option>
+                                                    <option value="1">Rinnai</option>
+                                                    <option value="2">Modenna</option>
+                                                    <option value="3">Hock</option>
+                                                   
+                                                </select>
+                                                <div class="input-group-append">
+                                                <button type="submit" class="input-group-text bg-info text-white">Filter</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-3 mt-1 ml-2">
-                                <label for="Brand">Brand</label>
-                                <select class="form-control" name="brand_id" id="brand">
-                                    @foreach ($brands as $brand)
-                                    <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-3 mt-1">
-                                <label for="Category">Kategori</label>
-                                <select class="form-control" name="category_id" id="category">
-                                    @foreach ($categories as $kategori)
+                            <div class="col-md-4">
+                                <div class="card shadow-sm border">
+                                    <div class="card-body">
+                                         <h5>Kategori</h5>
+                                         <form action="/terlaris-kategori/{category:id}" method="GET" target="_blank">
+                                            @csrf
+                                            <div class="input-group mb-3">
+                                                <select class="form-control" name="category_id" id="category">
+                                                    <option value="">Pilih Kategori</option>
+                                                    @foreach ($categories as $kategori)
                                     <option value="{{$kategori->id}}">{{$kategori->name}}</option>
                                     @endforeach
-                                </select>
+                                                </select>
+                                                <div class="input-group-append">
+                                                <button type="submit" class="input-group-text bg-info text-white">Filter</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                            <a href="" onclick="this.href='/terlaris-tanggal/'+document.getElementById('tglawal').value +'/'+ document.getElementById('tglakhir').value; " target="_blank" class="btn btn-primary mt-4">Filter</a>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="/cetak-terlaris" target="_blank" class="btn btn-primary mb-3">Cetak Data</a>
+            <a href="/cetak-terlaris" target="_blank" class="btn btn-primary mb-3">Cetak Semua Data</a>
 
             @if(session()->has('success'))
             <div class="alert alert-success" role="alert">

@@ -24,19 +24,27 @@
 
                             <div class="col-md-4">
                                 <div class="card shadow-sm border">
-                                    <label for="Mulai">Mulai</label>
-                                    <input type="date" id="tglawal">
-                                    <label for="Akhir">Akhir</label>
-                                <input type="date" id="tglakhir">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <h5 class="mt-2">Tanggal Awal</h5>
+                                            <input type="date" id="tglawal" class="ml-2 mt-2">
+                                            <h5 class="mt-2 mb-2">Tanggal Akhir</h5>
+                                            <input type="date" id="tglakhir" class="ml-2 mt-2 mb-2">
+                                        </div>
+                                         <a href="" onclick="this.href='/cetak-tanggal/'+document.getElementById('tglawal').value +'/'+ document.getElementById('tglakhir').value; " target="_blank" class="btn bg-info text-white">Filter</a>
+                                    </div>
                                 </div>
                             </div>
+                           
                             <div class="col-md-4">
                                 <div class="card shadow-sm border">
                                     <div class="card-body">
-                                         <h5>Brand</h5>
-                                         <form action="/cetak-brand/{brand}">
+                                         <h5>Merk</h5>
+                                         <form action="/cetak-brand/{brand:id}" method="GET" target="_blank">
+                                            @csrf
                                             <div class="input-group mb-3">
                                                 <select class="form-control" name="brand_id" id="brand">
+                                                    <option value="">Pilih Merk</option>
                                                     @foreach ($brands as $brand)
                                                     <option value="{{$brand->id}}">{{$brand->name}}</option>
                                                     @endforeach
@@ -51,22 +59,30 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="card shadow-sm border">
-                                <label for="Category">Kategori</label>
-                                <select class="form-control" name="category_id" id="category">
-                                    @foreach ($categories as $kategori)
+                                    <div class="card-body">
+                                         <h5>Kategori</h5>
+                                         <form action="/cetak-kategori/{category:id}" method="GET" target="_blank">
+                                            @csrf
+                                            <div class="input-group mb-3">
+                                                <select class="form-control" name="category_id" id="category">
+                                                    <option value="">Pilih Kategori</option>
+                                                    @foreach ($categories as $kategori)
                                     <option value="{{$kategori->id}}">{{$kategori->name}}</option>
                                     @endforeach
-                                </select>
+                                                </select>
+                                                <div class="input-group-append">
+                                                <button type="submit" class="input-group-text bg-info text-white">Filter</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            <button id="filter" onclick="filter()" class="btn btn-primary mt-4">Filter</button>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="/cetak-stock" target="_blank" class="btn btn-primary mb-3">Cetak Data</a>
+            <a href="/cetak-stock" target="_blank" class="btn btn-primary mb-3">Cetak Semua Data</a>
             @if(session()->has('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
@@ -91,9 +107,9 @@
                             <th>Nama</th>
                             <th>Kode</th>
                             <th>Kategori</th>
-                            <th>Brand</th>
+                            <th>Merk</th>
                             <th>Stok</th>
-                            <th>Update</th>
+                            <th>Tanggal</th>
 
 
                         </tr>
@@ -109,7 +125,7 @@
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->brand->name }}</td>
                             <td>{{ $product->stock }}</td>
-                            <td>{{ date('d F Y', strtotime($product->updated_at)) }}</td>
+                            <td>{{ $product->created_at }}</td>
 
                         </tr>
 

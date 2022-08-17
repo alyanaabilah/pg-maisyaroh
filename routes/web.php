@@ -28,6 +28,7 @@ use App\Http\Controllers\front\PayOrderController;
 use App\Http\Controllers\front\SubsidiCouponController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\report\CouponUserController;
+use App\Http\Controllers\report\KeuanganController;
 use App\Http\Controllers\report\StockController;
 use App\Http\Controllers\report\UserLoyalController;
 use App\Http\Controllers\report\WilayahController;
@@ -133,6 +134,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resource('best-seller', BestSellerController::class);
         Route::resource('transaction-orders', TransactionOrderController::class);
         Route::get('user-loyal', [UserLoyalController::class, 'userloyal'])->name('cetak.user');
+        Route::get('wilayah-terbanyak', [WilayahController::class, 'wilayah'])->name('cetak.wilayah');
+        Route::resource('keuangan-laporan',KeuanganController::class);
+        
 
 
         // Route::get('/generate-invoice/{order:id}', function (Order $order) {
@@ -166,11 +170,17 @@ Route::get('/cetak-kategori/{category:id}', [StockController::class, 'cetakkateg
 //TERLARIS
 Route::get('/cetak-terlaris', [BestSellerController::class, 'terlaris'])->name('cetak.terlaris');
 Route::get('/terlaris-tanggal/{tglawal}/{tglakhir}', [BestSellerController::class, 'cetaktgl'])->name('cetak.tanggal');
+Route::get('/terlaris-brand/{brand:id}', [BestSellerController::class, 'cetakbrand'])->name('cetak.brand');
+Route::get('/terlaris-kategori/{category:id}', [BestSellerController::class, 'cetakkategori'])->name('cetak.kategori');
 //USER-LOYAL
-//Route::get('/user-loyal', [UserLoyalController::class, 'userloyal'])->name('cetak.user');
+Route::get('/cetak-user-loyal', [UserLoyalController::class, 'cetakuser'])->name('cetak.user');
+Route::get('/cetak-user-tanggal/{tglawal}/{tglakhir}', [UserLoyalController::class, 'usertgl'])->name('cetak.usertgl');
 //WILAYAH-TERBANYAK
-Route::get('/cetak-wilayah-terbanyak', [WilayahController::class, 'wilayah'])->name('cetak.wlayah');
-
+Route::get('/cetak-wilayah-terbanyak', [WilayahController::class, 'wilayahcetak'])->name('cetak.wlayah');
+Route::get('/cetak-wilayah-tanggal/{tglawal}/{tglakhir}', [WilayahController::class, 'wilayahtgl'])->name('cetak.wlayahtgl');
+//TRANSAKSI
+Route::get('/cetak-transaksi', [TransactionOrderController::class, 'transaksi'])->name('cetak.transaksi');
+Route::get('/transaksi-tanggal/{tglawal}/{tglakhir}', [TransactionOrderController::class, 'tgltransaksi'])->name('cetak.tgltransaksi');
 
 //search
 Route::get('product-list', [UserHomeController::class, 'productlistAjax']);

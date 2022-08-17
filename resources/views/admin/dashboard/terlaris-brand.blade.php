@@ -11,33 +11,37 @@
             border: 1px solid black;
         }
     </style>
-    <title>Sisa Stock Barang</title>
+    <title>Barang Terlaris</title>
 </head>
 
 <body>
     <div class="form-group">
-        <p align="center"><b>SISA STOCK BARANG - KATEGORI</b></p>
+        <p align="center"><b>BARANG TERLARIS - BRAND</b></p>
         <table class="static" align="center" rules="all" border="1px" style="width: 95%;">
             <tr>
 
                 <th>Nama</th>
                 <th>Kode</th>
-                <th>Kategori</th>
-                <th>Stok</th>
-                <th>Tanggal</th>
+                <th>Merk</th>
+                <th>Kuantitas</th>
+                <th>Harga Terjual</th>
+           
 
 
             </tr>
-            @foreach ($category as $product)
+            @foreach ($brand as $item)
 
             <tr>
 
 
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->product_code }}</td>
-                <td>{{ $product->category->name }}</td>
-                <td>{{ $product->stock }}</td>
-                <td>{{ $product->created_at }}</td>
+                <td>{{ $item->product->name }}</td>
+                <td>{{ $item->product->product_code }}</td>
+                <td>{{ $item->product->brand->name }}</td>
+                <td>{{ $item->quantity }}</td>
+                <td>@currency( $item->price * $item->quantity)</td>
+                
+                
+
 
             </tr>
 

@@ -11,34 +11,32 @@
             border: 1px solid black;
         }
     </style>
-    <title>Sisa Stock Barang</title>
+    <title>Wilayah Terbanyak</title>
 </head>
 
 <body>
     <div class="form-group">
-        <p align="center"><b>SISA STOCK BARANG - KATEGORI</b></p>
+        <p align="center"><b>WILAYAH TERBANYAK</b></p>
         <table class="static" align="center" rules="all" border="1px" style="width: 95%;">
             <tr>
 
-                <th>Nama</th>
-                <th>Kode</th>
-                <th>Kategori</th>
-                <th>Stok</th>
-                <th>Tanggal</th>
+                <th>No</th>
+                            <th>Kota</th>
+                            <th>Provinsi</th>
+                            <th>Total Pelanggan</th>
+                            <th>Total Pembelian</th>
 
 
             </tr>
-            @foreach ($category as $product)
+            @foreach ($wilayah as $item)
 
             <tr>
 
-
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->product_code }}</td>
-                <td>{{ $product->category->name }}</td>
-                <td>{{ $product->stock }}</td>
-                <td>{{ $product->created_at }}</td>
-
+                <td>{{$loop->iteration}}</td>
+                <td>{{ $item->user->regency->name }}</td>
+                <td>{{ $item->user->province->name }}</td>
+                <td>{{ $item->most_orders}}</td>
+                <td>@currency($item->total_price)</td>
             </tr>
 
             @endforeach

@@ -20,11 +20,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Nomor Tracking</th>
+                                <th>Nomor Pembelian</th>
                                 <th>Total Pembelian</th>
                                 <th>Status Pembayaran</th>
                                 <th>Aksi</th>
-                                <th></th>
                             </tr>
                         </thead>
 
@@ -38,7 +37,7 @@
                                 <td>
                                     @currency($order->total_price)
                                 </td>
-                                <td>
+                                
                                     @if($order->order_status == '0')
                                 <td>Pending</td>
                                 @elseif($order->order_status == '1')
@@ -58,9 +57,11 @@
                                     @if ($order->order_status == "1")
                                     <a href=" /user/confirmation-orders/{{$order->id}}"><i class="fa fa-check-circle fa-2x" style="color:black;"></i></a>
                                     @endif
-                                    @else (Auth::user()->ceklevel === 'subsidi')
-                                    <a href="/subsidi/my-orders/{{$order->id}}"><i class="fa fa-info-circle fa-2x mr-2" style="color:black;"></i></a>
+                                    @elseif(Auth::user()->ceklevel === 'admin')
+                                    <a href="/admin/my-orders/{{$order->id}}"><i class="fa fa-info-circle fa-2x mr-2" style="color:black;"></i></a>
+                                    @if ($order->order_status == "1")
                                     <a href="/subsidi/confirmation-orders/{{$order->id}}"><i class="fa fa-check-circle fa-2x" style="color:black;"></i></a>
+                                    @endif
                                     @endif
                                 </td>
                                 <td class="shoping__cart__item__close">

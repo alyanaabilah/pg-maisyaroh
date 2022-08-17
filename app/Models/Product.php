@@ -20,7 +20,10 @@ class Product extends Model
             return  $query->where('name', 'like', '%' . request('search') . '%');
         }
     }
-
+    public function getCreatedAtAttribute()
+    {
+        return \Carbon\Carbon::parse($this->attributes['created_at'])->translatedFormat('d F Y'); 
+    }
 
     public function category()
     {

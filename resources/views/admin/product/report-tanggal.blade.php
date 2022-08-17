@@ -23,9 +23,9 @@
                 <th>Nama</th>
                 <th>Kode</th>
                 <th>Kategori</th>
-                <th>Brand</th>
+                <th>Merk</th>
                 <th>Stok</th>
-                <th>Update</th>
+                <th>Tanggal</th>
 
 
             </tr>
@@ -39,7 +39,7 @@
                 <td>{{ $product->category->name }}</td>
                 <td>{{ $product->brand->name }}</td>
                 <td>{{ $product->stock }}</td>
-                <td>{{ date('d F Y', strtotime($product->updated_at)) }}</td>
+                <td>{{ $product->created_at }}</td>
 
             </tr>
 

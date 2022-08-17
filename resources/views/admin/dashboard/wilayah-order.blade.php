@@ -29,7 +29,7 @@
                                             <h5 class="mt-2 mb-2">Tanggal Akhir</h5>
                                             <input type="date" id="tglakhir" class="ml-2 mt-2 mb-2">
                                         </div>
-                                         <a href="" onclick="this.href='/cetak-user-tanggal/'+document.getElementById('tglawal').value +'/'+ document.getElementById('tglakhir').value; " target="_blank" class="btn bg-info text-white">Filter</a>
+                                         <a href="" onclick="this.href='/cetak-wilayah-tanggal/'+document.getElementById('tglawal').value +'/'+ document.getElementById('tglakhir').value; " target="_blank" class="btn bg-info text-white">Filter</a>
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <a href="/cetak-user-loyal" target="_blank" class="btn btn-primary mb-3">Cetak Data</a>
+            <a href="/cetak-wilayah-terbanyak" target="_blank" class="btn btn-primary mb-3">Cetak Data</a>
 
             @if(session()->has('success'))
             <div class="alert alert-success" role="alert">
@@ -65,21 +65,23 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
-                            <th>Jumlah Beli</th>
+                            <th>Kota</th>
+                            <th>Provinsi</th>
+                            <th>Total Pelanggan</th>
                             <th>Total Pembelian</th>
-                            <th>Tanggal Pembelian</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $item)
+                        @foreach ($wilayah as $item)
 
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{ $item->user->name }}</td>
+                            <td>{{ $item->user->regency->name }}</td>
+                            <td>{{ $item->user->province->name }}</td>
                             <td>{{ $item->most_orders}}</td>
                             <td>@currency($item->total_price)</td>
-                            <td>{{date('d F Y', strtotime($item->date))}}</td>
+                            
                            
                         </tr>
 

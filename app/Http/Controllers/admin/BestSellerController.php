@@ -6,9 +6,10 @@ use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\OrderItem;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Request;
 
 class BestSellerController extends Controller
 {
@@ -98,7 +99,7 @@ class BestSellerController extends Controller
 
     public function terlaris()
     {
-        $order = (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id')->orderBy('quantity', 'desc')
+        $order = (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')
             ->get();
         $pdf = PDF::loadView('admin.report.terlaris-report', ['orders' => $order]);
         return $pdf->stream('pg-maisyaroh-produk-terlaris.pdf');
@@ -116,17 +117,21 @@ class BestSellerController extends Controller
         return $pdf->stream('pg-maisyaroh-terlaris-pertanggal.pdf');
     }
 
-    // public function cetakbrand($brand)
-    // {
-    //     $brand = Product::where('brand_id', [$brand])->get();
-    //     $pdf = PDF::loadView('admin.product.report-brand', ['brand' => $brand]);
-    //     return $pdf->stream('pg-maisyaroh-sisa-stock-brand.pdf');
-    // }
+    public function cetakbrand( $id)
+    {
+        $brand= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')
+            ->get();
+        //$merk = $brand->where(Request::input('brand_id'));
+        dd($brand);
+       // $merk = OrderItem::where('product_id', Request::input('brand_id'))->get();
+        $pdf = PDF::loadView('admin.dashboard.terlaris-brand', ['brand' => $brand]);
+        return $pdf->stream('pg-maisyaroh-sisa-stock-brand.pdf');
+    }
 
-    // public function cetakkategori($category)
-    // {
-    //     $category = Product::where('category_id', [$category])->get();
-    //     $pdf = PDF::loadView('admin.product.report-kategori', ['category' => $category]);
-    //     return $pdf->stream('pg-maisyaroh-sisa-stock-kategori.pdf');
-    // }
+    public function cetakkategori($category)
+    {
+        $category = Product::where('category_id', [$category])->get();
+        $pdf = PDF::loadView('admin.dashboard.terlaris-kategori', ['category' => $category]);
+        return $pdf->stream('pg-maisyaroh-sisa-stock-kategori.pdf');
+    }
 }

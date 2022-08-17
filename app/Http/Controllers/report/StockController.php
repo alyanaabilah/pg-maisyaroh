@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\report;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Models\IncomingProduct;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class StockController extends Controller
 {
@@ -21,10 +22,11 @@ class StockController extends Controller
     public function index()
     {
         $produk = Product::all();
-        $incomings  = IncomingProduct::all();
+        //$produk = Product::where('brand_id', Request::input('brand_id'))->get();
+       // $incomings  = IncomingProduct::all();
         return view('admin.report.stock-report', [
             "title" => "Stock Produk",
-            "incomings" => $incomings,
+           // "incomings" => $incomings,
             "products"  => $produk,
             "categories" => Category::all(),
             "brands" => Brand::all()
@@ -111,16 +113,17 @@ class StockController extends Controller
     {
         //dd(["Tanggal Awal : " . $tglawal, "Tanggal Akhir:" . $tglakhir]);
 
-        $tanggal = Product::wherebetween('updated_at', [$tglawal, $tglakhir])->get();
+        $tanggal = Product::wherebetween('created_at', [$tglawal, $tglakhir])->get();
         $pdf = PDF::loadView('admin.product.report-tanggal', ['tanggal' => $tanggal]);
         return $pdf->stream('pg-maisyaroh-sisa-stock-pertanggal.pdf');
     }
 
     public function cetakbrand($id)
     {
+        $merk = Product::where('brand_id', Request::input('brand_id'))->get();
        // $brand = (new Product())->groupBy('brand_id', 'name', 'product_code', 'stock','date')->selectRaw('date(created_at) as date ,product_code, name, stock, brand_id as brand')->get();
        //$brand = (new Product())->groupBy('brand_id', 'name', 'product_code', 'stock','date')->selectRaw('date(created_at) as date ,product_code, name, stock, brand_id as brand')->get();
-       $merk = Product::find($id)->select('brand_id');
+      // $merk = Product::find($id)->select('brand_id');
       // $merk = Product::select('brand_id', 'name', 'product_code', 'stock')->groupBy('brand_id','name', 'product_code', 'stock')->get();
        //$brand = Product::select('brand_id')->pluck('name');
         $pdf = PDF::loadView('admin.product.report-brand', ['brands' => $merk]);
@@ -128,10 +131,11 @@ class StockController extends Controller
     
     }
 
-    public function cetakkategori($category)
+    public function cetakkategori($id)
     {
-        $category = Product::where('category_id', [$category])->get();
-        $pdf = PDF::loadView('admin.product.report-kategori', ['category' => $category]);
+        $kategori = Product::where('category_id', Request::input('category_id'))->get();
+       // $category = Product::where('category_id', [$category])->get();
+        $pdf = PDF::loadView('admin.product.report-kategori', ['category' => $kategori]);
         return $pdf->stream('pg-maisyaroh-sisa-stock-kategori.pdf');
     }
 }
