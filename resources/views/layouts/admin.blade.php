@@ -179,7 +179,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
+                                            <a class="sidenav-item-link" href="/admin/pesanan-barang">
                                                 <span class="nav-text">Barang Request</span> <!-- join antara tabel produk+brand+field(qty, harga satuan, harga total per barang, harga jumlah pemesanan) !-->
                                             </a>
                                         </li>
@@ -196,8 +196,8 @@
                                 <ul class="collapse" id="documentation" data-parent="#sidebar-menu">
                                     <div class="sub-menu">
                                         <li>
-                                            <a class="sidenav-item-link" href="user-profile.html">
-                                                <span class="nav-text">Request Barang Sales</span>
+                                            <a class="sidenav-item-link" href="/admin/laporan-barang">
+                                                <span class="nav-text">Pesanan Barang</span>
                                             </a>
                                         </li>
                                         <li>

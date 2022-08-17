@@ -34,6 +34,10 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
+    public function permintaan()
+    {
+        return $this->belongsTo(Permintaan::class, 'permintaan_id', 'id');
+    }
 
 
 

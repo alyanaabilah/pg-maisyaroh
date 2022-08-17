@@ -10,6 +10,7 @@ use App\Models\OrderItem;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\DB;
 
 class BestSellerController extends Controller
 {
@@ -119,12 +120,22 @@ class BestSellerController extends Controller
 
     public function cetakbrand( $id)
     {
-        $brand= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')
+        // $terjual = DB::table('order_items')
+        //  ->select(
+        //         DB::raw('SUM(order_items.quantity * order_items.price) as price'),
+        //          DB::raw('SUM(order_items.quantity)as quantity')
+        // )
+        // ->join('products','products.id','=','order_items.product_id')
+        // ->join('brands','brands.id','=','products.brand_id')
+        // ->groupBy('price', 'product_id')->orderBy('quantity', 'desc')->where('brand_id',Request::input('brand_id'))
+        // ->get();
+
+        $terjual= (new OrderItem())->groupBy('product_id', 'price')->selectRaw('sum(quantity) as quantity, product_id, price')->orderBy('quantity', 'desc')->where('product_id',Request::input('brand_id'))
             ->get();
         //$merk = $brand->where(Request::input('brand_id'));
-        dd($brand);
+        //dd($terjual);
        // $merk = OrderItem::where('product_id', Request::input('brand_id'))->get();
-        $pdf = PDF::loadView('admin.dashboard.terlaris-brand', ['brand' => $brand]);
+        $pdf = PDF::loadView('admin.dashboard.terlaris-brand', ['brand' => $terjual]);
         return $pdf->stream('pg-maisyaroh-sisa-stock-brand.pdf');
     }
 

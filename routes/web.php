@@ -22,11 +22,13 @@ use App\Http\Controllers\admin\OrderItemController;
 use App\Http\Controllers\front\MyProfileController;
 use App\Http\Controllers\attribut\CategoryController;
 use App\Http\Controllers\admin\IncomingProductController;
+use App\Http\Controllers\admin\PermintaanController;
 use App\Http\Controllers\admin\TransactionOrderController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\front\PayOrderController;
 use App\Http\Controllers\front\SubsidiCouponController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\repoprt\CetakPesananController;
 use App\Http\Controllers\report\CouponUserController;
 use App\Http\Controllers\report\KeuanganController;
 use App\Http\Controllers\report\StockController;
@@ -136,9 +138,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::get('user-loyal', [UserLoyalController::class, 'userloyal'])->name('cetak.user');
         Route::get('wilayah-terbanyak', [WilayahController::class, 'wilayah'])->name('cetak.wilayah');
         Route::resource('keuangan-laporan',KeuanganController::class);
+        Route::resource('pesanan-barang',PermintaanController::class);
+        Route::get('laporan-barang',[CetakPesananController::class, 'index']);
         
-
-
+        
         // Route::get('/generate-invoice/{order:id}', function (Order $order) {
         //     return view('admin.report.invoice-order', [
         //         "title" => "Pangkalan Gas Maisyaroh | Invoice",
@@ -181,6 +184,9 @@ Route::get('/cetak-wilayah-tanggal/{tglawal}/{tglakhir}', [WilayahController::cl
 //TRANSAKSI
 Route::get('/cetak-transaksi', [TransactionOrderController::class, 'transaksi'])->name('cetak.transaksi');
 Route::get('/transaksi-tanggal/{tglawal}/{tglakhir}', [TransactionOrderController::class, 'tgltransaksi'])->name('cetak.tgltransaksi');
+//REQUEST-SALES
+Route::get('pesanan-brand/{brand:id}',[CetakPesananController::class, 'cetakbrand']);
+
 
 //search
 Route::get('product-list', [UserHomeController::class, 'productlistAjax']);

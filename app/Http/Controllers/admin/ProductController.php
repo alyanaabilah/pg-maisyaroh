@@ -20,7 +20,7 @@ class ProductController extends Controller
     {
         $product = Product::all();
         return view('admin.product.index-product', [
-            "title" => "Product",
+            "title" => "Produk",
             "products" => $product
         ]);
     }
@@ -33,7 +33,7 @@ class ProductController extends Controller
     public function create()
     {
         return view('admin.product.create-product', [
-            "title" => "Tambah Product",
+            "title" => "Tambah Produk",
             "categories" => Category::all(),
             "brands" => Brand::all()
         ]);
@@ -64,7 +64,7 @@ class ProductController extends Controller
         }
 
         Product::create($validatedData);
-        return redirect('admin/product')->with('success', 'Product Baru Ditambahkan!');
+        return redirect('admin/product')->with('success', 'PProduk Baru Ditambahkan!');
     }
 
     /**
@@ -88,7 +88,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         return view('admin.product.edit-product', [
-            "title" => "Edit Product",
+            "title" => "Edit Produk",
             "product" => $product,
             "categories" => Category::all(),
             "brands" => Brand::all()
@@ -129,7 +129,7 @@ class ProductController extends Controller
         }
         Product::where('id', $product->id)
             ->update($validatedData);
-        return redirect('admin/product')->with('update', 'Berhasil Edit Product!');
+        return redirect('admin/product')->with('update', 'Berhasil Edit Produk!');
     }
 
     /**
@@ -144,6 +144,6 @@ class ProductController extends Controller
             Storage::delete($product->image);
         }
         Product::destroy($product->id);
-        return redirect('admin/product')->with('delete', 'Berhasil Hapus Product!');
+        return redirect('admin/product')->with('delete', 'Berhasil Hapus Produk!');
     }
 }

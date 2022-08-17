@@ -17,7 +17,7 @@ class BrandController extends Controller
     {
         $brand = Brand::all();
         return view('admin.attribut.brand.index-brand', [
-            "title" => "Brand",
+            "title" => "Merk",
             "brand" => $brand
         ]);
     }
@@ -30,7 +30,7 @@ class BrandController extends Controller
     public function create()
     {
         return view('admin.attribut.brand.create-brand', [
-            "title" => "Tambah Brand"
+            "title" => "Tambah Merk"
         ]);
     }
 
@@ -48,7 +48,7 @@ class BrandController extends Controller
         ]);
 
         Brand::create($validatedData);
-        return redirect('admin/brand')->with('success', 'Brand Baru Ditambahkan!');
+        return redirect('admin/brand')->with('success', 'Merk Baru Ditambahkan!');
     }
 
     /**
@@ -71,7 +71,7 @@ class BrandController extends Controller
     public function edit(Brand $brand)
     {
         return view('admin.attribut.brand.edit-brand', [
-            "title" => "Edit Brand",
+            "title" => "Edit Merk",
             "brand" => $brand
         ]);
     }
@@ -94,7 +94,7 @@ class BrandController extends Controller
 
         Brand::where('id', $brand->id)
             ->update($validatedData);
-        return redirect('admin/brand')->with('update', 'Berhasil Edit Brand!');
+        return redirect('admin/brand')->with('update', 'Berhasil Edit Merk!');
     }
 
     /**
@@ -106,6 +106,6 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         Brand::destroy($brand->id);
-        return redirect('admin/brand')->with('delete', 'Berhasil Hapus Brand!');
+        return redirect('admin/brand')->with('delete', 'Berhasil Hapus Merk!');
     }
 }

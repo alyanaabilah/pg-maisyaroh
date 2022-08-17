@@ -44,9 +44,9 @@
                                             <div class="input-group mb-3">
                                                 <select class="form-control" name="brand_id" id="brand">
                                                     <option value="">Pilih Merk</option>
-                                                    <option value="1">Rinnai</option>
-                                                    <option value="2">Modenna</option>
-                                                    <option value="3">Hock</option>
+                                                    @foreach ($brands as $merk)
+                                    <option value="{{$merk->id}}">{{$merk->name}}</option>
+                                    @endforeach
                                                    
                                                 </select>
                                                 <div class="input-group-append">

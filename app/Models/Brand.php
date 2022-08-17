@@ -14,6 +14,10 @@ class Brand extends Model
     {
         return $this->hasMany(Product::class);
     }
+    public function permintaan()
+    {
+        return $this->hasMany(Permintaan::class);
+    }
 
     public function getCreatedAtAttribute()
     {
