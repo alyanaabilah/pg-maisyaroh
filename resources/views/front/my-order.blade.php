@@ -22,7 +22,9 @@
                             <tr>
                                 <th>Nomor Pembelian</th>
                                 <th>Total Pembelian</th>
+                                <th>Status Pembayaran</th>
                                 <th>Status Pesanan</th>
+                                <th>Pengiriman</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -37,7 +39,18 @@
                                 <td>
                                     @currency($order->total_price)
                                 </td>
-                               
+                                @if($order->payment_status == '0')
+                                <td>Belum Bayar</td>
+                                @elseif($order->payment_status == '1')
+                                <td>COD - Terbayar</td>
+                                @elseif($order->payment_status == '2')
+                                <td>Transfer Bank - Sukses</td>
+                                @elseif($order->payment_status == '5')
+                                <td>Pembayaran Di Toko</td>
+                                @else
+                                <td></td>
+                                @endif
+
                                     @if($order->order_status == '0')
                                 <td>Pending</td>
                                 @elseif($order->order_status == '1')
@@ -46,6 +59,19 @@
                                 <td>Cancel</td>
                                 @elseif($order->order_status == '3')
                                 <td>Complete</td>
+                                @else
+                                <td></td>
+                                @endif
+                                </td>
+                                
+                                @if($order->payment_mode == '1')
+                                <td>COD</td>
+                                @elseif($order->payment_mode == '2')
+                                <td>Transfer Bank</td>
+                                @elseif($order->order_status == '2')
+                                <td>Cancel</td>
+                                @elseif($order->payment_mode == '3')
+                                <td>Pembayaran Ke Toko</td>
                                 @else
                                 <td></td>
                                 @endif

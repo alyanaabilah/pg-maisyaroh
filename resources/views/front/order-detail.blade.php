@@ -25,9 +25,9 @@
                     <label for="addres" class="mt-2">Alamat</label>
                     <div class="border">{{ $order->addres }}</div>
                     <label for="province" class="mt-2">Provinsi</label>
-                    <div class="border">{{$order->provinces_id}}</div>
+                    <div class="border">{{$order->provinces->name}}</div>
                     <label for="regency" class="mt-2">Kabupaten/Kota</label>
-                    <div class="border">{{$order->regencies_id}}</div>
+                    <div class="border">{{$order->regencies->name}}</div>
                     <label for="zip_code" class="mt-2">Kode Pos</label>
                     <div class="border">{{$order->zip_code}}</div>
                     <label for="pengiriman" class="mt-2">Pengiriman</label>
@@ -36,15 +36,13 @@
                     @elseif($order->pengiriman == "2")
                         <div class="border">JNE</div>
                     @elseif($order->pengiriman == "3")
-                        <div class="border">POS</div>
-                    @elseif($order->pengiriman == "4")
                         <div class="border">Ambil Di Toko</div>
                     @else
                          <div class="border">-</div>
                     @endif
                     <label for="phone_number" class="mt-2">Nomor Telepon</label>
                     <div class="border">{{$order->phone_number}}</div>
-                    @if($order->pengiriman != "4")
+                    @if($order->pengiriman == "2")
                     <form action="/user/my-orders/{{$order->id}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -87,7 +85,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    @if($order->pengiriman != "4")
+                    @if($order->pengiriman != "3")
                     <h4 class="px-2">Total + Ongkir: <span class="float-end">@currency($order->total_price + 10000)</span></h4>
                     @else
                     <h4 class="px-2">Total: <span class="float-end">@currency($order->total_price)</span></h4>
@@ -102,6 +100,7 @@
                     <br>
                     <br>
                     <br>
+                    @if($order->pengiriman == "2")
                     <div class="col-md-6 mt-5">
                         <div class="card mt-3">
                             <div class="card-body">
@@ -110,7 +109,10 @@
                                 Bank Mandiri 021 000 43871
                                 a.n Maisyaroh
                             </div>
+                        </div>
                     </div>
+                    @endif
+                    
                 </div>
 
                 

@@ -70,15 +70,6 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="sales_price">Harga Sales</label>
-                    <input type="text" class="form-control @error('sales_price') is-invalid @enderror" required name="sales_price" id="sales_price" aria-describedby="sales_price" placeholder="Harga Sales" value="{{old ('sales_price')}}">
-                    @error('sales_price')
-                    <div class="invalid-feeedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
                     <label for="slug">Slug</label>
                     <input type="text" class="form-control @error('slug') is-invalid @enderror" required name="slug" id="slug" aria-describedby="slug" placeholder="Slug" value="{{old ('slug')}}">
                     @error('slug')

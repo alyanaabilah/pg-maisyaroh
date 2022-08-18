@@ -8,6 +8,7 @@ use App\Models\Coupon;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -28,8 +29,8 @@ class CartController extends Controller
             "active" => "cart",
             "judul" => "Cart",
             "cartitems" => $cartitems,
-            "product" => Product::all(),
-            "kupon" => $coupon
+            "brands" => Brand::all(),
+            // "kupon" => $coupon
             //  "total" => $total
         ]);
     }

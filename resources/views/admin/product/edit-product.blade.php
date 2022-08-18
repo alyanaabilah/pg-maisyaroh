@@ -7,7 +7,7 @@
 <div class="col-lg-12">
     <div class="card card-default">
         <div class="card-header card-header-border-bottom">
-            <h2>Edit Product</h2>
+            <h2>Edit Produk</h2>
         </div>
         <div class="card-body">
             <form action="/admin/product/{{$product->id}}" method="POST" enctype="multipart/form-data">
@@ -69,15 +69,6 @@
                     <label for="sell_price">Harga Jual</label>
                     <input type="text" class="form-control @error('sell_price') is-invalid @enderror" required name="sell_price" id="sell_price" aria-describedby="sell_price" placeholder="Harga Jual" value="{{old ('sell_price', $product->sell_price)}}">
                     @error('sell_price')
-                    <div class="invalid-feeedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="sales_price">Harga Sales</label>
-                    <input type="text" class="form-control @error('sales_price') is-invalid @enderror" required name="sales_price" id="sales_price" aria-describedby="sales_price" placeholder="Harga Sales" value="{{old ('sales_price', $product->sales_price)}}">
-                    @error('sales_price')
                     <div class="invalid-feeedback">
                         {{ $message }}
                     </div>

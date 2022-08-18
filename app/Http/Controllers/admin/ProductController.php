@@ -54,7 +54,7 @@ class ProductController extends Controller
             'brand_id' => 'required',
             // 'stock' => 'required',
             'sell_price' => 'required|integer',
-            'sales_price' => 'required|integer',
+            // 'sales_price' => 'required|integer',
             'slug' => 'required|max:50|string|unique:products',
             'image' => 'image|file',
             'description' => 'required'
@@ -64,7 +64,7 @@ class ProductController extends Controller
         }
 
         Product::create($validatedData);
-        return redirect('admin/product')->with('success', 'PProduk Baru Ditambahkan!');
+        return redirect('admin/product')->with('success', 'Produk Baru Ditambahkan!');
     }
 
     /**
@@ -112,7 +112,7 @@ class ProductController extends Controller
             'brand_id' => 'required',
             // 'stock' => 'required',
             'sell_price' => 'required|integer',
-            'sales_price' => 'required|integer',
+            // 'sales_price' => 'required|integer',
             'description' => 'required'
         ];
         if ($request->slug != $product->slug) {

@@ -27,9 +27,7 @@
         <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
             <div class="featured__item">
                 <div class="featured__item__pic set-bg" data-setbg="{{asset('storage/'. $orderan->product->image)}}">
-                    <ul class="featured__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
+                    
                 </div>
                 <div class="featured__item__text">
                     <h6><a href="/user/shop/{{$orderan->product->slug}}">{{ $orderan->product->name }}</a></h6>
@@ -41,9 +39,7 @@
         <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
             <div class="featured__item">
                 <div class="featured__item__pic set-bg" data-setbg="{{asset('storage/'. $orderan->product->image)}}">
-                    <ul class="featured__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
+                    
                 </div>
                 <div class="featured__item__text">
                     <h6><a href="/user/shop/{{$orderan->product->slug}}">{{ $orderan->product->name }}</a></h6>
@@ -55,9 +51,7 @@
         <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
             <div class="featured__item">
                 <div class="featured__item__pic set-bg" data-setbg="{{asset('storage/'. $orderan->product->image)}}">
-                    <ul class="featured__item__pic__hover">
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                    </ul>
+                    
                 </div>
                 <div class="featured__item__text">
                     <h6><a href="/admin/shop/{{$orderan->product->slug}}">{{ $orderan->product->name }}</a></h6>

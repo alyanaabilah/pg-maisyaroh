@@ -278,11 +278,7 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <!-- User image -->
-                                        <li>
-                                            <a href="profile.html">
-                                                <i class="mdi mdi-account"></i> My Profile
-                                            </a>
-                                        </li>
+                                        
                                         <li class="dropdown-footer">
                                             <a href="{{ route('logout') }}"> <i class="mdi mdi-logout"></i> Log Out </a>
                                         </li>

@@ -9,11 +9,11 @@
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span>Kategori</span>
+                        <span>Brands</span>
                     </div>
                     <ul>
-                        @foreach ($product as $produk)
-                        <li><a href="/front-category/{{ $produk->category->name }}">{{ $produk->category->name }}</a></li>
+                        @foreach ($brands as $produk)
+                        <li><a href="/front-category/{{ $produk->name }}">{{ $produk->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>

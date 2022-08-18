@@ -13,7 +13,7 @@
 <div class="col-lg-12">
     <div class="card card-default">
         <div class="card-header card-header-border-bottom">
-            <h2>Product Masuk</h2>
+            <h2>Barang Masuk</h2>
         </div>
         <div class="card-body">
             <a href="/admin/incoming-product/create" class="btn btn-primary mb-3">Tambah Data</a>
@@ -44,7 +44,7 @@
                             <th>No</th>
                             <th>Produk</th>
                             <th>Quantity</th>
-                            <th>Harga Beli</th>
+                            <th>Harga Beli<br>Sales</th>
                             <th>Total Harga<br>Beli</th>
                             <th>Ongkir Barang</th>
                             <th>Total Ongkir</th>

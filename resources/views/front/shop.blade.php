@@ -13,9 +13,9 @@
                         <span>Brands</span>
                     </div>
                     <ul>
-                        @foreach ($product as $produk)
-                        <li><a href="/front-brand/{{ $produk->brand->name }}">{{ $produk->brand->name }}</a></li>
-                        @endforeach
+                        @foreach ($brands as $produk)
+                         <li><a href="/front-brand/{{ $produk->name }}">{{ $produk->name }}</a></li>
+                         @endforeach
                     </ul>
                 </div>
             </div>

@@ -24,11 +24,12 @@ class ShopController extends Controller
 
 
         return view('front.shop', [
-            "title" => "Pangkalan Gas Maisyaroh | Shop",
+            "title" => "Pangkalan Gas Maisyaroh | Belanja",
             "product" => Product::all(),
             "active" => "shop",
-            "judul" => "Shop",
-            "categories" => Category::all()
+            "judul" => "Belanja",
+            "categories" => Category::all(),
+            "brands" => Brand::all()
         ]);
     }
 

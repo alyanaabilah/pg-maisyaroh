@@ -61,20 +61,20 @@ class MyOrderController extends Controller
 
     public function addInfo($id)
     {
-        $order = Order::find($id);
-        if ($order->payment_mode = "2"){
+        $order = Order::find($id); 
             $orders = DB::table('orders')->where(function ($query) {
-                $query->whereNull('image');
+                $query->whereNull('image')
+                        ->where('payment_mode', 2);
             })->get();
             return view('front.my-order', compact('id', 'orders'));
-        }
+        
        
     }
 
     public function complete($id) {
         $order = Order::find($id);
-        $order->order_status = "3";
-        $order->payment_status = "4";
+        $order->order_status = "3";//Diterima User
+        $order->payment_status = "4";//Lunas
         $order->save();
         return redirect()->back()->with('status', 'Sukses Menerima Pesanan');
     }
