@@ -161,7 +161,7 @@
                     <tr>
                         <th>Produk</th>
                         <th class="w-20">Harga</th>
-                        <th class="w-20">Quantity</th>
+                        <th class="w-20">Kuantitas</th>
                         <th class="w-20">Total</th>
                     </tr>
                 </thead>
@@ -190,13 +190,13 @@
             <br>
             <hr>
             <h3 class="heading">Pembayaran:
-                @if($order->payment_mode == '0')
-                On Delivery
-                @elseif($order->payment_mode == '1')
-                Transfer Bank
-                @elseif($order->payment_mode == '2')
-                Pembayaran Di Toko
-                @endif
+                @if($order->payment_mode == '1')
+                                    COD
+                                    @elseif($order->payment_mode == '2')
+                                    Transfer Bank
+                                    @elseif($order->payment_mode == '3')
+                                    Pembayaran Ke Toko
+                                    @endif
             </h3>
             <h3 class="heading">Pengiriman:
                 @if($order->pengiriman == "1")
@@ -204,8 +204,6 @@
                             @elseif($order->pengiriman == "2")
                             JNE
                             @elseif($order->pengiriman == "3")
-                            POS
-                            @elseif($order->pengiriman == "4")
                             Ambil Di Toko
                             @endif
             </h3>
@@ -222,12 +220,14 @@
             </h3>
             <h3 class="heading">Status Order:
                 @if($order->order_status == '0')
-                Pending
-                @elseif($order->order_status == '1')
-                Sukses
-                @elseif($order->order_status == '2')
-                Dibatalkan
-                @endif
+                                    Pending
+                                    @elseif($order->order_status == '1')
+                                    Sukses
+                                    @elseif($order->order_status == '2')
+                                    Dibatalkan
+                                    @elseif($order->order_status == '3')
+                                    Diterima User
+                                    @endif
             </h3>
            
                         

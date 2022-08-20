@@ -228,6 +228,11 @@
                                             </a>
                                         </li>
                                         
+                                        <li>
+                                            <a class="sidenav-item-link" href="/admin/data-kendaraan">
+                                                <span class="nav-text">Data Kendaraan</span>
+                                            </a>
+                                        </li>
                                     </div>
                                 </ul>
                             </li>

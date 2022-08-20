@@ -37,6 +37,8 @@ use App\Http\Controllers\front\SubsidiCouponController;
 use App\Http\Controllers\repoprt\CetakPesananController;
 use App\Http\Controllers\admin\IncomingProductController;
 use App\Http\Controllers\admin\TransactionOrderController;
+use App\Http\Controllers\coba\PegawaiCobaController;
+use App\Http\Controllers\penugasan\DataKendaraanController;
 use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -148,7 +150,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::get('/orders/{id}/approve', [OrderController::class, 'approve'])->name('orders.approve');
         Route::get('/orders/{id}/reject', [OrderController::class, 'reject'])->name('orders.reject');
         Route::get('/orders/{id}/selesai', [OrderController::class, 'selesai'])->name('orders.selesai');
-        
+        //Route::resource('pegawai-coba', PegawaiCobaController::class);
+        Route::resource('data-kendaraan', DataKendaraanController::class);
         
         // Route::get('/generate-invoice/{order:id}', function (Order $order) {
         //     return view('admin.report.invoice-order', [
@@ -194,6 +197,7 @@ Route::get('/cetak-transaksi', [TransactionOrderController::class, 'transaksi'])
 Route::get('/transaksi-tanggal/{tglawal}/{tglakhir}', [TransactionOrderController::class, 'tgltransaksi'])->name('cetak.tgltransaksi');
 //REQUEST-SALES
 Route::get('pesanan-brand/{brand:id}',[CetakPesananController::class, 'cetakbrand']);
+Route::get('/cetak-kendaraan',[DataKendaraanController::class, 'cetak']);
 //KEUANGAN
 Route::get('/cetak-keuangan-tanggal/{tglawal}/{tglakhir}', [KeuanganController::class, 'keuangantgl'])->name('cetak.tgl');
 

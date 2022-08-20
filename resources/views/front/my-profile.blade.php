@@ -88,13 +88,13 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="province">Provinsi</label>
-                                    <input type="text" readonly class="form-control" name="province" id="province" aria-describedby="province" placeholder="Provinsi" value="{{$user->province->name}}" style="color:black">
+                                    <input type="text" readonly class="form-control" name="province" id="province" aria-describedby="province" placeholder="Provinsi" value="{{$user->province_id}}" style="color:black">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="regency">Kabupaten/Kota</label>
-                                    <input type="text" readonly class="form-control" name="regency" id="regency" aria-describedby="regency" placeholder="Kabupaten/Kota" value="{{ $user->regency->name}}" style="color:black">
+                                    <input type="text" readonly class="form-control" name="regency" id="regency" aria-describedby="regency" placeholder="Kabupaten/Kota" value="{{ $user->regencies_id}}" style="color:black">
                                 </div>
                             </div>
                         </div>

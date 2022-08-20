@@ -90,8 +90,6 @@
                                 <h6 style="color: black;">COD</h6>
                                 @elseif($order->pengiriman == '3')
                                 <h6 style="color: black;">Pengambilan Ke Toko</h6>
-                                @elseif($order->pengiriman == '2')
-                                <h6 style="color: black;">Belum Transfer</h6>
                                 @else
                                 <img src="{{asset('storage/'. $order->image)}}" width="100px">
                                 @endif
